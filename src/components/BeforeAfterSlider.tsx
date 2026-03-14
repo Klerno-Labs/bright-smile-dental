@@ -3,8 +3,6 @@ import React, { useState, useRef } from "react";
 import { images } from '@/config/images';
 import { cn } from '@/lib/utils';
 
-import Image from "next/image";
-import { useState } from "react";
 export function BeforeAfterSlider() {
   const [sliderPosition, setSliderPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
