@@ -1,5 +1,3 @@
-"use client";
-
 import { Metadata } from "next";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -160,14 +158,14 @@ export default function AboutPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                 <p className="text-white text-sm mb-2">
-                  Founder Dr. O'Connor is a lifelong fan of the Houston Astros.
+                  Founder Dr. O&apos;Connor is a lifelong fan of the Houston Astros.
                 </p>
                 <div className="flex gap-4">
                   <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">LinkedIn</a>
                 </div>
               </div>
               <div className="p-4 bg-white border-x border-b border-gray-100 rounded-b-xl">
-                <h3 className="text-lg font-bold text-textMain">Dr. James O'Connor</h3>
+                <h3 className="text-lg font-bold text-textMain">Dr. James O&apos;Connor</h3>
                 <p className="text-sm text-primary font-medium">General Dentistry</p>
               </div>
             </div>

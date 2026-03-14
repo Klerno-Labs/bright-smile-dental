@@ -8,7 +8,6 @@ import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
 import { Loader2, CheckCircle, AlertCircle } from "lucide-react";
 
-import { z } from "zod";
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
@@ -80,7 +79,7 @@ export function ContactForm() {
           </div>
           <h3 className="text-2xl font-bold text-textMain mb-2">Message Sent!</h3>
           <p className="text-textBody">
-            Thank you for contacting Bright Smile Dental. We'll be in touch within 24 hours to confirm your appointment.
+            Thank you for contacting Bright Smile Dental. We&apos;ll be in touch within 24 hours to confirm your appointment.
           </p>
         </div>
       ) : (

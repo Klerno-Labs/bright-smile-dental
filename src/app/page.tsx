@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -51,7 +49,7 @@ export default function Home() {
     {
       name: "Maria L.",
       role: "Patient",
-      quote: "I've always been afraid of the dentist, but the team at Bright Smile changed that. They were so gentle and explained everything!",
+      quote: "I&apos;ve always been afraid of the dentist, but the team at Bright Smile changed that. They were so gentle and explained everything!",
       rating: 5,
     },
     {

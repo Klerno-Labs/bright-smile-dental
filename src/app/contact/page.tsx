@@ -31,7 +31,7 @@ export default function ContactPage() {
         <div className="lg:col-span-5 bg-white p-8 lg:p-16 flex flex-col justify-center">
           <div className="mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-textMain mb-4">Get in Touch</h1>
-            <p className="text-textBody text-lg">We can't wait to see your smile.</p>
+            <p className="text-textBody text-lg">We can&apos;t wait to see your smile.</p>
           </div>
           
           <div className="space-y-6 mb-10">
