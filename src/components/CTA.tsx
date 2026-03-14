@@ -1,19 +1,14 @@
 import { Button } from "./ui/Button";
 import { images } from "@/config/images";
-import Image from "next/image";
-
 export function CTA({ title = "Ready for Your Best Smile?", description = "Join thousands of happy patients in Houston. Book your appointment today and experience the difference of gentle, modern dentistry." }) {
   return (
     <section className="relative py-24 lg:py-32 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
+        <img
           src={images["cta"].src}
-          alt={images["cta"].alt}
-          fill
+          alt={images["cta"].alt} style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover"
-          priority
-          sizes="100vw"
         />
         <div className="absolute inset-0 bg-primary/90 mix-blend-multiply" />
       </div>

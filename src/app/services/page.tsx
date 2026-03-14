@@ -1,5 +1,3 @@
-"use client";
-
 import { Metadata } from "next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { Button } from "@/components/ui/Button";
@@ -9,7 +7,6 @@ import { motion } from "framer-motion";
 import { ChevronRight, Activity, Smile, Shield, UserCheck, Clock, Zap } from "lucide-react";
 import Link from "next/link";
 
-import Image from "next/image";
 export const metadata: Metadata = {
   title: "Services",
   description: "Explore our comprehensive dental services including cosmetic, general, and emergency dentistry in Houston, TX.",
@@ -19,7 +16,7 @@ const services = {
   general: [
     { title: "Comprehensive Exams", desc: "Detailed checkups including digital X-rays and oral cancer screenings.", price: "From $150" },
     { title: "Professional Cleaning", desc: "Remove plaque and tartar build-up to prevent gum disease.", price: "From $120" },
-    { title: "Fillings & Restorations", desc: "Tooth-colored composite fillings that blend seamlessly with your natural teeth.", price: "From $150" },
+    { title: "Fillings & Restorations", desc: "Tooth-colored composite style={{ width: "100%", height: "100%", objectFit: "cover" }}ings that blend seamlessly with your natural teeth.", price: "From $150" },
     { title: "Pediatric Dentistry", desc: "Gentle care designed specifically for children and teens.", price: "From $100" },
   ],
   cosmetic: [
@@ -103,7 +100,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
-               <Image
+               <img
                 src={images["gallery-1"]}
                 alt="Advanced Technology"
                 width={600}

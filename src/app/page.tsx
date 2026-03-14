@@ -1,6 +1,7 @@
+"use client";
+
 import Link from "next/link";
 import { Metadata } from "next";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { CTA } from "@/components/CTA";
@@ -35,7 +36,7 @@ export default function Home() {
     },
     {
       title: "General Dentistry",
-      description: "Comprehensive exams, cleanings, and fillings using the latest technology for optimal health.",
+      description: "Comprehensive exams, cleanings, and style={{ width: "100%", height: "100%", objectFit: "cover" }}ings using the latest technology for optimal health.",
       icon: "🦷",
     },
     {
@@ -134,14 +135,12 @@ export default function Home() {
             {/* Image */}
             <Reveal delay={0.2} className="lg:col-span-5 relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <Image
+                <img
                   src={images["hero"].src}
                   alt={images["hero"].alt}
                   width={images["hero"].width}
                   height={images["hero"].height}
-                  priority
                   className="w-full h-auto object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 {/* Decorative Blob behind */}
                 <div className="absolute -z-10 -top-10 -right-10 w-full h-full bg-primaryLight/50 rounded-full blur-3xl opacity-70" />
@@ -243,7 +242,7 @@ export default function Home() {
                 <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
                   <div className="flex text-primary mb-4">
                     {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} size={16} fill="currentColor" className="mr-1" />
+                      <Star key={i} size={16} style={{ width: "100%", height: "100%", objectFit: "cover" }}="currentColor" className="mr-1" />
                     ))}
                   </div>
                   <p className="text-textBody mb-6 italic">"{t.quote}"</p>
@@ -276,7 +275,7 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-primaryLight rounded-lg flex items-center justify-center flex-shrink-0 text-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" style={{ width: "100%", height: "100%", objectFit: "cover" }}="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                   </div>
                   <div>
                     <h4 className="font-bold text-textMain">Call Us</h4>
@@ -287,7 +286,7 @@ export default function Home() {
                 
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-primaryLight rounded-lg flex items-center justify-center flex-shrink-0 text-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" style={{ width: "100%", height: "100%", objectFit: "cover" }}="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                   </div>
                   <div>
                     <h4 className="font-bold text-textMain">Visit Us</h4>

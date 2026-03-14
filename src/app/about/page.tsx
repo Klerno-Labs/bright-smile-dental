@@ -1,7 +1,4 @@
-"use client";
-
 import { Metadata } from "next";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -20,12 +17,10 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="relative bg-gray-900 py-24 md:py-32 text-center">
         <div className="absolute inset-0 opacity-30">
-          <Image
+          <img
             src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=1920&h=1080&fit=crop"
-            alt="Office Background"
-            fill
+            alt="Office Background" style={{ width: "100%", height: "100%", objectFit: "cover" }}
             className="object-cover"
-            priority
           />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4">
@@ -70,7 +65,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <Image
+              <img
                 src={images["about"]}
                 alt="Our Team"
                 width={600}
@@ -128,7 +123,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Doctor 1 */}
             <div className="group relative overflow-hidden rounded-2xl">
-              <Image
+              <img
                 src={images["team-1"]}
                 alt="Dr. Sarah Bennett"
                 width={400}
@@ -151,7 +146,7 @@ export default function AboutPage() {
 
             {/* Doctor 2 */}
             <div className="group relative overflow-hidden rounded-2xl">
-              <Image
+              <img
                 src={images["founder"]}
                 alt="Dr. James O'Connor"
                 width={400}
@@ -174,7 +169,7 @@ export default function AboutPage() {
 
             {/* Doctor 3 */}
              <div className="group relative overflow-hidden rounded-2xl">
-              <Image
+              <img
                 src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&h=800&fit=crop"
                 alt="Dr. Emily Chen"
                 width={400}
@@ -205,7 +200,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[1, 2, 3].map((item) => (
               <div key={item} className="aspect-square overflow-hidden rounded-lg">
-                <Image
+                <img
                   src={images[`gallery-${item}` as keyof typeof images].src}
                   alt={`Office view ${item}`}
                   width={400}

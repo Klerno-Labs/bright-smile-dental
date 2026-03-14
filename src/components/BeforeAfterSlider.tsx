@@ -1,10 +1,8 @@
 'use client';
 import React, { useState, useRef } from "react";
-import Image from 'next/image';
 import { images } from '@/config/images';
 import { cn } from '@/lib/utils';
 
-import { useState } from "react";
 export function BeforeAfterSlider() {
   const [sliderPosition, setSliderPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,12 +24,10 @@ export function BeforeAfterSlider() {
     >
       {/* After Image (Background) */}
       <div className="absolute inset-0">
-        <Image 
+        <img 
           src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=800&auto=format&fit=crop" 
-          alt="After: Bright confident smile"
-          fill
+          alt="After: Bright confident smile" style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover"
-          priority
         />
       </div>
 
@@ -40,12 +36,10 @@ export function BeforeAfterSlider() {
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <Image 
+        <img 
           src="https://images.unsplash.com/photo-1445527815219-ecbfec67492e?q=80&w=800&auto=format&fit=crop" 
-          alt="Before: Dull smile"
-          fill
+          alt="Before: Dull smile" style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover filter brightness-[0.9]"
-          priority
         />
         <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
           Before
@@ -62,7 +56,7 @@ export function BeforeAfterSlider() {
         style={{ left: `${sliderPosition}%` }}
       >
         <div className="w-8 h-8 rounded-full bg-white text-primary shadow-xl flex items-center justify-center transform -translate-x-1/2 pointer-events-auto group-hover:scale-110 transition-transform">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="16" height="16" viewBox="0 0 24 24" style={{ width: "100%", height: "100%", objectFit: "cover" }}="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
             <polyline points="9 18 3 12 9 6" transform="rotate(180 6 12)"></polyline>
           </svg>
