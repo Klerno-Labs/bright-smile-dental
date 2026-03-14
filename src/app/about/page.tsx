@@ -1,142 +1,126 @@
-import React from "react";
-import Link from "next/link";
+import { Metadata } from "next";
 import Image from "next/image";
-import { Section } from "@/components/ui/section";
+import { Contact } from "@/components/sections/contact";
 import { Button } from "@/components/ui/button";
 import { images } from "@/config/images";
-import { MapPin, Linkedin, Twitter } from "lucide-react";
+import { Linkedin, Instagram, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
 
-export const metadata = {
-  title: "About Us | Meet Our Dental Team",
-  description: "Learn about Bright Smile Dental's philosophy and meet our expert team of dentists in Houston.",
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Meet the team of world-class dentists at Bright Smile Dental in Houston.",
 };
 
 const team = [
   {
-    name: "Dr. Sarah Jenkins",
-    role: "Lead Dentist, DDS",
-    bio: "Dr. Jenkins has over 15 years of experience specializing in cosmetic and restorative dentistry. She believes everyone deserves a smile they love.",
-    image: images["team-1"],
-    socials: { linkedin: "#", twitter: "#" }
+    name: "Dr. Elena Bright",
+    role: "Founder & Lead Dentist",
+    bio: "With over 15 years of experience, Dr. Bright specializes in cosmetic reconstruction and implantology. She believes in the power of a confident smile.",
+    credentials: "DDS, University of Texas",
+    img: "about"
   },
   {
     name: "Dr. Michael Chen",
-    role: "Orthodontist, DMD",
-    bio: "An expert in Invisalign and clear braces, Dr. Chen helps patients achieve perfect alignment with modern, discreet solutions.",
-    image: images["team-2"],
-    socials: { linkedin: "#", twitter: "#" }
+    role: "Orthodontist",
+    bio: "Dr. Chen is an Invisalign Diamond Provider dedicated to creating perfect smiles for patients of all ages using the latest 3D imaging technology.",
+    credentials: "DMD, Harvard School of Dental Medicine",
+    img: "hero-alt"
   },
   {
-    name: "Emily Rodriguez",
-    role: "Lead Hygienist",
-    bio: "Emily ensures every patient's cleaning is thorough yet gentle. She is passionate about patient education and preventative care.",
-    image: images["team-3"],
-    socials: { linkedin: "#", twitter: "#" }
+    name: "Dr. Sarah Johnson",
+    role: "Pediatric Specialist",
+    bio: "Specializing in making dental visits fun and fear-free for children. Dr. Johnson creates a foundation of lifelong oral health for our youngest patients.",
+    credentials: "DDS, Pediatric Residency at Baylor",
+    img: "gallery-2"
   }
 ];
 
 export default function AboutPage() {
   return (
-    <div>
-      {/* About Hero */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-secondary overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-           <Image src={images["about"].src} alt="Clinic Interior" fill className="object-cover" />
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-6 animate-fade-up">Experience You Can Trust</h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto animate-fade-up delay-100">
-            We are not just dentists; we are partners in your health journey. Our state-of-the-art facility in Houston is designed with your comfort in mind.
+    <>
+      {/* Internal Hero */}
+      <section className="pt-32 pb-20 bg-surface-alt border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">Experience You Can Trust</h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            At Bright Smile Dental, we combine artistry with medical science to provide dental care that exceeds expectations. Our team is not just skilled technicians; we are compassionate caregivers dedicated to your well-being.
           </p>
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <Section>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 className="text-3xl font-serif font-bold text-primary mb-6">Our Philosophy</h2>
-            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              At Bright Smile Dental, we reject the idea that visiting the dentist must be uncomfortable. We have curated a spa-like environment that calms the senses the moment you walk in.
-            </p>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              We invest in the highest technology—not because it looks cool, but because it allows us to diagnose issues earlier and treat them more precisely. From 3D imaging to laser dentistry, we bring the future of care to Houston today.
-            </p>
-            <ul className="space-y-4 mb-8">
-              {["Patient-first approach always", "Transparent pricing with no surprises", "Latest in sterilization technology"].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 font-bold text-gray-800">
-                  <span className="w-2 h-2 rounded-full bg-accent"></span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="relative rounded-[24px] overflow-hidden shadow-2xl">
-            <Image src={images["about"].src} alt="Modern Dental Clinic" fill className="object-cover" sizes="50vw" />
+      {/* Values Section */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            <motion.div whileHover={{ y: -5 }} className="p-6">
+              <div className="w-16 h-16 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-6 text-primary">
+                <GraduationCap className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Continuous Education</h3>
+              <p className="text-gray-600">Our team attends annual conferences to stay at the forefront of dental technology.</p>
+            </motion.div>
+            <motion.div whileHover={{ y: -5 }} className="p-6">
+              <div className="w-16 h-16 bg-medical/10 rounded-full flex items-center justify-center mx-auto mb-6 text-medical">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+              </div>
+              <h3 className="text-xl font-bold mb-3">Patient-First Philosophy</h3>
+              <p className="text-gray-600">We listen to your concerns and tailor treatment plans to your specific needs and budget.</p>
+            </motion.div>
+            <motion.div whileHover={{ y: -5 }} className="p-6">
+              <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6 text-accent">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+              </div>
+              <h3 className="text-xl font-bold mb-3">Highest Safety Standards</h3>
+              <p className="text-gray-600">We exceed CDC guidelines for sterilization and infection control to keep you safe.</p>
+            </motion.div>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* Team Section */}
-      <Section bgColor="surface">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-serif font-bold text-primary mb-4">Meet Your Care Team</h2>
-          <p className="text-lg text-gray-600">Highly trained professionals dedicated to your well-being.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {team.map((member, idx) => (
-            <div key={idx} className="group h-full">
-              <div className="relative h-[500px] w-full perspective-1000 mb-6">
-                {/* Flip Card Inner */}
-                <div className="relative w-full h-full text-center transition-transform duration-700 transform-style-3xl group-hover:rotate-y-180">
+      <section className="py-24 bg-surface-alt">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary text-center mb-16">Meet Our Specialists</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {team.map((member, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+              >
+                <div className="h-64 relative overflow-hidden">
+                  <Image
+                    src={images[member.img as keyof typeof images].src}
+                    alt={member.name}
+                    width={400}
+                    height={300}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-8">
+                  <h3 className="text-xl font-bold text-primary mb-1">{member.name}</h3>
+                  <p className="text-medical font-semibold text-sm mb-4">{member.role}</p>
+                  <p className="text-gray-600 text-sm mb-6 leading-relaxed">{member.bio}</p>
                   
-                  {/* Front */}
-                  <div className="absolute w-full h-full backface-hidden bg-white rounded-xl shadow-card overflow-hidden">
-                    <div className="relative h-[350px]">
-                      <Image src={member.image.src} alt={member.name} fill className="object-cover" sizes="33vw" />
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-2xl font-serif font-bold text-primary">{member.name}</h3>
-                      <p className="text-accent font-bold uppercase text-xs tracking-widest mt-2">{member.role}</p>
-                      <p className="text-gray-500 mt-4 text-sm italic">Hover to view bio</p>
-                    </div>
-                  </div>
-
-                  {/* Back */}
-                  <div className="absolute w-full h-full backface-hidden bg-primary text-white rotate-y-180 rounded-xl shadow-xl p-8 flex flex-col justify-center items-start text-left">
-                    <h3 className="text-2xl font-serif font-bold mb-1">{member.name}</h3>
-                    <p className="text-teal-300 text-sm font-bold uppercase tracking-widest mb-6">{member.role}</p>
-                    <p className="text-gray-200 leading-relaxed mb-8">{member.bio}</p>
-                    
-                    <div className="flex gap-4">
-                      <a href={member.socials.linkedin} aria-label="LinkedIn" className="bg-white/10 p-2 rounded-full hover:bg-accent transition-colors">
-                        <Linkedin size={18} />
-                      </a>
-                      <a href={member.socials.twitter} aria-label="Twitter" className="bg-white/10 p-2 rounded-full hover:bg-accent transition-colors">
-                        <Twitter size={18} />
-                      </a>
+                  <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
+                    <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{member.credentials}</span>
+                    <div className="flex space-x-3">
+                      <a href="#" className="text-gray-400 hover:text-primary transition-colors" aria-label="LinkedIn"><Linkedin className="w-5 h-5" /></a>
+                      <a href="#" className="text-gray-400 hover:text-accent transition-colors" aria-label="Instagram"><Instagram className="w-5 h-5" /></a>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
-      {/* CTA */}
-      <Section bgColor="gradient-mint">
-        <div className="text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl font-serif font-bold text-primary mb-6">Join the Bright Smile Family</h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Whether you need a simple checkup or a complete smile transformation, our doors are open.
-          </p>
-          <Link href="/#contact">
-            <Button size="lg">Book Your Visit</Button>
-          </Link>
-        </div>
-      </Section>
-    </div>
+      <Contact />
+    </>
   );
 }

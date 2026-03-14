@@ -1,138 +1,106 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { CheckCircle, ChevronRight } from "lucide-react";
-import { Section } from "@/components/ui/section";
-import { images } from "@/config/images";
-import ContactForm from "@/components/forms/contact-form";
+import { Metadata } from "next";
+import { Hero } from "@/components/sections/hero";
+import { Contact } from "@/components/sections/contact";
+import { Check, Zap } from "lucide-react";
+import { motion } from "framer-motion";
 
-const categories = [
-  {
-    id: "general",
-    title: "General Dentistry",
-    desc: "Routine cleanings, exams, and preventative care to keep your smile healthy for life.",
-    price: "From $150",
-    items: ["Comprehensive Exams", "Digital X-Rays", "Professional Cleanings", "Fluoride Treatments", "Oral Cancer Screenings"],
-    image: images["service-2"]
-  },
+export const metadata: Metadata = {
+  title: "Our Services",
+  description: "Explore our comprehensive dental treatments including Cosmetic Dentistry, Implants, and Orthodontics.",
+};
+
+const treatments = [
   {
     id: "cosmetic",
     title: "Cosmetic Dentistry",
-    desc: "Enhance the appearance of your smile with our aesthetic treatments.",
-    price: "From $400",
-    items: ["Professional Teeth Whitening", "Porcelain Veneers", "Dental Bonding", "Invisalign®", "Gum Contouring"],
-    image: images["service-1"]
+    desc: "Achieve the smile of your dreams with our aesthetic treatments.",
+    services: [
+      { name: "Porcelain Veneers", price: "From $1,200/tooth" },
+      { name: "Professional Whitening", price: "$399" },
+      { name: "Bonding & Contouring", price: "From $300/tooth" },
+      { name: "Gum Recontouring", price: "From $500" }
+    ]
   },
   {
     id: "restorative",
-    title: "Restorative Procedures",
-    desc: "Repair damaged teeth and restore function with natural-looking solutions.",
-    price: "From $800",
-    items: ["Dental Implants", "Crowns & Bridges", "Tooth-Colored Fillings", "Root Canal Therapy", "Dentures"],
-    image: images["service-3"]
+    title: "Restorative Care",
+    desc: "Repair damaged teeth and restore full function to your bite.",
+    services: [
+      { name: "Dental Implants", price: "From $3,500" },
+      { name: "Crowns & Bridges", price: "From $1,100" },
+      { name: "Root Canal Therapy", price: "From $800" },
+      { name: "Tooth-Colored Fillings", price: "From $250" }
+    ]
+  },
+  {
+    id: "ortho",
+    title: "Orthodontics",
+    desc: "Straighten your teeth at any age with modern solutions.",
+    services: [
+      { name: "Invisalign", price: "From $4,500" },
+      { name: "Clear Braces", price: "From $4,000" },
+      { name: "Traditional Braces", price: "From $3,800" },
+      { name: "Retainers", price: "From $200" }
+    ]
   }
 ];
 
-export const metadata = {
-  title: "Our Services | Premium Dental Treatments",
-  description: "Explore our comprehensive range of dental services including cosmetic, general, and restorative dentistry in Houston.",
-};
-
 export default function ServicesPage() {
   return (
-    <div className="pt-20">
-      {/* Page Header */}
-      <section className="bg-surface py-20 border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">Our Dental Services</h1>
+    <>
+      {/* Internal Hero */}
+      <section className="pt-32 pb-20 bg-surface-alt border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Our Dental Services</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            World-class treatments tailored to your unique needs. We combine advanced technology with a gentle touch.
+            Comprehensive care utilizing the latest technology for your comfort and health.
           </p>
         </div>
       </section>
 
-      {/* Service Categories */}
-      <main>
-        {categories.map((cat, idx) => (
-          <Section key={cat.id} bgColor={idx % 2 === 0 ? "white" : "surface"}>
-            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${idx % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}>
-              <div className="relative rounded-[24px] overflow-hidden shadow-xl aspect-[4/3]">
-                <Image
-                  src={cat.image.src}
-                  alt={cat.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-              
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-accent font-bold tracking-widest uppercase text-sm">{cat.price}</span>
-                  <span className="text-gray-300">|</span>
-                  <span className="text-teal-600 font-bold tracking-widest uppercase text-sm">{cat.id}</span>
+      <section className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {treatments.map((category, idx) => (
+            <div key={category.id} id={category.id} className="mb-24 last:mb-0 scroll-mt-24">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center mb-8"
+              >
+                <div className="w-16 h-16 bg-medical/10 rounded-2xl flex items-center justify-center mr-6 text-medical">
+                  <Zap className="w-8 h-8" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">{cat.title}</h2>
-                <p className="text-lg text-gray-600 mb-8">{cat.desc}</p>
-                
-                <ul className="space-y-4 mb-8">
-                  {cat.items.map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-700">
-                      <div className="bg-teal-100 rounded-full p-1">
-                        <CheckCircle className="w-4 h-4 text-teal-600" />
-                      </div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <div>
+                  <h2 className="text-3xl font-bold text-primary">{category.title}</h2>
+                  <p className="text-gray-600">{category.desc}</p>
+                </div>
+              </motion.div>
 
-                <Link href="/#contact">
-                  <button className="group inline-flex items-center gap-2 text-primary font-bold text-lg hover:text-accent transition-colors">
-                    Book Consultation <ChevronRight className="group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </Link>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {category.services.map((service, sIdx) => (
+                  <motion.div 
+                    key={sIdx}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: sIdx * 0.1 }}
+                    className="p-6 bg-white border border-gray-200 rounded-xl hover:border-medical hover:shadow-md transition-all group"
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="text-lg font-bold text-primary group-hover:text-medical transition-colors">{service.name}</h3>
+                      <Check className="w-5 h-5 text-gray-300 group-hover:text-medical transition-colors" />
+                    </div>
+                    <p className="text-accent font-semibold text-sm">{service.price}</p>
+                  </motion.div>
+                ))}
               </div>
             </div>
-          </Section>
-        ))}
+          ))}
+        </div>
+      </section>
 
-        {/* FAQ Section */}
-        <Section bgColor="white">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-serif font-bold text-primary text-center mb-12">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              {[
-                { q: "Do you accept my insurance?", a: "We accept most major PPO insurance plans including Delta Dental, Aetna, Cigna, and MetLife. Please call our office for a complimentary benefits check." },
-                { q: "What if I have a dental emergency?", a: "We reserve time daily for emergency patients. If you are in pain, please call us immediately at (713) 555-0123 and we will do our best to see you same-day." },
-                { q: "Are you accepting new patients?", a: "Yes! We are currently accepting new patients of all ages. We would love the opportunity to care for your smile." }
-              ].map((item, i) => (
-                <details key={i} className="group bg-surface rounded-xl border border-gray-200 p-6 cursor-pointer">
-                  <summary className="flex justify-between items-center font-bold text-lg text-primary list-none">
-                    {item.q}
-                    <span className="transition-transform group-open:rotate-45">+</span>
-                  </summary>
-                  <p className="mt-4 text-gray-600 leading-relaxed animate-slide-down">
-                    {item.a}
-                  </p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </Section>
-
-        {/* Contact Form */}
-        <Section id="contact" bgColor="mint-gradient">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-serif font-bold text-primary mb-4">Ready to Start?</h2>
-              <p className="text-lg text-gray-600">Fill out the form below and we'll get back to you shortly.</p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-xl max-w-2xl mx-auto">
-              <ContactForm />
-            </div>
-          </div>
-        </Section>
-      </main>
-    </div>
+      <Contact />
+    </>
   );
 }

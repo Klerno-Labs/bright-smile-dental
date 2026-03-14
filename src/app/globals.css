@@ -3,67 +3,34 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  --foreground-rgb: 31, 41, 55;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 }
 
 @layer base {
-  html {
-    @apply scroll-smooth;
+  * {
+    @apply border-border;
   }
-  
   body {
-    @apply bg-white text-gray-700 antialiased;
+    @apply bg-white text-text-main font-body antialiased;
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-serif text-primary font-bold tracking-tight;
-  }
-  
-  h1 { @apply text-4xl sm:text-5xl lg:text-6xl; }
-  h2 { @apply text-3xl sm:text-4xl; }
-  h3 { @apply text-xl sm:text-2xl; }
-  
-  button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
-    @apply outline-none ring-2 ring-teal-500 ring-offset-2 rounded;
+  h1, h2, h3, h4 {
+    @apply font-heading font-bold text-primary;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* Custom Scrollbar */
+/* Custom scrollbar for cleaner look */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F1F1;
+  background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 5px;
+  background: #c1c1c1;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
-}
-
-/* 3D Flip Utilities */
-.perspective-1000 {
-  perspective: 1000px;
-}
-.transform-style-3xl {
-  transform-style: preserve-3d;
-}
-.backface-hidden {
-  backface-visibility: hidden;
-}
-.rotate-y-180 {
-  transform: rotateY(180deg);
-}
-.group:hover .group-hover\:rotate-y-180 {
-  transform: rotateY(180deg);
+  background: #a8a8a8;
 }
