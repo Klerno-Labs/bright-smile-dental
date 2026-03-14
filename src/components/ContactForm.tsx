@@ -7,6 +7,7 @@ import * as z from "zod";
 import { cn } from "@/lib/utils";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
+import { z } from "zod";
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(50),
   email: z.string().email("Invalid email address"),

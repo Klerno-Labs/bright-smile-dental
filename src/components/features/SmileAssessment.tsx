@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { ChevronRight, CheckCircle, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { useState } from "react";
 const steps = [
   {
     id: "concern",
