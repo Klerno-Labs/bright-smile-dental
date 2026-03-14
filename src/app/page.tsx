@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { CheckCircle2, Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -25,7 +26,7 @@ export default function Home() {
             className="order-2 lg:order-1"
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary font-semibold text-sm mb-6 tracking-wide">
-              HOUSTON'S PREMIER DENTAL CARE
+              HOUSTON&apos;S PREMIER DENTAL CARE
             </span>
             <h1 className="font-heading text-5xl lg:text-6xl xl:text-7xl font-bold text-primary leading-[1.1] mb-6">
               Life-changing <br/> <span className="text-secondary">confidence.</span>
@@ -42,7 +43,7 @@ export default function Home() {
               <div className="flex -space-x-3">
                 {[1,2,3].map((i) => (
                   <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Patient" width={40} height={40} />
+                    <Image src={`https://i.pravatar.cc/100?img=${i+10}`} alt="Patient" width={40} height={40} />
                   </div>
                 ))}
               </div>
@@ -114,7 +115,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { title: "Cosmetic Dentistry", desc: "Veneers, bonding, and whitening for the perfect smile.", img: "service-2" },
-              { title: "General Dentistry", desc: "Cleanings, exams, and style={{ width: "100%", height: "100%", objectFit: "cover" }}ings for the whole family.", img: "service-1" },
+              { title: "General Dentistry", desc: "Cleanings, exams, and fillings for the whole family.", img: "service-1" },
               { title: "Restorative Care", desc: "Implants and crowns using the latest 3D technology.", img: "service-3" }
             ].map((service, i) => (
               <motion.div
@@ -126,9 +127,10 @@ export default function Home() {
                 className="group bg-white rounded-2xl shadow-card hover:shadow-hover transition-all duration-300 border border-gray-100 overflow-hidden"
               >
                 <div className="h-64 overflow-hidden relative">
-                  <img 
+                  <Image 
                     src={images[service.img as ImageSlot].src} 
-                    alt={service.title} style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    alt={service.title}
+                    fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -151,8 +153,8 @@ export default function Home() {
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary text-center mb-16">What Our Patients Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "Maria L.", text: "I've never felt so comfortable at a dentist. The team explained everything and my new smile is incredible!" },
-              { name: "James T.", text: "Dr. Bennett's attention to detail is unmatched. The painless root canal was a miracle." },
+              { name: "Maria L.", text: "I&apos;ve never felt so comfortable at a dentist. The team explained everything and my new smile is incredible!" },
+              { name: "James T.", text: "Dr. Bennett&apos;s attention to detail is unmatched. The painless root canal was a miracle." },
               { name: "Sarah J.", text: "Modern, clean, and friendly. They actually respect your time here. Highly recommended for families." }
             ].map((review, i) => (
               <motion.div
@@ -169,7 +171,7 @@ export default function Home() {
                 <p className="font-serif text-xl text-gray-600 mb-6 italic">"{review.text}"</p>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-gray-200 rounded-full overflow-hidden">
-                    <img src={`https://i.pravatar.cc/100?img=${i+20}`} alt={review.name} width={40} height={40} />
+                    <Image src={`https://i.pravatar.cc/100?img=${i+20}`} alt={review.name} width={40} height={40} />
                   </div>
                   <span className="font-bold text-primary">{review.name}</span>
                 </div>
@@ -190,7 +192,7 @@ export default function Home() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary shrink-0">
-                    <svg className="w-6 h-6" style={{ width: "100%", height: "100%", objectFit: "cover" }}="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                   </div>
                   <div>
                     <h4 className="text-white font-bold mb-1">Call Us</h4>
@@ -199,7 +201,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary shrink-0">
-                    <svg className="w-6 h-6" style={{ width: "100%", height: "100%", objectFit: "cover" }}="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                   </div>
                   <div>
                     <h4 className="text-white font-bold mb-1">Visit Us</h4>
