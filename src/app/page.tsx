@@ -1,306 +1,329 @@
-"use client";
-
-import Link from "next/link";
 import { Metadata } from "next";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/Button";
-import { CTA } from "@/components/CTA";
-import { SymptomChecker } from "@/components/SymptomChecker";
-import { ContactForm } from "@/components/ContactForm";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, Star, Phone, Calendar, Shield, Clock } from "lucide-react";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { BeforeAfterSlider } from "@/components/before-after-slider";
+import { PainMap } from "@/components/pain-map";
 import { images } from "@/config/images";
-import { Star, Shield, Clock, Users, ArrowRight, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Home",
-  description: "Experience modern dentistry with a gentle touch at Bright Smile Dental. Comprehensive cosmetic, family, and emergency dental services in Houston, TX.",
+  description: "Premium family and cosmetic dentistry in Houston, TX. Experience life-changing confidence with our patient-first approach.",
 };
 
-// Reveal Animation Component
-const Reveal = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    transition={{ duration: 0.7, delay, ease: "easeOut" }}
-  >
-    {children}
-  </motion.div>
-);
-
 export default function Home() {
-  const services = [
-    {
-      title: "Cosmetic Dentistry",
-      description: "Transform your smile with professional whitening, veneers, and bonding for a confident look.",
-      icon: "✨",
-    },
-    {
-      title: "General Dentistry",
-      description: "Comprehensive exams, cleanings, and style={{ width: "100%", height: "100%", objectFit: "cover" }}ings using the latest technology for optimal health.",
-      icon: "🦷",
-    },
-    {
-      title: "Orthodontics",
-      description: "Straighten your teeth with clear aligners or traditional braces tailored to your lifestyle.",
-      icon: "😁",
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Maria L.",
-      role: "Patient",
-      quote: "I&apos;ve always been afraid of the dentist, but the team at Bright Smile changed that. They were so gentle and explained everything!",
-      rating: 5,
-    },
-    {
-      name: "James T.",
-      role: "Patient",
-      quote: "The cosmetic work Dr. Bennett did on my veneers is incredible. I haven&apos;t stopped smiling since I left the office.",
-      rating: 5,
-    },
-    {
-      name: "Emily R.",
-      role: "Patient",
-      quote: "Emergency tooth pain at 9 PM? They fit me in first thing the next morning. True professionals.",
-      rating: 5,
-    },
-  ];
-
   return (
-    <>
+    <main className="min-h-screen">
+      <Navbar />
+      
       {/* Hero Section */}
-      <section className="relative pt-10 pb-20 lg:pt-20 lg:pb-32 overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
-            {/* Content */}
-            <div className="lg:col-span-7 text-center lg:text-left z-10">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="inline-block bg-secondary/10 text-secondary px-4 py-1 rounded-full text-sm font-semibold mb-6"
-              >
-                Accepting New Patients
-              </motion.div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-textMain tracking-tight mb-6 leading-tight"
-              >
-                Modern Dentistry <br className="hidden lg:block" />
-                <span className="text-primary">With a Gentle Touch.</span>
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-lg md:text-xl text-textBody mb-8 max-w-2xl mx-auto lg:mx-0"
-              >
-                Experience world-class dental care in the heart of Houston. We use advanced technology to ensure your visit is comfortable, efficient, and stress-free.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-              >
-                <Button asChild size="lg" className="h-14 px-8 text-base">
-                  <Link href="/contact">Book Appointment</Link>
-                </Button>
-                <Button asChild size="lg" variant="secondary" className="h-14 px-8 text-base">
-                  <Link href="/services">Explore Services</Link>
-                </Button>
-              </motion.div>
-
-              {/* Trust Indicators */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="mt-10 flex items-center justify-center lg:justify-start gap-6 text-sm text-textMuted"
-              >
-                <div className="flex items-center gap-2">
-                  <CheckCircle size={16} className="text-success" />
-                  <span>Insurance Accepted</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle size={16} className="text-success" />
-                  <span>5-Star Rated</span>
-                </div>
-              </motion.div>
+      <section className="min-h-[90vh] pt-20 flex items-center bg-[#F9FAFB]">
+        <div className="max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+          {/* Content */}
+          <div className="space-y-8 animate-fade-in-up">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-[#E0F2F2] text-[#0E3A53] text-sm font-semibold tracking-wide uppercase">
+              Houston&apos;s Top Rated Dentist
+            </span>
+            <h1 className="font-heading font-bold text-[clamp(2.5rem,5vw,4.5rem)] text-[#0E3A53] leading-[1.1]">
+              Life-changing confidence <br />
+              <span className="text-[#4CA1A3]">starts with a smile.</span>
+            </h1>
+            <p className="text-lg text-[#4B5563] max-w-lg leading-relaxed">
+              Experience modern dentistry designed for your comfort. From routine cleanings to complete smile makeovers, we treat you like family.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Button size="lg" asChild>
+                <Link href="/#contact">Book Consultation</Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link href="/services">Explore Services</Link>
+              </Button>
             </div>
-
-            {/* Image */}
-            <Reveal delay={0.2} className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src={images["hero"].src}
-                  alt={images["hero"].alt}
-                  width={images["hero"].width}
-                  height={images["hero"].height}
-                  className="w-full h-auto object-cover"
-                />
-                {/* Decorative Blob behind */}
-                <div className="absolute -z-10 -top-10 -right-10 w-full h-full bg-primaryLight/50 rounded-full blur-3xl opacity-70" />
+            
+            {/* Trust Badges */}
+            <div className="flex items-center gap-6 pt-6 text-sm font-medium text-[#0E3A53]">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-[#4CA1A3]" />
+                <span>Accepting New Patients</span>
               </div>
-            </Reveal>
+              <div className="flex items-center gap-2">
+                <Star className="w-5 h-5 fill-[#D4AF37] text-[#D4AF37]" />
+                <span>5.0 Rated on Google</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Media / Before-After */}
+          <div className="relative h-[60vh] lg:h-[90vh] w-full rounded-l-[24px] overflow-hidden shadow-2xl">
+            <BeforeAfterSlider />
+            
+            {/* Floating Card (Desktop) */}
+            <div className="hidden md:block absolute bottom-10 left-[-40px] bg-white/95 backdrop-blur p-6 rounded-2xl shadow-xl max-w-xs border border-gray-100">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="w-12 h-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3]">
+                  <Phone className="w-6 h-6" />
+                </div>
+                <div>
+                  <p className="text-xs text-[#4B5563] uppercase font-bold tracking-wider">Emergency?</p>
+                  <p className="font-heading font-bold text-[#0E3A53]">(713) 555-0123</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-600">Same-day appointments available for pain relief.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="py-16 md:py-24 bg-bgBody">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-4">
-                Comprehensive Care for Your Whole Family
-              </h2>
-              <p className="text-lg text-textBody">
-                From preventative checkups to complete smile makeovers, we offer a full range of dental services under one roof.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Reveal key={index} delay={index * 0.1}>
-                <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100 h-full flex flex-col">
-                  <div className="w-16 h-16 bg-primaryLight rounded-full flex items-center justify-center text-3xl mb-6">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-textMain mb-3">{service.title}</h3>
-                  <p className="text-textBody mb-6 flex-grow">{service.description}</p>
-                  <Link href="/services" className="inline-flex items-center text-primary font-semibold hover:underline">
-                    Learn more <ArrowRight size={16} className="ml-1" />
-                  </Link>
-                </div>
-              </Reveal>
+      {/* Trust Bar */}
+      <section className="bg-white border-y border-gray-100 py-8">
+        <div className="max-w-[1240px] mx-auto px-6">
+          <p className="text-center text-sm text-gray-500 font-medium mb-6 tracking-widest uppercase">Proudly working with major insurance providers</p>
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale">
+            {/* Placeholder Logo Text - In prod, use SVG logos */}
+            {["Delta Dental", "Aetna", "Cigna", "MetLife", "Humana"].map((name) => (
+              <span key={name} className="font-heading font-bold text-xl text-gray-400">{name}</span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Symptom Checker */}
-      <SymptomChecker />
+      {/* Pain Map Section */}
+      <section className="py-24 bg-[#F9FAFB]">
+        <div className="max-w-[1240px] mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#0E3A53] mb-4">Not sure what you need?</h2>
+            <p className="text-[#4B5563] text-lg">
+              Tap on the area where you are experiencing discomfort to see our recommended treatments.
+            </p>
+          </div>
+          <PainMap />
+        </div>
+      </section>
 
-      {/* Why Choose Us */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Reveal>
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-4">
-                Why Houston Chooses Bright Smile
-              </h2>
-              <p className="text-lg text-textBody">
-                We combine cutting-edge technology with a warm, welcoming environment to provide an experience unlike any other dentist office.
+      {/* Services Preview */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[1240px] mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-xl">
+              <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#0E3A53] mb-4">Comprehensive Dental Care</h2>
+              <p className="text-[#4B5563] text-lg">
+                We utilize the latest technology to provide accurate diagnoses and effective treatments in a relaxing environment.
               </p>
             </div>
-          </Reveal>
+            <Button variant="outline" asChild>
+              <Link href="/services">View All Services <ArrowRight className="w-4 h-4 ml-2" /></Link>
+            </Button>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { icon: Shield, title: "Safety First", desc: "We exceed all CDC and OSHA sterilization guidelines." },
-              { icon: Clock, title: "Punctual Care", desc: "We respect your time. Minimal wait times guaranteed." },
-              { icon: Users, title: "Expert Team", desc: "Board-certified specialists with years of experience." },
-              { icon: Star, title: "Top Rated", desc: "Over 500 5-star reviews from happy patients." },
-            ].map((item, idx) => (
-              <Reveal key={idx} delay={idx * 0.1}>
-                <div className="text-center">
-                  <div className="w-14 h-14 bg-gray-50 rounded-xl flex items-center justify-center mx-auto mb-4 text-primary">
-                    <item.icon size={28} />
-                  </div>
-                  <h3 className="text-lg font-bold text-textMain mb-2">{item.title}</h3>
-                  <p className="text-sm text-textBody">{item.desc}</p>
+              {
+                title: "Cosmetic Dentistry",
+                desc: "Transform your smile with veneers, bonding, and professional whitening.",
+                img: "service-1",
+                link: "cosmetic"
+              },
+              {
+                title: "Restorative Care",
+                desc: "High-quality crowns, bridges, and implants to restore function and beauty.",
+                img: "service-2",
+                link: "restorative"
+              },
+              {
+                title: "Preventative Care",
+                desc: "Regular check-ups, cleanings, and sealants to keep your teeth healthy.",
+                img: "service-3",
+                link: "preventative"
+              }
+            ].map((service, i) => (
+              <div key={i} className="group bg-[#F9FAFB] rounded-[24px] overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100">
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={images[service.img as keyof typeof images].src}
+                    alt={service.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E3A53]/60 to-transparent opacity-60" />
                 </div>
-              </Reveal>
+                <div className="p-8">
+                  <h3 className="font-heading font-bold text-2xl text-[#0E3A53] mb-3 group-hover:text-[#4CA1A3] transition-colors">{service.title}</h3>
+                  <p className="text-[#4B5563] mb-6 leading-relaxed">{service.desc}</p>
+                  <div className="flex items-center text-[#4CA1A3] font-semibold group-hover:translate-x-2 transition-transform">
+                    Learn More <ArrowRight className="w-4 h-4 ml-2" />
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-16 md:py-24 bg-bgBody relative overflow-hidden">
-         {/* Background Decor */}
-         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-         <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl" />
+      <section className="py-24 bg-[#0E3A53] text-white relative overflow-hidden">
+        {/* Background Decor */}
+        <div className="absolute inset-0 opacity-10">
+          <Image src={images["testimonial-bg"].src} alt="" fill className="object-cover grayscale" />
+        </div>
+        
+        <div className="max-w-[1240px] mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <span className="text-[#D4AF37] font-serif italic text-xl">What Our Patients Say</span>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl mt-2">Rated 5 Stars in Houston</h2>
+          </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <Reveal>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-4">
-                Loved by Our Community
-              </h2>
-            </div>
-          </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
-              <Reveal key={i} delay={i * 0.1}>
-                <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                  <div className="flex text-primary mb-4">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} size={16} style={{ width: "100%", height: "100%", objectFit: "cover" }}="currentColor" className="mr-1" />
-                    ))}
-                  </div>
-                  <p className="text-textBody mb-6 italic">"{t.quote}"</p>
-                  <div>
-                    <p className="font-bold text-textMain">{t.name}</p>
-                    <p className="text-xs text-textMuted uppercase tracking-wide">{t.role}</p>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { name: "Maria L.", service: "Veneers", text: "I was so self-conscious about my smile for years. Dr. Bennett changed my life in just two visits. The staff made me feel so comfortable!" },
+              { name: "James T.", service: "Implants", text: "I thought getting an implant would be painful, but it was surprisingly easy. The technology they use is incredible." },
+              { name: "Sarah M.", service: "Cleaning", text: "Best dental experience I've ever had. The office is beautiful, the views are calming, and the cleaning was gentle." }
+            ].map((review, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/10">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} className="w-5 h-5 fill-[#D4AF37] text-[#D4AF37]" />
+                  ))}
                 </div>
-              </Reveal>
+                <p className="font-serif text-lg leading-relaxed mb-6 text-gray-200">&quot;{review.text}&quot;</p>
+                <div>
+                  <p className="font-bold text-white">{review.name}</p>
+                  <p className="text-sm text-[#4CA1A3]">{review.service}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <CTA />
-
-      {/* Contact Form Teaser */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-            <div className="lg:py-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-6">
-                Ready to Schedule Your Visit?
-              </h2>
-              <p className="text-lg text-textBody mb-8">
-                Fill out the form to request an appointment. Our team will contact you shortly to confirm your preferred time.
-              </p>
-              
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-primaryLight rounded-lg flex items-center justify-center flex-shrink-0 text-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" style={{ width: "100%", height: "100%", objectFit: "cover" }}="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-textMain">Call Us</h4>
-                    <p className="text-textBody">(713) 555-0198</p>
-                    <p className="text-sm text-textMuted">Available Mon-Sat</p>
-                  </div>
+      {/* CTA / Contact Section */}
+      <section id="contact" className="py-24 bg-white">
+        <div className="max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div>
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#0E3A53] mb-6">Ready to smile?</h2>
+            <p className="text-lg text-[#4B5563] mb-8 leading-relaxed">
+              Schedule your appointment today. New patients receive a comprehensive exam and digital x-rays for just $99.
+            </p>
+            
+            <div className="space-y-6 mb-10">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
+                  <Calendar className="w-6 h-6" />
                 </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-primaryLight rounded-lg flex items-center justify-center flex-shrink-0 text-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" style={{ width: "100%", height: "100%", objectFit: "cover" }}="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-textMain">Visit Us</h4>
-                    <p className="text-textBody">4521 Westheimer Rd, Suite 200</p>
-                    <p className="text-textBody">Houston, TX 77027</p>
-                  </div>
+                <div>
+                  <h4 className="font-bold text-[#0E3A53]">Flexible Scheduling</h4>
+                  <p className="text-[#4B5563]">Early morning and evening slots available.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
+                  <Shield className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-[#0E3A53]">Insurance Friendly</h4>
+                  <p className="text-[#4B5563]">We handle the paperwork so you don't have to.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
+                  <Clock className="w-6 h-6" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-[#0E3A53]">No Wait Time</h4>
+                  <p className="text-[#4B5563]">We respect your time. Appointments run on schedule.</p>
                 </div>
               </div>
             </div>
-            
-            <ContactForm />
           </div>
+
+          {/* Contact Form */}
+          <ContactForm />
         </div>
       </section>
-    </>
+
+      <Footer />
+    </main>
+  );
+}
+
+function ContactForm() {
+  return (
+    <form action="/api/contact" method="POST" className="bg-[#F9FAFB] p-8 md:p-10 rounded-[24px] shadow-card border border-gray-100">
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label htmlFor="name" className="text-sm font-medium text-[#0E3A53]">Full Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name"
+              required 
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all placeholder:text-gray-400"
+              placeholder="John Doe"
+            />
+          </div>
+          <div className="space-y-2">
+            <label htmlFor="phone" className="text-sm font-medium text-[#0E3A53]">Phone Number</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone"
+              required 
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all placeholder:text-gray-400"
+              placeholder="(713) 555-0123"
+            />
+          </div>
+        </div>
+        
+        <div className="space-y-2">
+          <label htmlFor="email" className="text-sm font-medium text-[#0E3A53]">Email Address</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            required 
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all placeholder:text-gray-400"
+            placeholder="john@example.com"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="service" className="text-sm font-medium text-[#0E3A53]">Interested Service</label>
+          <select id="service" name="service" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all bg-white">
+            <option value="">Select a service...</option>
+            <option value="checkup">New Patient Exam</option>
+            <option value="cleaning">Hygiene Cleaning</option>
+            <option value="cosmetic">Cosmetic Consult</option>
+            <option value="emergency">Emergency/Pain</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="message" className="text-sm font-medium text-[#0E3A53]">Message (Optional)</label>
+          <textarea 
+            id="message" 
+            name="message"
+            rows={3} 
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all placeholder:text-gray-400 resize-none"
+            placeholder="How can we help you?"
+          />
+        </div>
+
+        <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
+
+        <button 
+          type="submit" 
+          className="w-full bg-[#4CA1A3] text-white font-bold py-4 rounded-xl hover:bg-[#3E8A8C] transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+        >
+          Request Appointment
+        </button>
+        <p className="text-xs text-center text-gray-500">
+          By submitting, you agree to our privacy policy. We&apos;ll contact you within 24 hours.
+        </p>
+      </div>
+    </form>
   );
 }

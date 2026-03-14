@@ -3,50 +3,26 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, service, message } = body;
+    const { name, email, phone, message, service, _gotcha } = body;
 
-    // Basic validation
-    if (!name || !email || !phone || !message) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
+    // Honeypot check for spam
+    if (_gotcha) {
+      return NextResponse.json({ success: false, message: "Spam detected" }, { status: 400 });
     }
 
-    // In a real application, you would:
-    // 1. Send an email using a service like SendGrid, Resend, or Nodemailer
-    // 2. Store the lead in a database (PostgreSQL, MongoDB, etc.)
-    // 3. Integrate with a CRM like Salesforce or HubSpot
-    
-    // Example email sending logic (commented out for demo)
-    /*
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'info@brightsmiledental.com',
-      subject: `New Appointment Request from ${name}`,
-      html: `
-        <h1>New Contact Form Submission</h1>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Service:</strong> ${service || 'None specified'}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `
-    });
-    */
+    // Basic Validation
+    if (!name || !email || !message) {
+      return NextResponse.json({ success: false, message: "Missing required fields" }, { status: 400 });
+    }
 
-    console.log("Received form submission:", { name, email, phone, service, message });
-
-    // Simulate a delay
+    // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    return NextResponse.json({ message: "Form submitted successfully" }, { status: 200 });
+    // In a real app, you would send an email here using Resend, SendGrid, etc.
+    console.log("Form received:", { name, email, phone, service, message });
+
+    return NextResponse.json({ success: true, message: "Message sent successfully!" });
   } catch (error) {
-    console.error("Contact form error:", error);
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: "Internal Server Error" }, { status: 500 });
   }
 }

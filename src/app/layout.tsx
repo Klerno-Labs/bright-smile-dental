@@ -1,49 +1,53 @@
 import type { Metadata } from "next";
-import { Montserrat, Open_Sans } from "next/font/google";
+import { Manrope, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { siteConfig } from "@/config/site";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 
-const montserrat = Montserrat({
+// Font Configuration
+const manrope = Manrope({ 
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
-  weight: ["600", "700", "800"],
 });
 
-const openSans = Open_Sans({
+const inter = Inter({ 
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-sans",
   display: "swap",
-  weight: ["400", "600"],
+});
+
+const playfair = Playfair_Display({ 
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://brightsmiledental-demo.com"),
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: "Bright Smile Dental | Houston, TX",
+    template: "%s | Bright Smile Dental"
   },
-  description: siteConfig.description,
-  keywords: ["Dentist", "Houston", "Cosmetic Dentistry", "Family Dentistry", "Emergency Dentist"],
-  authors: [{ name: siteConfig.name }],
-  creator: "Pegrio",
+  description: "Premium family and cosmetic dentistry in Houston, TX. Experience life-changing confidence with our patient-first approach.",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    url: "https://brightsmiledental-demo.com",
+    siteName: "Bright Smile Dental",
+    title: "Bright Smile Dental | Houston, TX",
+    description: "Premium family and cosmetic dentistry in Houston, TX.",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200",
+        width: 1200,
+        height: 630,
+        alt: "Bright Smile Dental Clinic",
+      },
+    ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    creator: "@pegrio",
+  robots: {
+    index: true,
+    follow: true,
   },
-  metadataBase: new URL(siteConfig.url),
 };
 
 export default function RootLayout({
@@ -53,10 +57,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${montserrat.variable} ${openSans.variable} flex flex-col min-h-screen`}>
-        <Navbar />
-        <main className="flex-1 pt-20">{children}</main>
-        <Footer />
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
+      <body className={`${manrope.variable} ${inter.variable} ${playfair.variable} font-sans antialiased bg-[#F9FAFB] text-[#4B5563]`}>
+        {children}
       </body>
     </html>
   );

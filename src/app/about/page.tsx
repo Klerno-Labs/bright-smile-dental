@@ -1,226 +1,120 @@
-"use client";
-
 import { Metadata } from "next";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { images } from "@/config/site";
-import { CTA } from "@/components/CTA";
-import { CheckCircle } from "lucide-react";
+import Image from "next/image";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Award, Users, Heart, Zap } from "lucide-react";
+import { images } from "@/config/images";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Learn about the history, mission, and expert team at Bright Smile Dental in Houston, TX.",
+  description: "Meet the team at Bright Smile Dental. We are dedicated to providing top-tier dental care in Houston, TX.",
 };
 
 export default function AboutPage() {
   return (
-    <>
+    <main className="min-h-screen">
+      <Navbar />
+      
       {/* Hero */}
-      <section className="relative bg-gray-900 py-24 md:py-32 text-center">
-        <div className="absolute inset-0 opacity-30">
-          <img
-            src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=1920&h=1080&fit=crop"
-            alt="Office Background" style={{ width: "100%", height: "100%", objectFit: "cover" }}
-            className="object-cover"
-          />
-        </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
-            Our Story
-          </h1>
-          <p className="text-xl text-gray-200">
-            Creating healthy smiles for the Houston community since 2005.
-          </p>
-        </div>
-      </section>
-
-      {/* Narrative */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-textMain mb-6">
-                More Than Just a Dentist Office
-              </h2>
-              <p className="text-lg text-textBody mb-6 leading-relaxed">
-                Bright Smile Dental was founded with a simple mission: to make high-quality dental care accessible and anxiety-free for everyone in Houston. We believe that a visit to the dentist should be a positive experience, not something to dread.
-              </p>
-              <p className="text-lg text-textBody mb-8 leading-relaxed">
-                Over the years, we have grown from a small practice to a state-of-the-art facility, but our core values remain the same. We treat every patient like family, taking the time to listen to your concerns and explain your treatment options clearly.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-4xl font-bold text-primary mb-1">18+</h3>
-                  <p className="text-textBody font-medium">Years Experience</p>
-                </div>
-                <div>
-                  <h3 className="text-4xl font-bold text-primary mb-1">15k+</h3>
-                  <p className="text-textBody font-medium">Happy Patients</p>
-                </div>
-              </div>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
-              <img
-                src={images["about"]}
-                alt="Our Team"
-                width={600}
-                height={500}
-                className="rounded-2xl shadow-xl"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="py-16 md:py-24 bg-bgBody">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-4">
-              Our Core Values
-            </h2>
-            <p className="text-lg text-textBody">
-              The principles that guide every decision we make.
+      <section className="pt-32 pb-20 bg-white relative overflow-hidden">
+        <div className="max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-[#4CA1A3] font-bold tracking-widest uppercase text-sm mb-4 block">Since 2010</span>
+            <h1 className="font-heading font-bold text-4xl md:text-5xl text-[#0E3A53] mb-6 leading-tight">
+              We believe dentistry should be personal.
+            </h1>
+            <p className="text-lg text-[#4B5563] mb-8 leading-relaxed">
+              Bright Smile Dental was founded on a simple principle: treat every patient like a member of our own family. We combine state-of-the-art technology with old-fashioned compassion.
             </p>
+            <div className="flex gap-4">
+              <Button asChild><a href="#team">Meet the Team</a></Button>
+              <Button variant="outline" asChild><a href="/#contact">Book Visit</a></Button>
+            </div>
           </div>
+          <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+            <Image src={images["about"].src} alt="Our Clinic Philosophy" fill className="object-cover" priority />
+          </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { title: "Integrity", desc: "Honest diagnoses and fair pricing." },
-              { title: "Compassion", desc: "Empathy in every interaction." },
-              { title: "Excellence", desc: "Commitment to the highest standards." },
-              { title: "Innovation", desc: "Adopting the latest technology." },
-            ].map((val, i) => (
-              <div key={i} className="bg-white p-6 rounded-xl shadow-sm text-center">
-                <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary font-bold text-xl">
-                  0{i + 1}
-                </div>
-                <h3 className="text-lg font-bold text-textMain mb-2">{val.title}</h3>
-                <p className="text-sm text-textBody">{val.desc}</p>
+      {/* Philosophy */}
+      <section className="py-24 bg-[#F9FAFB]">
+        <div className="max-w-[1240px] mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-[#E0F2F2] rounded-full flex items-center justify-center text-[#4CA1A3] mb-6">
+                <Heart className="w-6 h-6" />
               </div>
-            ))}
+              <h3 className="font-heading font-bold text-xl text-[#0E3A53] mb-3">Patient-First</h3>
+              <p className="text-[#4B5563]">Your comfort is our priority. We offer amenities like noise-canceling headphones and blankets to make your visit relaxing.</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-[#E0F2F2] rounded-full flex items-center justify-center text-[#4CA1A3] mb-6">
+                <Zap className="w-6 h-6" />
+              </div>
+              <h3 className="font-heading font-bold text-xl text-[#0E3A53] mb-3">Advanced Tech</h3>
+              <p className="text-[#4B5563]">We use 3D imaging, digital scanning, and laser dentistry to reduce procedure times and improve accuracy.</p>
+            </div>
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
+              <div className="w-12 h-12 bg-[#E0F2F2] rounded-full flex items-center justify-center text-[#4CA1A3] mb-6">
+                <Award className="w-6 h-6" />
+              </div>
+              <h3 className="font-heading font-bold text-xl text-[#0E3A53] mb-3">Expert Care</h3>
+              <p className="text-[#4B5563]">Our doctors undergo hundreds of hours of continuing education every year to stay at the forefront of the field.</p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Team */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-4">
-              Meet Your Doctors
-            </h2>
-            <p className="text-lg text-textBody">
-              Expert care from the best professionals in the field.
-            </p>
+      <section id="team" className="py-24 bg-white">
+        <div className="max-w-[1240px] mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <h2 className="font-heading font-bold text-3xl md:text-4xl text-[#0E3A53] mb-4">Meet Our Doctors</h2>
+            <p className="text-[#4B5563]">Our team of specialists brings decades of combined experience to your smile.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Doctor 1 */}
-            <div className="group relative overflow-hidden rounded-2xl">
-              <img
-                src={images["team-1"]}
-                alt="Dr. Sarah Bennett"
-                width={400}
-                height={400}
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <p className="text-white text-sm mb-2">
-                  Dr. Bennett loves hiking and photography in her free time.
-                </p>
-                <div className="flex gap-4">
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">LinkedIn</a>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Dr. Sarah Bennett",
+                role: "Lead Dentist, DDS",
+                bio: "Graduated with honors from UT Health. Specializes in cosmetic reconstructions and implantology.",
+                img: "team-1"
+              },
+              {
+                name: "Dr. Michael Chen",
+                role: "Orthodontist",
+                bio: "Certified Invisalign provider. Passionate about creating confident smiles for teenagers and adults.",
+                img: "hero-alt" // Reusing image for demo
+              },
+              {
+                name: "Dr. Emily Rodriguez",
+                role: "Pediatric Dentist",
+                bio: "Making dentistry fun for kids. 15 years of experience creating positive early dental experiences.",
+                img: "gallery-3" // Reusing image for demo
+              }
+            ].map((member, i) => (
+              <div key={i} className="group text-center">
+                <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#F9FAFB] shadow-lg group-hover:scale-105 transition-transform duration-300">
+                  <Image
+                    src={images[member.img as keyof typeof images].src}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-              </div>
-              <div className="p-4 bg-white border-x border-b border-gray-100 rounded-b-xl">
-                <h3 className="text-lg font-bold text-textMain">Dr. Sarah Bennett</h3>
-                <p className="text-sm text-primary font-medium">Cosmetic Specialist</p>
-              </div>
-            </div>
-
-            {/* Doctor 2 */}
-            <div className="group relative overflow-hidden rounded-2xl">
-              <img
-                src={images["founder"]}
-                alt="Dr. James O'Connor"
-                width={400}
-                height={400}
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <p className="text-white text-sm mb-2">
-                  Founder Dr. O&apos;Connor is a lifelong fan of the Houston Astros.
-                </p>
-                <div className="flex gap-4">
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">LinkedIn</a>
-                </div>
-              </div>
-              <div className="p-4 bg-white border-x border-b border-gray-100 rounded-b-xl">
-                <h3 className="text-lg font-bold text-textMain">Dr. James O&apos;Connor</h3>
-                <p className="text-sm text-primary font-medium">General Dentistry</p>
-              </div>
-            </div>
-
-            {/* Doctor 3 */}
-             <div className="group relative overflow-hidden rounded-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&h=800&fit=crop"
-                alt="Dr. Emily Chen"
-                width={400}
-                height={400}
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <p className="text-white text-sm mb-2">
-                  Dr. Chen is an avid baker known for her sourdough bread.
-                </p>
-                 <div className="flex gap-4">
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">LinkedIn</a>
-                </div>
-              </div>
-              <div className="p-4 bg-white border-x border-b border-gray-100 rounded-b-xl">
-                <h3 className="text-lg font-bold text-textMain">Dr. Emily Chen</h3>
-                <p className="text-sm text-primary font-medium">Orthodontics</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Preview */}
-      <section className="py-16 bg-bgBody">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-textMain mb-8">Our Office</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="aspect-square overflow-hidden rounded-lg">
-                <img
-                  src={images[`gallery-${item}` as keyof typeof images].src}
-                  alt={`Office view ${item}`}
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
+                <h3 className="font-heading font-bold text-xl text-[#0E3A53]">{member.name}</h3>
+                <p className="text-[#4CA1A3] font-medium text-sm mb-3">{member.role}</p>
+                <p className="text-[#4B5563] text-sm leading-relaxed px-4">{member.bio}</p>
               </div>
             ))}
           </div>
-          <div className="mt-8 text-center">
-             <Button asChild variant="secondary">
-               <Link href="/services">Take a Virtual Tour</Link>
-             </Button>
-          </div>
         </div>
       </section>
 
-      <CTA />
-    </>
+      <Footer />
+    </main>
   );
 }
