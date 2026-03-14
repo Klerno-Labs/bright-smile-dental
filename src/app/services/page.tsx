@@ -1,156 +1,142 @@
-"use client";
-
 import { useState } from "react";
-import { Metadata } from "next";
-import { motion } from "framer-motion";
-import { Calculator, ChevronDown, ChevronUp } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import { images } from "@/config/images";
+import Link from "next/link";
 
-// Note: Normally this is a server component for metadata, but we are making it client for the calculator/accordion interactions
-// In a real app, split the accordion into a client component.
+const categories = [
+  { id: "all", label: "All Services" },
+  { id: "general", label: "General" },
+  { id: "cosmetic", label: "Cosmetic" },
+  { id: "ortho", label: "Orthodontics" },
+  { id: "emergency", label: "Emergency" },
+];
 
-export default function ServicesPage() {
-  const [openService, setOpenService] = useState<string | null>("cosmetic");
-  const [cost, setCost] = useState(3000);
+const servicesData = [
+  { id: 1, cat: "general", title: "Comprehensive Exam", desc: "Full oral health assessment including digital X-rays and oral cancer screening.", price: "$150 - $200" },
+  { id: 2, cat: "general", title: "Deep Cleaning", desc: "Removal of plaque and tartar below the gum line to treat or prevent gum disease.", price: "$200 - $350" },
+  { id: 3, cat: "cosmetic", title: "Professional Whitening", desc: "In-office Zoom whitening for results up to 8 shades lighter in one hour.", price: "$399" },
+  { id: 4, cat: "cosmetic", title: "Porcelain Veneers", desc: "Custom thin shells bonded to the front of teeth to correct shape, color, and alignment.", price: "$1,000+ / tooth" },
+  { id: 5, cat: "ortho", title: "Clear Aligners", desc: "Invisalign and similar clear tray systems to straighten teeth discreetly.", price: "$3,500 - $6,000" },
+  { id: 6, cat: "emergency", title: "Tooth Extraction", desc: "Gentle removal of damaged or impacted teeth, including wisdom teeth.", price: "$200 - $600" },
+];
 
-  const monthlyPayment = Math.round((cost / 12) * 1.05); // Simple calc logic
+export default function Services() {
+  const [activeCat, setActiveCat] = useState("all");
 
-  const services = [
-    { 
-      id: "cosmetic", 
-      title: "Cosmetic Dentistry", 
-      price: "$500 - $3,000",
-      desc: "Transform your smile with porcelain veneers, professional whitening, and bonding.",
-      details: "Our cosmetic services include Zoom Whitening, Porcelain Veneers, and Cosmetic Bonding. We use digital smile design to show you your potential results before we start.",
-      img: "service-2"
-    },
-    { 
-      id: "general", 
-      title: "General Dentistry", 
-      price: "$150 - $400",
-      desc: "Routine cleanings, comprehensive exams, and cavity style={{ width: "100%", height: "100%", objectFit: "cover" }}ings for the whole family.",
-      details: "Prevention is the best medicine. Our general services include prophylaxis, fluoride treatments, sealants, and tooth-colored composite style={{ width: "100%", height: "100%", objectFit: "cover" }}ings.",
-      img: "service-1"
-    },
-    { 
-      id: "implants", 
-      title: "Implants & Restoration", 
-      price: "$2,000+",
-      desc: "Permanent solutions for missing teeth using top-grade titanium implants.",
-      details: "We use 3D CBCT imaging for precise implant placement. Whether you need a single tooth implant or a full-mouth restoration (All-on-4), our specialists are here to help.",
-      img: "service-3"
-    }
-  ];
+  const filteredServices = activeCat === "all" 
+    ? servicesData 
+    : servicesData.filter(s => s.cat === activeCat);
 
   return (
-    <main className="pt-10">
+    <>
       {/* Hero */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-primary mb-6">Our Services</h1>
-          <p className="text-lg text-textMain max-w-2xl mx-auto">Transparent pricing and world-class care. Select a category to learn more.</p>
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-5xl font-heading font-bold text-neutral-text-main mb-6">
+            World-Class Dental Services
+          </h1>
+          <p className="text-neutral-text-body text-lg max-w-2xl mx-auto">
+            From preventative care to complete smile makeovers, we use the latest techniques to ensure optimal results.
+          </p>
         </div>
       </section>
 
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <div className="space-y-6">
-            {services.map((service) => (
-              <motion.div 
-                key={service.id}
-                layout
-                className="border border-gray-200 rounded-xl overflow-hidden bg-white"
+      {/* Filter Tabs */}
+      <div className="sticky top-20 z-40 bg-white border-b border-gray-200 py-4">
+        <div className="max-w-7xl mx-auto px-6 overflow-x-auto no-scrollbar">
+          <div className="flex space-x-2 min-w-max justify-center">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCat(cat.id)}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
+                  activeCat === cat.id 
+                    ? "bg-primary text-white shadow-md" 
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
               >
-                <button 
-                  onClick={() => setOpenService(openService === service.id ? null : service.id)}
-                  className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="font-heading text-xl font-bold text-primary">{service.title}</span>
-                    <span className="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full">{service.price}</span>
-                  </div>
-                  {openService === service.id ? <ChevronUp className="text-secondary" /> : <ChevronDown className="text-secondary" />}
-                </button>
-                
-                {openService === service.id && (
-                  <motion.div 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="border-t border-gray-100"
-                  >
-                    <div className="p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                      <div>
-                        <p className="text-textMain mb-4 leading-relaxed">{service.desc}</p>
-                        <p className="text-textMain leading-relaxed">{service.details}</p>
-                        <div className="mt-8">
-                           <Button>Book This Service</Button>
-                        </div>
-                      </div>
-                      <div className="relative h-64 md:h-80 rounded-xl overflow-hidden">
-                        <img 
-                          src={images[service.img as ImageSlot].src} 
-                          alt={service.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} 
-                          className="object-cover" 
-                        />
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </motion.div>
+                {cat.label}
+              </button>
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Services Grid */}
+      <section className="py-section bg-neutral-bg">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence>
+              {filteredServices.map((service) => (
+                <motion.div
+                  layout
+                  key={service.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.2 }}
+                  className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all border border-transparent hover:border-primary/30 group"
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <span className={`text-xs font-bold uppercase tracking-wider px-2 py-1 rounded ${
+                      service.cat === 'emergency' ? 'bg-accent/10 text-accent' : 'bg-primary/10 text-primary'
+                    }`}>
+                      {service.cat}
+                    </span>
+                    <span className="font-bold text-neutral-text-main">{service.price}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-neutral-text-main mb-3 group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-neutral-text-body mb-6 text-sm leading-relaxed">
+                    {service.desc}
+                  </p>
+                  <Link href="/contact" className="inline-flex items-center text-sm font-bold text-primary hover:gap-2 transition-all gap-1">
+                    Book Now <ArrowRight size={14} />
+                  </Link>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </div>
       </section>
 
-      {/* Finance Calculator Feature */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-100">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
-                <Calculator className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="font-heading text-2xl font-bold text-primary">Finance Calculator</h3>
-                <p className="text-sm text-textMain">Estimate your monthly payments (APR 5%)</p>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-primary mb-2">Estimated Treatment Cost</label>
-                <div className="relative">
-                  <span className="absolute left-4 top-3 text-gray-500">$</span>
-                  <input 
-                    type="number" 
-                    value={cost}
-                    onChange={(e) => setCost(Number(e.target.value))}
-                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none"
-                  />
-                </div>
-                <input 
-                  type="range" 
-                  min="500" 
-                    max="10000" 
-                    step="100"
-                  value={cost}
-                  onChange={(e) => setCost(Number(e.target.value))}
-                  className="w-full mt-3 accent-secondary"
-                />
-              </div>
-
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 flex justify-between items-center">
-                <span className="text-textMain">Estimated Monthly Payment</span>
-                <span className="text-3xl font-bold text-primary">${monthlyPayment}<span className="text-sm text-gray-500 font-normal">/mo</span></span>
-              </div>
-              
-              <p className="text-xs text-gray-400 text-center">*Estimates only. Actual financing terms may vary based on credit approval.</p>
-            </div>
+      {/* Tech Section */}
+      <section className="py-section bg-white">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <span className="text-secondary font-bold uppercase tracking-wider mb-2 block">Technology</span>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-neutral-text-main mb-6">
+              Advanced Equipment for Better Care
+            </h2>
+            <ul className="space-y-6">
+              {[
+                "Digital X-Rays (90% less radiation)",
+                "Intraoral Cameras for instant visualization",
+                "3D Cone Beam CT imaging",
+                "Laser Cavity Detection"
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <CheckCircle2 className="text-green-500 flex-shrink-0 mt-1" size={20} />
+                  <span className="text-neutral-text-body">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="relative">
+            <div className="absolute inset-0 bg-secondary/20 rounded-full blur-3xl" />
+            <Image 
+              src={images["gallery-2"].src}
+              alt="Advanced Technology"
+              width={600}
+              height={400}
+              className="relative rounded-2xl shadow-lg"
+            />
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }

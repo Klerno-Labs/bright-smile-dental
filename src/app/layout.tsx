@@ -1,28 +1,104 @@
-```typescript
-import './globals.css';
-import { metadata } from './metadata';
-import { cn } from '@/lib/utils';
-import { Inter } from 'next/font/google';
-import { Footer } from '@/components/Footer';
-import { Navbar } from '@/components/Navbar';
+import type { Metadata } from "next";
+import { Montserrat, Open_Sans } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
-const inter = Inter({ subsets: ['latin'], display: 'swap' });
+const montserrat = Montserrat({ 
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+  weight: ["400", "600", "700", "800"]
+});
 
-export const metadata = {
-  title: 'Bright Smile Dental',
-  description: 'Your trusted family dental practice in Houston, TX, providing comprehensive dental care with a gentle touch.',
-  metadataBase: new URL('https://example.com'),
+const openSans = Open_Sans({ 
+  subsets: ["latin"],
+  variable: "--font-opensans",
+  display: "swap",
+  weight: ["400", "600"]
+});
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://brightsmiledental-demo.com"),
+  title: {
+    default: "Bright Smile Dental | Modern Dentistry in Houston",
+    template: "%s | Bright Smile Dental"
+  },
+  description: "Experience gentle, modern dental care in Houston. We specialize in cosmetic, family, and emergency dentistry. Book your appointment today.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://brightsmiledental-demo.com",
+    siteName: "Bright Smile Dental",
+    title: "Bright Smile Dental | Modern Dentistry in Houston",
+    description: "Experience gentle, modern dental care in Houston. We specialize in cosmetic, family, and emergency dentistry.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Bright Smile Dental Office",
+      },
+    ],
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, 'bg-bg-body text-text-body')}>
+      <body className={`${montserrat.variable} ${openSans.variable} font-body text-neutral-text-body bg-neutral-bg antialiased`}>
         <Navbar />
-        <main>{children}</main>
+        <main className="min-h-screen">
+          {children}
+        </main>
         <Footer />
+        
+        {/* Structured Data for Local Business */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Dentist",
+              "name": "Bright Smile Dental",
+              "image": "https://brightsmiledental-demo.com/logo.png",
+              "@id": "https://brightsmiledental-demo.com",
+              "url": "https://brightsmiledental-demo.com",
+              "telephone": "+17135550199",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "4521 Westheimer Rd, Suite 200",
+                "addressLocality": "Houston",
+                "addressRegion": "TX",
+                "postalCode": "77027",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 29.7379,
+                "longitude": -95.4635
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "08:00",
+                "closes": "18:00"
+              },
+              "priceRange": "$$"
+            }),
+          }}
+        />
       </body>
     </html>
   );
 }
-```

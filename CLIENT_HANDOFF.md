@@ -1,43 +1,86 @@
-# Bright Smile Dental Website Handoff
+# Client Handoff Guide: Bright Smile Dental
 
-## What Was Built
-We have created a responsive website for Bright Smile Dental, designed to attract and inform potential patients. The site includes:
+Congratulations on your new website! This guide explains how you can manage and update the content of your Bright Smile Dental site without needing a developer.
 
-- **Home Page**: Features a hero section, trust bar, interactive pain map, services preview, testimonials, team preview, and a call-to-action section.
-- **About Page**: Showcases the practice's philosophy, technology, and team members.
-- **Services Page**: Lists services with a search bar, accordion style service list, and a finance calculator.
+---
 
-## Changing Images
-All images on the site are controlled from ONE file: `src/config/images.ts`. Each image slot has a comment explaining where it appears on the site.
+## 🎨 Changing Images
 
-### To Swap an Image:
-1. Open `src/config/images.ts`.
-2. Find the image slot you want to change (e.g., "hero").
-3. Replace the `src` URL with your own image URL.
-4. Update the `alt` text to describe the new image.
-5. Save the file — the change will appear on every page that uses that image.
+We have made changing photos incredibly simple. **You do not need to search through code files.**
 
-### Supported Formats:
-- Any web-accessible image URL (Cloudinary, S3, Vercel Blob, etc.).
-- For best results, use images at least 1200px wide, landscape orientation for heroes.
+### How to do it:
+1. Open the folder structure in your code editor (like VS Code).
+2. Navigate to the file: `src/config/images.ts`.
+3. You will see a list of image slots (e.g., `hero`, `about`, `service-general`).
 
-## Changing Logo
-If a logo slot exists in `src/config/images.ts`, follow the same steps as above to swap it.
+### Example:
+```typescript
+"hero": {
+  src: "https://images.unsplash.com/photo-...", // <--- Replace THIS LINK
+  alt: "Smiling patient",                      // <--- Update THIS TEXT
+  width: 1200,
+  height: 800,
+},
+```
 
-## Changing Colors
-To modify the brand colors, edit the `tailwind.config.js` file. Change the color values to match your branding.
+### Steps to swap a photo:
+1. Find the URL of your new photo (it must be hosted online, e.g., Unsplash, or your file host).
+2. Paste it where the `src` link currently is.
+3. Update the `alt` text to describe your new photo.
+4. Save the file.
+5. Your website updates automatically!
 
-## Changing Fonts
-To swap the Google Font, update the link in the `layout.tsx` file.
+**Tip:** For best results, use landscape photos (width larger than height) for banners and square photos for team members.
 
-## Updating Text Content
-To update text content, edit the respective page files in the `src/app/pages` directory.
+---
 
-## Requesting Changes from Pegrio
-For any changes or updates, please contact Pegrio support via email.
+## 🎨 Changing Colors
 
-## Hosting and Maintenance Info
-The website is hosted on Vercel, which provides automatic deployments and SSL. Regular updates and maintenance can be requested through Pegrio.
+The main colors of your brand (the Blue, Teal, and Red accents) are controlled in one place.
 
-## Contact
-For support, reach out to Pegrio at support@pegrio.com.
+1. Open the file: `tailwind.config.ts`.
+2. Look for the `colors` section.
+3. You will see `primary` (Blue), `secondary` (Teal), and `accent` (Red).
+4. Change the Hex codes (e.g., `#0056b3`) to your desired colors.
+5. Save.
+
+---
+
+## ✏️ Updating Text Content
+
+If you need to change the words on the homepage or other pages:
+
+1. Go to `src/app/`.
+2. Open `page.tsx` (for Home), `about/page.tsx`, `services/page.tsx`, or `contact/page.tsx`.
+3. You will see the text mixed in with the code. You can simply edit the text inside the quote marks.
+   *Example:* Change `h1` content to update your main headline.
+4. Save.
+
+**Note:** Be careful not to delete any brackets `{ }`, `< >`, or quote marks `""`. These are necessary for the code to work.
+
+---
+
+## 📞 Requesting Major Changes
+
+If you want to change the layout, add new pages, or create new features, it is best to contact Pegrio support.
+
+*   **Email:** showcase@pegrio.com
+*   **Subject:** Change Request for Bright Smile Dental
+
+---
+
+## 🚀 Hosting & Maintenance
+
+Your website is hosted on Vercel. This platform handles automatic backups, security updates, and speed optimization automatically.
+
+### Updating the Site
+1. Make your changes in the code editor.
+2. Commit the changes (Save & Push to Git).
+3. Vercel will automatically detect the change and update your live site within 1-2 minutes.
+
+### Monitoring
+You can log in to your Vercel dashboard anytime to see how many people are visiting your site or if there are any errors.
+
+---
+
+Thank you for choosing Pegrio for your digital growth!

@@ -9,101 +9,101 @@
 // to edit to swap any image on the entire website.
 
 export const images = {
-  // Homepage hero banner — the first image visitors see — REPLACE with a real Unsplash URL matching: "Modern office workspace with natural light"
+  // Homepage hero banner — the first image visitors see — Smiling confident patient
   "hero": {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop&q=80",
-    alt: "Modern office workspace with natural light",
+    src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop",
+    alt: "Smiling patient showing bright teeth",
     width: 1200,
     height: 800,
   },
 
-  // Alternative hero image (used on inner pages or as fallback) — REPLACE with a real Unsplash URL matching: "Professional team collaborating in bright office"
-  "hero-alt": {
-    src: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&h=800&fit=crop&q=80",
-    alt: "Professional team collaborating in bright office",
+  // Alternative hero image (About page) — Clean, modern dental interior
+  "about-hero": {
+    src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop",
+    alt: "Modern dental office interior with bright lighting",
     width: 1200,
     height: 800,
   },
 
-  // About page or About section on homepage — REPLACE with a real Unsplash URL matching: "Business professionals in modern meeting room"
-  "about": {
-    src: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1200&h=800&fit=crop&q=80",
-    alt: "Business professionals in modern meeting room",
+  // About section narrative — Team collaboration
+  "about-team": {
+    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1200&auto=format&fit=crop",
+    alt: "Dental team collaborating",
     width: 1200,
     height: 800,
   },
 
-  // First service card image — REPLACE with a real Unsplash URL matching: "Creative professionals working together"
-  "service-1": {
-    src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=800&fit=crop&q=80",
-    alt: "Creative professionals working together",
+  // Service: General Dentistry — Checkup scenario
+  "service-general": {
+    src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1200&auto=format&fit=crop",
+    alt: "Dentist performing a routine checkup",
     width: 1200,
     height: 800,
   },
 
-  // Second service card image — REPLACE with a real Unsplash URL matching: "Data analytics dashboard on screen"
-  "service-2": {
-    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&q=80",
-    alt: "Data analytics dashboard on screen",
+  // Service: Cosmetic — Whitening/Smile
+  "service-cosmetic": {
+    src: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=1200&auto=format&fit=crop",
+    alt: "Sparkling smile cosmetic result",
     width: 1200,
     height: 800,
   },
 
-  // Third service card image — REPLACE with a real Unsplash URL matching: "Team workshop and brainstorming session"
-  "service-3": {
-    src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop&q=80",
-    alt: "Team workshop and brainstorming session",
+  // Service: Orthodontics — Braces/Invisalign
+  "service-ortho": {
+    src: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=1200&auto=format&fit=crop",
+    alt: "Orthodontic treatment tools",
     width: 1200,
     height: 800,
   },
 
-  // Gallery image 1 — REPLACE with a real Unsplash URL matching: "Professional handshake in business setting"
+  // Gallery: Office Tour 1
   "gallery-1": {
-    src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&h=800&fit=crop&q=80",
-    alt: "Professional handshake in business setting",
+    src: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?q=80&w=1200&auto=format&fit=crop",
+    alt: "Patient waiting area",
     width: 1200,
     height: 800,
   },
 
-  // Gallery image 2 — REPLACE with a real Unsplash URL matching: "Modern conference room with city view"
+  // Gallery: Office Tour 2
   "gallery-2": {
-    src: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200&h=800&fit=crop&q=80",
-    alt: "Modern conference room with city view",
+    src: "https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?q=80&w=1200&auto=format&fit=crop",
+    alt: "State of the art dental equipment",
     width: 1200,
     height: 800,
   },
 
-  // Team member photo — REPLACE with a real Unsplash URL matching: "Diverse team celebrating success"
+  // Team: Doctor 1 (Dr. Sarah Bennett)
   "team-1": {
-    src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=800&fit=crop&q=80",
-    alt: "Diverse team celebrating success",
-    width: 1200,
-    height: 800,
+    src: "https://images.unsplash.com/photo-1559839734-2b71ea867d88?q=80&w=600&auto=format&fit=crop",
+    alt: "Dr. Sarah Bennett",
+    width: 600,
+    height: 600,
   },
 
-  // Gallery image 3 — REPLACE with a real Unsplash URL matching: "Technology workspace with multiple screens"
-  "gallery-3": {
-    src: "https://images.unsplash.com/photo-1531297461136-82lw9z210b5e?w=1200&h=800&fit=crop&q=80",
-    alt: "Technology workspace with multiple screens",
-    width: 1200,
-    height: 800,
+  // Team: Doctor 2 (Dr. Michael Chen)
+  "team-2": {
+    src: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600&auto=format&fit=crop",
+    alt: "Dr. Michael Chen",
+    width: 600,
+    height: 600,
   },
 
-  // Call-to-action section background — REPLACE with a real Unsplash URL matching: "Innovation and technology concept"
+  // Team: Doctor 3 (Dr. Emily Rodriguez)
+  "team-3": {
+    src: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=600&auto=format&fit=crop",
+    alt: "Dr. Emily Rodriguez",
+    width: 600,
+    height: 600,
+  },
+  
+  // CTA Section Background
   "cta": {
-    src: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=800&fit=crop&q=80",
-    alt: "Innovation and technology concept",
+    src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200&auto=format&fit=crop",
+    alt: "Dental tools ready for procedure",
     width: 1200,
-    height: 800,
-  },
-
-  // Testimonials section background or decoration — REPLACE with a real Unsplash URL matching: "Professional business environment"
-  "testimonial-bg": {
-    src: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&h=800&fit=crop&q=80",
-    alt: "Professional business environment",
-    width: 1200,
-    height: 800,
-  },
+    height: 600,
+  }
 } as const;
 
 export type ImageSlot = keyof typeof images;

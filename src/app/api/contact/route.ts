@@ -1,44 +1,43 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { z } from "zod";
 
-export async function POST(req: NextRequest) {
+const formSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  phone: z.string().min(10),
+  service: z.string().optional(),
+  message: z.string().min(10),
+  _gotcha: z.string().optional(),
+});
+
+export async function POST(request: Request) {
   try {
-    const body = await req.json();
-    const { name, email, phone, message, _gotcha } = body;
+    const body = await request.json();
+    
+    // Validate input
+    const validatedData = formSchema.parse(body);
 
-    // Honeypot check for spam prevention
-    if (_gotcha) {
-      // Silently return success to fool bots, but do not process
-      return NextResponse.json(
-        { message: "Message sent successfully" },
-        { status: 200 }
-      );
+    // Honeypot check
+    if (validatedData._gotcha) {
+      // If honeypot is filled, return success to fool bots but don't process
+      return NextResponse.json({ success: true }, { status: 200 });
     }
 
-    // Basic server-side validation
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { message: "Missing required fields" },
-        { status: 400 }
-      );
-    }
+    // Log the data (In a real app, you would send an email here via Resend/SendGrid/SES)
+    console.log("Form Submission Received:", {
+      name: validatedData.name,
+      email: validatedData.email,
+      service: validatedData.service,
+      timestamp: new Date().toISOString()
+    });
 
-    // Here you would integrate with an email service (Resend, SendGrid, etc.)
-    // For now, we'll simulate a successful send.
-    console.log("Form submission received:", { name, email, phone, message });
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Simulate processing delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return NextResponse.json({ success: true, message: "Form submitted successfully" }, { status: 200 });
 
-    return NextResponse.json(
-      { message: "Message sent successfully! We will be in touch soon." },
-      { status: 200 }
-    );
   } catch (error) {
     console.error("Contact form error:", error);
-    return NextResponse.json(
-      { message: "Something went wrong. Please try again later." },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: "Invalid request" }, { status: 400 });
   }
 }

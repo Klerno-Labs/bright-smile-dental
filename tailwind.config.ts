@@ -9,35 +9,45 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#0E3A53",
-        secondary: "#4CA1A3",
-        accent: "#D4AF37",
-        surface: "#FFFFFF",
-        background: "#F9FAFB",
-        textMain: "#4B5563",
+        primary: {
+          DEFAULT: "#0056b3",
+          dark: "#004494",
+          light: "#e6f0fa",
+        },
+        secondary: {
+          DEFAULT: "#00a8cc",
+          dark: "#008cab",
+        },
+        accent: {
+          DEFAULT: "#ff6b6b",
+        },
+        neutral: {
+          bg: "#f8f9fa",
+          surface: "#ffffff",
+          text: {
+            main: "#1a202c",
+            body: "#4a5568",
+            muted: "#a0aec0",
+          },
+          border: "#e2e8f0",
+        },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        heading: ["var(--font-manrope)", "sans-serif"],
-        serif: ["var(--font-playfair)", "serif"],
+        heading: ["var(--font-montserrat)", "sans-serif"],
+        body: ["var(--font-opensans)", "sans-serif"],
+      },
+      spacing: {
+        section: "5rem",
+        "section-lg": "6.25rem",
       },
       borderRadius: {
-        lg: "8px",
-        xl: "12px",
-        "2xl": "24px",
+        sm: "4px",
+        md: "12px",
+        lg: "24px",
       },
       boxShadow: {
-        card: "0 4px 6px -1px rgba(14, 58, 83, 0.05), 0 2px 4px -1 rgba(14, 58, 83, 0.03)",
-        hover: "0 20px 25px -5px rgba(14, 58, 83, 0.1), 0 10px 10px -5px rgba(14, 58, 83, 0.04)",
-      },
-      animation: {
-        "fade-in-up": "fadeInUp 0.8s ease-out forwards",
-      },
-      keyframes: {
-        fadeInUp: {
-          "0%": { opacity: "0", transform: "translateY(40px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
+        card: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        blue: "0 4px 14px 0 rgba(0, 86, 179, 0.39)",
       },
     },
   },
