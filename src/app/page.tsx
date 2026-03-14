@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
@@ -57,7 +55,7 @@ export default function Home() {
     {
       name: "James T.",
       role: "Patient",
-      quote: "The cosmetic work Dr. Bennett did on my veneers is incredible. I haven't stopped smiling since I left the office.",
+      quote: "The cosmetic work Dr. Bennett did on my veneers is incredible. I haven&apos;t stopped smiling since I left the office.",
       rating: 5,
     },
     {
