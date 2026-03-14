@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Metadata } from "next";
 import Image from "next/image";
