@@ -10,7 +10,7 @@ export default function Contact() {
           <div>
             <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">Get in Touch</h1>
             <p className="text-xl text-blue-100 mb-8">
-              Ready to schedule your visit? Have questions about insurance or treatments? We're here to help.
+              Ready to schedule your visit? Have questions about insurance or treatments? We&apos;re here to help.
             </p>
             
             <div className="space-y-6">
