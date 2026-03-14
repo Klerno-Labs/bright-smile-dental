@@ -43,7 +43,7 @@ export default function AboutPage() {
               <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
                 <Award className="h-10 w-10 text-[#4CA1A3] mb-4" />
                 <h3 className="font-bold text-[#0E3A53] text-lg mb-2">Award Winning</h3>
-                <p className="text-sm text-[#4B5563]">Recognized as Houston's Top Dentist for 5 consecutive years.</p>
+                <p className="text-sm text-[#4B5563]">Recognized as Houston&apos;s Top Dentist for 5 consecutive years.</p>
               </div>
               <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
                 <Users className="h-10 w-10 text-[#4CA1A3] mb-4" />
