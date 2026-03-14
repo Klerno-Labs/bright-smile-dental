@@ -3,89 +3,45 @@ import { Manrope, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { siteConfig } from "@/config/site";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: new URL("https://brightsmiledental.com"),
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: "Bright Smile Dental | Houston's Premier Dentist",
+    template: "%s | Bright Smile Dental"
   },
-  description: siteConfig.description,
+  description: "Experience world-class dentistry in Houston. From cosmetic makeovers to implants, we provide gentle, patient-first care in a spa-like environment.",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    creator: "@brightsmile",
+    url: "https://brightsmiledental.com",
+    siteName: "Bright Smile Dental",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Bright Smile Dental Office",
+      },
+    ],
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable} ${playfair.variable}`}>
-      <body className="min-h-screen flex flex-col font-inter bg-gray-50 text-gray-700">
+      <body>
         <Navbar />
-        <main className="flex-1 pt-20">{children}</main>
+        <main className="min-h-screen">
+          {children}
+        </main>
         <Footer />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Dentist",
-              name: siteConfig.name,
-              image: [siteConfig.ogImage],
-              "@id": siteConfig.url,
-              url: siteConfig.url,
-              telephone: siteConfig.contact.phone,
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: siteConfig.contact.address,
-                addressLocality: siteConfig.contact.city,
-                addressRegion: siteConfig.contact.state,
-                postalCode: siteConfig.contact.zip,
-                addressCountry: "US",
-              },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: 29.7604,
-                longitude: -95.3698,
-              },
-              openingHoursSpecification: [
-                {
-                  "@type": "OpeningHoursSpecification",
-                  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                  opens: "08:00",
-                  closes: "18:00",
-                },
-                {
-                  "@type": "OpeningHoursSpecification",
-                  dayOfWeek: "Saturday",
-                  opens: "09:00",
-                  closes: "14:00",
-                },
-              ],
-              priceRange: "$$",
-            }),
-          }}
-        />
       </body>
     </html>
   );

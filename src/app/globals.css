@@ -4,48 +4,27 @@
 
 @layer base {
   :root {
-    /* Primary: Deep Navy/Teal - Conveys professionalism, hygiene, and trust */
-    --color-primary: #0E3A53; 
-    /* Usage: Navigation text, Footer background, Headings, Trust badges */
-
-    /* Secondary: Muted Teal - Represents cleanliness and modernity */
-    --color-secondary: #4CA1A3;
-    /* Usage: Primary buttons, Icon accents, Active states, Form focus rings */
-
-    /* Accent: Gold/Sand - Implies luxury and high-tier service */
-    --color-accent: #D4AF37;
-    /* Usage: Star ratings, 'Premium' badges, Outline button borders, Hover effects */
-
-    /* Backgrounds */
-    --color-bg-body: 249 250 251;      /* #F9FAFB Off-white */
-    --color-bg-surface: 255 255 255;   /* #FFFFFF Pure white */
-
-    /* Typography */
-    --color-text-main: 75 85 99;    /* #4B5563 Cool Grey */
-    --color-text-heading: 14 58 83;  /* #0E3A53 Primary Navy */
-    --color-text-muted: 156 163 175;   /* #9CA3AF Light grey */
+    --font-manrope: 'Manrope', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-playfair: 'Playfair Display', serif;
   }
-}
 
-@layer base {
   body {
-    @apply bg-gray-50 text-[#4B5563] font-sans antialiased;
+    @apply bg-background text-text-main antialiased;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-manrope font-bold text-[#0E3A53];
+    @apply font-heading text-text-heading;
   }
-  
-  h1 {
-    @apply text-4xl sm:text-5xl lg:text-6xl tracking-tight;
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
   }
-  
-  h2 {
-    @apply text-3xl sm:text-4xl tracking-tight;
-  }
-  
-  h3 {
-    @apply text-2xl font-semibold;
+
+  /* Focus visible styles for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-secondary;
   }
 }
 

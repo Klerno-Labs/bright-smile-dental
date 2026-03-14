@@ -1,92 +1,106 @@
-import { HeroInternal } from "@/components/sections/HeroInternal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Container } from "@/components/ui/Container";
-import { TeamSection } from "@/components/sections/TeamSection";
-import { CheckCircle, Award, Users } from "lucide-react";
+import Image from 'next/image';
+import { Award, Users, Zap, HeartHandshake } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
+import { images } from '@/config/images';
 
 export const metadata = {
-  title: "About Us",
-  description: "Learn more about Bright Smile Dental's philosophy, technology, and expert team in Houston, TX.",
+  title: "About Us - Our Philosophy",
+  description: "Learn about Bright Smile Dental's history, our patient-first philosophy, and our commitment to modern dental care in Houston.",
+  openGraph: {
+    title: "About Us - Bright Smile Dental",
+    description: "Meet our team of experienced professionals dedicated to your smile.",
+    images: [{ url: images['about'].src }],
+  }
 };
 
 export default function AboutPage() {
   return (
-    <>
-      <HeroInternal 
-        title="About Our Practice" 
-        subtitle="Excellence in dentistry since 1990"
-        imageKey="about" 
-      />
-
-      {/* Philosophy Section */}
-      <section className="py-24 bg-white">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#0E3A53] mb-6">
-                We Treat Patients, Not Just Teeth
-              </h2>
-              <p className="text-[#4B5563] mb-6 leading-relaxed">
-                At Bright Smile Dental, we believe that visiting the dentist should be a positive, stress-free experience. Founded on the principles of compassion and integrity, our practice has served the Houston community for over three decades.
-              </p>
-              <p className="text-[#4B5563] mb-8 leading-relaxed">
-                Our philosophy is simple: provide the highest quality care using the latest technology, delivered with a gentle touch. We listen to your concerns, explain your options clearly, and empower you to make the best decisions for your oral health.
-              </p>
-              <blockquote className="border-l-4 border-[#D4AF37] pl-6 py-2 mb-6">
-                <p className="font-playfair text-2xl italic text-[#0E3A53]">
-                  "Your smile is our passion. We dedicate ourselves to crafting beautiful, healthy smiles that last a lifetime."
-                </p>
-                <cite className="not-italic text-sm text-gray-500 mt-2 block">— Dr. Elena Vance, Lead Dentist</cite>
-              </blockquote>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-                <Award className="h-10 w-10 text-[#4CA1A3] mb-4" />
-                <h3 className="font-bold text-[#0E3A53] text-lg mb-2">Award Winning</h3>
-                <p className="text-sm text-[#4B5563]">Recognized as Houston&apos;s Top Dentist for 5 consecutive years.</p>
-              </div>
-              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
-                <Users className="h-10 w-10 text-[#4CA1A3] mb-4" />
-                <h3 className="font-bold text-[#0E3A53] text-lg mb-2">Family Friendly</h3>
-                <p className="text-sm text-[#4B5563]">We create a welcoming environment for patients of all ages.</p>
-              </div>
-               <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 sm:col-span-2">
-                <CheckCircle className="h-10 w-10 text-[#4CA1A3] mb-4" />
-                <h3 className="font-bold text-[#0E3A53] text-lg mb-2">Gentle Guarantee</h3>
-                <p className="text-sm text-[#4B5563]">If you feel any discomfort, simply raise your hand and we will pause immediately.</p>
-              </div>
-            </div>
-          </div>
-        </Container>
+    <main>
+      {/* Hero */}
+      <section className="relative h-[60vh] flex items-center justify-center">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src={images['about']} 
+            alt="Bright Smile Dental Reception" 
+            fill 
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-primary/80"></div>
+        </div>
+        <div className="relative z-10 text-center px-6">
+          <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-4">About Bright Smile</h1>
+          <p className="text-xl text-gray-200 max-w-2xl mx-auto">Compassionate care, advanced technology, and a genuine passion for changing lives.</p>
+        </div>
       </section>
 
-      {/* Technology Section */}
-      <section className="py-24 bg-gray-50">
-        <Container>
-          <SectionHeading 
-            title="Advanced Technology" 
-            subtitle="State-of-the-Art Equipment"
-            align="center"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      {/* Philosophy */}
+      <section className="py-24 bg-background">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-heading font-bold text-primary mb-8">Our Philosophy</h2>
+          <p className="text-xl text-text-main leading-relaxed mb-8">
+            We believe a visit to the dentist should be something you look forward to, not dread. 
+            Since opening our doors in 2010, we have combined state-of-the-art dental technology with 
+            a warm, spa-like atmosphere to change the way Houston views dental care.
+          </p>
+          <blockquote className="font-serif text-2xl text-secondary italic border-l-4 border-accent pl-6 text-left my-12">
+            "We treat every patient like a member of our own family, ensuring they leave our office not just with a healthier smile, but with a sense of well-being."
+          </blockquote>
+          <p className="text-lg text-text-main">
+            From the moment you walk in, you will notice the difference. We offer complimentary beverages, 
+            noise-canceling headphones, and blankets to ensure your comfort.
+          </p>
+        </div>
+      </section>
+
+      {/* Technology Grid */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[1240px] mx-auto px-6">
+          <h2 className="text-3xl font-heading font-bold text-center text-primary mb-16">Modern Technology</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              "3D Digital Imaging (CBCT)",
-              "Intraoral Cameras",
-              "Laser Cavity Detection",
-              "CEREC Same-Day Crowns",
-              "Digital Impressions (No Goop!)",
-              "Sedation Dentistry Options"
-            ].map((tech, i) => (
-              <div key={i} className="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm">
-                <div className="h-2 w-2 rounded-full bg-[#4CA1A3]" />
-                <span className="font-medium text-[#0E3A53]">{tech}</span>
+              { icon: Zap, title: "Digital X-Rays", desc: "90% less radiation than traditional film." },
+              { icon: Award, title: "3D Imaging", desc: "Precision planning for implants." },
+              { icon: Users, title: "Intraoral Cameras", desc: "See what we see in real-time." },
+              { icon: HeartHandshake, title: "Laser Dentistry", desc: "Minimally invasive gum treatments." }
+            ].map((item, i) => (
+              <div key={i} className="text-center p-6 rounded-xl hover:bg-gray-50 transition-colors">
+                <div className="w-16 h-16 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <item.icon className="w-8 h-8" />
+                </div>
+                <h3 className="font-bold text-primary text-lg mb-3">{item.title}</h3>
+                <p className="text-text-main text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      <TeamSection />
-    </>
+      {/* Team */}
+      <section className="py-24 bg-background">
+        <div className="max-w-[1240px] mx-auto px-6">
+          <h2 className="text-3xl font-heading font-bold text-center text-primary mb-16">Meet The Experts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { name: "Dr. Sarah Bennett", role: "Lead Dentist", img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600&h=600&fit=crop" },
+              { name: "Dr. Michael Chen", role: "Orthodontist", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=600&h=600&fit=crop" },
+              { name: "Emily Rodriguez", role: "Hygienist", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=600&h=600&fit=crop" }
+            ].map((member, i) => (
+              <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-card group">
+                <div className="relative h-80 overflow-hidden">
+                  <Image src={member.img} alt={member.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                </div>
+                <div className="p-6 text-center">
+                  <h3 className="font-bold text-primary text-xl">{member.name}</h3>
+                  <p className="text-secondary font-medium mb-4">{member.role}</p>
+                  <p className="text-text-main text-sm mb-4">Passionate about providing gentle, effective care for all ages.</p>
+                  <Button variant="outline" size="sm" className="w-full">View Profile</Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

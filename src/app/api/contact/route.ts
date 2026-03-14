@@ -1,35 +1,41 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { z } from 'zod';
+
+// Simple validation schema to match frontend
+const contactSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  phone: z.string().min(10),
+  service: z.string().optional(),
+  message: z.string().min(10),
+  _gotcha: z.string().optional(),
+});
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, service, message, _gotcha } = body;
+    
+    // Validate input
+    const validatedData = contactSchema.parse(body);
 
-    // Honeypot validation
-    if (_gotcha) {
-      return NextResponse.json({ message: "Bot detected" }, { status: 200 });
+    // Honeypot check
+    if (validatedData._gotcha) {
+      // Return success to fool bots, but don't actually process
+      return NextResponse.json({ success: true }, { status: 200 });
     }
 
-    // Basic validation
-    if (!name || !email || !phone) {
-      return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
-    }
+    // In a real app, you would send an email here using Resend, SendGrid, or nodemailer
+    // console.log("Form received:", validatedData);
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-    // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json({ message: "Invalid email address" }, { status: 400 });
-    }
+    return NextResponse.json({ success: true, message: "Email sent successfully" });
 
-    // In a real app, you would send this to an email service like Resend, SendGrid, or save to a database.
-    // console.log("Received Contact Form:", { name, email, phone, service, message });
-
-    // Simulating a delay for the UX
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    return NextResponse.json({ message: "Message sent successfully" }, { status: 200 });
   } catch (error) {
-    console.error("Contact form error:", error);
-    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+    if (error instanceof z.ZodError) {
+      return NextResponse.json({ error: "Invalid data", details: error.errors }, { status: 400 });
+    }
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
