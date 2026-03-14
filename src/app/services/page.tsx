@@ -1,5 +1,3 @@
-"use client";
-
 import { Metadata } from "next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { Button } from "@/components/ui/Button";
@@ -9,6 +7,7 @@ import { motion } from "framer-motion";
 import { ChevronRight, Activity, Smile, Shield, UserCheck, Clock, Zap } from "lucide-react";
 import Link from "next/link";
 
+import Image from "next/image";
 export const metadata: Metadata = {
   title: "Services",
   description: "Explore our comprehensive dental services including cosmetic, general, and emergency dentistry in Houston, TX.",

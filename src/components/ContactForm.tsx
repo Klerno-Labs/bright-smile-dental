@@ -8,6 +8,7 @@ import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
 import { Loader2, CheckCircle, AlertCircle } from "lucide-react";
 
+import { z } from "zod";
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
