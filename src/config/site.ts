@@ -1,52 +1,26 @@
-import { ImageSlot } from "./images";
+import type { Metadata } from "next";
 
-export type SiteConfig = {
-  name: string;
-  description: string;
-  url: string;
-  ogImage: string;
-  links: {
-    twitter?: string;
-    instagram?: string;
-    linkedin?: string;
-  };
-  contact: {
-    phone: string;
-    email: string;
-    address: string;
-    city: string;
-    state: string;
-    zip: string;
-    mapUrl: string;
-  };
-  hours: {
-    weekdays: string;
-    saturday: string;
-    sunday: string;
-  };
-};
-
-export const siteConfig: SiteConfig = {
+export const siteConfig = {
   name: "Bright Smile Dental",
-  description: "Modern dentistry with a gentle touch. Comprehensive family care, cosmetic enhancements, and implants in Houston, TX.",
-  url: "https://brightsmiledental-demo.com",
-  ogImage: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1200&auto=format&fit=crop",
+  description: "Experience modern dentistry with a gentle touch at Bright Smile Dental. Comprehensive cosmetic, family, and emergency dental services in Houston, TX.",
+  url: "https://brightsmiledental.com",
+  ogImage: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1200&h=630&fit=crop",
   links: {
+    twitter: "https://twitter.com",
     instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
+    linkedin: "https://linkedin.com",
   },
   contact: {
     phone: "(713) 555-0198",
-    email: "hello@brightsmiledental-demo.com",
-    address: "4521 Westheimer Rd, Suite 200",
-    city: "Houston",
-    state: "TX",
-    zip: "77027",
-    mapUrl: "https://maps.google.com",
+    email: "info@brightsmiledental.com",
+    address: "4521 Westheimer Rd, Suite 200, Houston, TX 77027",
   },
-  hours: {
-    weekdays: "Mon-Fri: 8am - 6pm",
-    saturday: "Saturday: 9am - 2pm",
-    sunday: "Sunday: Closed",
-  },
+  nav: [
+    { title: "Home", href: "/" },
+    { title: "About", href: "/about" },
+    { title: "Services", href: "/services" },
+    { title: "Contact", href: "/contact" },
+  ],
 };
+
+export type SiteConfig = typeof siteConfig;

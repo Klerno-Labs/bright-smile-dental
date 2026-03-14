@@ -4,27 +4,16 @@
 
 @layer base {
   :root {
-    --font-manrope: 'Manrope', sans-serif;
-    --font-inter: 'Inter', sans-serif;
-    --font-playfair: 'Playfair Display', serif;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
   }
 
   body {
-    @apply bg-background text-text-main antialiased;
+    @apply bg-bgBody text-textBody font-body antialiased;
   }
-
+  
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading text-text-heading;
-  }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Focus visible styles for accessibility */
-  *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-secondary;
+    @apply font-heading text-textMain;
   }
 }
 
@@ -32,4 +21,32 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+  }
+  .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+  }
+}
+
+/* Custom Styles */
+.tooth-group {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  fill: #ffffff;
+  stroke: #cbd5e0;
+  stroke-width: 1;
+}
+
+.tooth-group:hover {
+  fill: #e6f0fa;
+  stroke: #0056b3;
+  transform: scale(1.05);
+}
+
+.tooth-group.selected {
+  fill: #0056b3;
+  stroke: #004494;
 }

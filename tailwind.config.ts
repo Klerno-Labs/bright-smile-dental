@@ -10,42 +10,43 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#0E3A53", // Deep Navy
-          foreground: "#FFFFFF",
+          DEFAULT: "#0056b3",
+          dark: "#004494",
+          light: "#e6f0fa",
         },
         secondary: {
-          DEFAULT: "#4CA1A3", // Muted Teal
-          foreground: "#FFFFFF",
+          DEFAULT: "#00a8cc",
+          dark: "#008cab",
         },
         accent: {
-          DEFAULT: "#D4AF37", // Gold
-          foreground: "#FFFFFF",
+          DEFAULT: "#ff6b6b",
         },
-        background: {
-          DEFAULT: "#F9FAFB", // Off-white
-          surface: "#FFFFFF", // Pure white
-        },
-        text: {
-          main: "#4B5563", // Cool Grey
-          heading: "#0E3A53",
-          muted: "#9CA3AF",
-        }
+        success: "#28a745",
+        bgBody: "#f8f9fa",
+        textMain: "#1a202c",
+        textBody: "#4a5568",
+        textMuted: "#a0aec0",
+        borderColor: "#e2e8f0",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        heading: ["var(--font-manrope)", "sans-serif"],
-        serif: ["var(--font-playfair)", "serif"],
+        heading: ["var(--font-heading)", "sans-serif"],
+        body: ["var(--font-body)", "sans-serif"],
       },
       boxShadow: {
-        'card': '0 4px 6px -1px rgba(14, 58, 83, 0.05), 0 2px 4px -1px rgba(14, 58, 83, 0.03)',
-        'hover': '0 20px 25px -5px rgba(14, 58, 83, 0.1), 0 10px 10px -5px rgba(14, 58, 83, 0.04)',
-        'modal': '0 25px 50px -12px rgba(14, 58, 83, 0.25)',
+        "card": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+        "blue": "0 4px 14px 0 rgba(0, 86, 179, 0.39)",
       },
-      borderRadius: {
-        'lg': '0.5rem',   // 8px
-        'xl': '0.75rem',  // 12px
-        '2xl': '1.5rem',  // 24px
-      }
+      animation: {
+        "blob": "blob 7s infinite",
+      },
+      keyframes: {
+        blob: {
+          "0%": { transform: "translate(0px, 0px) scale(1)" },
+          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+          "100%": { transform: "translate(0px, 0px) scale(1)" },
+        },
+      },
     },
   },
   plugins: [],

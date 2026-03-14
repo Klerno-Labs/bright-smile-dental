@@ -1,114 +1,114 @@
-import { HeroInternal } from "@/components/sections/HeroInternal";
-import { ContactForm } from "@/components/forms/ContactForm";
-import { Container } from "@/components/ui/Container";
-import { MapPin, Mail, Phone, Clock } from "lucide-react";
+import { Metadata } from "next";
+import { ContactForm } from "@/components/ContactForm";
+import { MapPin, Phone, Mail, Clock, AlertCircle } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Get in touch with Bright Smile Dental. Schedule your appointment or ask us a question.",
+  description: "Get in touch with Bright Smile Dental. Book an appointment, find our location in Houston, or call for emergency care.",
 };
 
 export default function ContactPage() {
   return (
-    <>
-      <HeroInternal 
-        title="Contact Us" 
-        subtitle="We are here to help you smile"
-        imageKey="gallery-1" 
-      />
-
-      <section className="py-24 bg-gray-50" id="new-patients">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Info */}
-            <div>
-              <h2 className="text-3xl font-bold text-[#0E3A53] mb-8">Visit Our Clinic</h2>
-              
-              <div className="space-y-8 mb-12">
-                <div className="flex gap-4">
-                  <div className="h-12 w-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
-                    <MapPin className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#0E3A53] mb-1">Address</h3>
-                    <p className="text-[#4B5563] leading-relaxed">
-                      {siteConfig.contact.address}<br />
-                      {siteConfig.contact.city}, {siteConfig.contact.state} {siteConfig.contact.zip}
-                    </p>
-                    <a 
-                      href={siteConfig.contact.mapUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-[#4CA1A3] text-sm font-semibold hover:underline mt-1 inline-block"
-                    >
-                      Get Directions
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="h-12 w-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
-                    <Phone className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#0E3A53] mb-1">Phone</h3>
-                    <a href={`tel:${siteConfig.contact.phone}`} className="text-[#4B5563] text-lg font-semibold hover:text-[#4CA1A3]">
-                      {siteConfig.contact.phone}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="h-12 w-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
-                    <Mail className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#0E3A53] mb-1">Email</h3>
-                    <a href={`mailto:${siteConfig.contact.email}`} className="text-[#4B5563] hover:text-[#4CA1A3]">
-                      {siteConfig.contact.email}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="h-12 w-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
-                    <Clock className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[#0E3A53] mb-1">Hours</h3>
-                    <ul className="text-[#4B5563] space-y-1">
-                      <li>{siteConfig.hours.weekdays}</li>
-                      <li>{siteConfig.hours.saturday}</li>
-                      <li>{siteConfig.hours.sunday}</li>
-                    </ul>
-                  </div>
-                </div>
+    <div className="min-h-screen bg-bgBody">
+      {/* Hero Map Split */}
+      <section className="grid lg:grid-cols-12">
+        <div className="lg:col-span-7 h-[400px] lg:h-[600px] relative bg-gray-200">
+          {/* Placeholder Map Implementation using Image for Static Export */}
+          {/* In a real app with API keys, use Google Maps Embed */}
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.6674955899685!2d-95.4369764!3d29.7499068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c36671947b3b%3A0x6a6e8d233a285d42!2s4521%20Westheimer%20Rd%2C%20Houston%2C%20TX%2077027!5e0!3m2!1sen!2sus!4v1698445987123!5m2!1sen!2sus"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Bright Smile Dental Location Map"
+          ></iframe>
+        </div>
+        
+        <div className="lg:col-span-5 bg-white p-8 lg:p-16 flex flex-col justify-center">
+          <div className="mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-textMain mb-4">Get in Touch</h1>
+            <p className="text-textBody text-lg">We can't wait to see your smile.</p>
+          </div>
+          
+          <div className="space-y-6 mb-10">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-primaryLight rounded-full flex items-center justify-center text-primary flex-shrink-0">
+                <MapPin size={20} />
               </div>
-
-              {/* Map Placeholder */}
-              <div className="w-full h-64 bg-gray-200 rounded-xl overflow-hidden relative">
-                 <iframe 
-                  width="100%" 
-                  height="100%" 
-                  frameBorder="0" 
-                  scrolling="no" 
-                  marginHeight={0} 
-                  marginWidth={0} 
-                  src="https://maps.google.com/maps?q=4521%20Westheimer%20Rd%2C%20Suite%20200%2C%20Houston%2C%20TX%2077027&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                  title="Google Map"
-                 ></iframe>
+              <div>
+                <h3 className="font-bold text-textMain">Address</h3>
+                <p className="text-textBody">{siteConfig.contact.address}</p>
               </div>
             </div>
 
-            {/* Form */}
-            <div className="bg-white p-8 md:p-12 rounded-2xl shadow-lg h-fit">
-              <h3 className="text-2xl font-bold text-[#0E3A53] mb-6">Send a Message</h3>
-              <ContactForm />
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-primaryLight rounded-full flex items-center justify-center text-primary flex-shrink-0">
+                <Phone size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-textMain">Phone</h3>
+                <a href={`tel:${siteConfig.contact.phone}`} className="text-primary hover:underline font-semibold">
+                  {siteConfig.contact.phone}
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-primaryLight rounded-full flex items-center justify-center text-primary flex-shrink-0">
+                <Mail size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-textMain">Email</h3>
+                <a href={`mailto:${siteConfig.contact.email}`} className="text-primary hover:underline">
+                  {siteConfig.contact.email}
+                </a>
+              </div>
+            </div>
+
+             <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center text-accent flex-shrink-0">
+                <Clock size={20} />
+              </div>
+              <div>
+                <h3 className="font-bold text-textMain">Hours</h3>
+                <p className="text-textBody text-sm">
+                  Mon-Fri: 8am-6pm<br />
+                  Sat: 9am-2pm<br />
+                  Sun: Closed
+                </p>
+              </div>
             </div>
           </div>
-        </Container>
+
+          {/* Emergency Banner */}
+          <div className="bg-accent/10 border border-accent/20 rounded-lg p-4 flex items-start gap-3">
+            <AlertCircle className="text-accent flex-shrink-0 mt-0.5" size={20} />
+            <div>
+              <h4 className="font-bold text-accent text-sm uppercase">Dental Emergency?</h4>
+              <p className="text-sm text-textBody mt-1">
+                We reserve time daily for emergency patients. Call us immediately at <a href={`tel:${siteConfig.contact.phone}`} className="font-semibold text-accent hover:underline">{siteConfig.contact.phone}</a>.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
-    </>
+
+      {/* Form Section */}
+      <section className="py-16 md:py-24 bg-bgBody">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-textMain mb-4">Request an Appointment</h2>
+            <p className="text-textBody">
+              Fill out the form below and our scheduling coordinator will contact you to confirm your appointment time.
+            </p>
+          </div>
+          <ContactForm />
+        </div>
+      </section>
+    </div>
   );
 }

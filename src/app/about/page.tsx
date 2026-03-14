@@ -1,75 +1,110 @@
-import Image from 'next/image';
-import { Award, Users, Zap, HeartHandshake } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { images } from '@/config/images';
+import { Metadata } from "next";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { images } from "@/config/site";
+import { CTA } from "@/components/CTA";
+import { CheckCircle } from "lucide-react";
 
-export const metadata = {
-  title: "About Us - Our Philosophy",
-  description: "Learn about Bright Smile Dental's history, our patient-first philosophy, and our commitment to modern dental care in Houston.",
-  openGraph: {
-    title: "About Us - Bright Smile Dental",
-    description: "Meet our team of experienced professionals dedicated to your smile.",
-    images: [{ url: images['about'].src }],
-  }
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about the history, mission, and expert team at Bright Smile Dental in Houston, TX.",
 };
 
 export default function AboutPage() {
   return (
-    <main>
+    <>
       {/* Hero */}
-      <section className="relative h-[60vh] flex items-center justify-center">
-        <div className="absolute inset-0 z-0">
-          <Image 
-            src={images['about']} 
-            alt="Bright Smile Dental Reception" 
-            fill 
+      <section className="relative bg-gray-900 py-24 md:py-32 text-center">
+        <div className="absolute inset-0 opacity-30">
+          <Image
+            src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=1920&h=1080&fit=crop"
+            alt="Office Background"
+            fill
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-primary/80"></div>
         </div>
-        <div className="relative z-10 text-center px-6">
-          <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-4">About Bright Smile</h1>
-          <p className="text-xl text-gray-200 max-w-2xl mx-auto">Compassionate care, advanced technology, and a genuine passion for changing lives.</p>
-        </div>
-      </section>
-
-      {/* Philosophy */}
-      <section className="py-24 bg-background">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-heading font-bold text-primary mb-8">Our Philosophy</h2>
-          <p className="text-xl text-text-main leading-relaxed mb-8">
-            We believe a visit to the dentist should be something you look forward to, not dread. 
-            Since opening our doors in 2010, we have combined state-of-the-art dental technology with 
-            a warm, spa-like atmosphere to change the way Houston views dental care.
-          </p>
-          <blockquote className="font-serif text-2xl text-secondary italic border-l-4 border-accent pl-6 text-left my-12">
-            "We treat every patient like a member of our own family, ensuring they leave our office not just with a healthier smile, but with a sense of well-being."
-          </blockquote>
-          <p className="text-lg text-text-main">
-            From the moment you walk in, you will notice the difference. We offer complimentary beverages, 
-            noise-canceling headphones, and blankets to ensure your comfort.
+        <div className="relative z-10 max-w-4xl mx-auto px-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+            Our Story
+          </h1>
+          <p className="text-xl text-gray-200">
+            Creating healthy smiles for the Houston community since 2005.
           </p>
         </div>
       </section>
 
-      {/* Technology Grid */}
-      <section className="py-24 bg-white">
-        <div className="max-w-[1240px] mx-auto px-6">
-          <h2 className="text-3xl font-heading font-bold text-center text-primary mb-16">Modern Technology</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Zap, title: "Digital X-Rays", desc: "90% less radiation than traditional film." },
-              { icon: Award, title: "3D Imaging", desc: "Precision planning for implants." },
-              { icon: Users, title: "Intraoral Cameras", desc: "See what we see in real-time." },
-              { icon: HeartHandshake, title: "Laser Dentistry", desc: "Minimally invasive gum treatments." }
-            ].map((item, i) => (
-              <div key={i} className="text-center p-6 rounded-xl hover:bg-gray-50 transition-colors">
-                <div className="w-16 h-16 bg-secondary/10 text-secondary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <item.icon className="w-8 h-8" />
+      {/* Narrative */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-textMain mb-6">
+                More Than Just a Dentist Office
+              </h2>
+              <p className="text-lg text-textBody mb-6 leading-relaxed">
+                Bright Smile Dental was founded with a simple mission: to make high-quality dental care accessible and anxiety-free for everyone in Houston. We believe that a visit to the dentist should be a positive experience, not something to dread.
+              </p>
+              <p className="text-lg text-textBody mb-8 leading-relaxed">
+                Over the years, we have grown from a small practice to a state-of-the-art facility, but our core values remain the same. We treat every patient like family, taking the time to listen to your concerns and explain your treatment options clearly.
+              </p>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-4xl font-bold text-primary mb-1">18+</h3>
+                  <p className="text-textBody font-medium">Years Experience</p>
                 </div>
-                <h3 className="font-bold text-primary text-lg mb-3">{item.title}</h3>
-                <p className="text-text-main text-sm">{item.desc}</p>
+                <div>
+                  <h3 className="text-4xl font-bold text-primary mb-1">15k+</h3>
+                  <p className="text-textBody font-medium">Happy Patients</p>
+                </div>
+              </div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <Image
+                src={images["about"]}
+                alt="Our Team"
+                width={600}
+                height={500}
+                className="rounded-2xl shadow-xl"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="py-16 md:py-24 bg-bgBody">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-4">
+              Our Core Values
+            </h2>
+            <p className="text-lg text-textBody">
+              The principles that guide every decision we make.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { title: "Integrity", desc: "Honest diagnoses and fair pricing." },
+              { title: "Compassion", desc: "Empathy in every interaction." },
+              { title: "Excellence", desc: "Commitment to the highest standards." },
+              { title: "Innovation", desc: "Adopting the latest technology." },
+            ].map((val, i) => (
+              <div key={i} className="bg-white p-6 rounded-xl shadow-sm text-center">
+                <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4 text-secondary font-bold text-xl">
+                  0{i + 1}
+                </div>
+                <h3 className="text-lg font-bold text-textMain mb-2">{val.title}</h3>
+                <p className="text-sm text-textBody">{val.desc}</p>
               </div>
             ))}
           </div>
@@ -77,30 +112,116 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-24 bg-background">
-        <div className="max-w-[1240px] mx-auto px-6">
-          <h2 className="text-3xl font-heading font-bold text-center text-primary mb-16">Meet The Experts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: "Dr. Sarah Bennett", role: "Lead Dentist", img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=600&h=600&fit=crop" },
-              { name: "Dr. Michael Chen", role: "Orthodontist", img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=600&h=600&fit=crop" },
-              { name: "Emily Rodriguez", role: "Hygienist", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=600&h=600&fit=crop" }
-            ].map((member, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-card group">
-                <div className="relative h-80 overflow-hidden">
-                  <Image src={member.img} alt={member.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
-                </div>
-                <div className="p-6 text-center">
-                  <h3 className="font-bold text-primary text-xl">{member.name}</h3>
-                  <p className="text-secondary font-medium mb-4">{member.role}</p>
-                  <p className="text-text-main text-sm mb-4">Passionate about providing gentle, effective care for all ages.</p>
-                  <Button variant="outline" size="sm" className="w-full">View Profile</Button>
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-4">
+              Meet Your Doctors
+            </h2>
+            <p className="text-lg text-textBody">
+              Expert care from the best professionals in the field.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Doctor 1 */}
+            <div className="group relative overflow-hidden rounded-2xl">
+              <Image
+                src={images["team-1"]}
+                alt="Dr. Sarah Bennett"
+                width={400}
+                height={400}
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <p className="text-white text-sm mb-2">
+                  Dr. Bennett loves hiking and photography in her free time.
+                </p>
+                <div className="flex gap-4">
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">LinkedIn</a>
                 </div>
               </div>
-            ))}
+              <div className="p-4 bg-white border-x border-b border-gray-100 rounded-b-xl">
+                <h3 className="text-lg font-bold text-textMain">Dr. Sarah Bennett</h3>
+                <p className="text-sm text-primary font-medium">Cosmetic Specialist</p>
+              </div>
+            </div>
+
+            {/* Doctor 2 */}
+            <div className="group relative overflow-hidden rounded-2xl">
+              <Image
+                src={images["founder"]}
+                alt="Dr. James O'Connor"
+                width={400}
+                height={400}
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <p className="text-white text-sm mb-2">
+                  Founder Dr. O'Connor is a lifelong fan of the Houston Astros.
+                </p>
+                <div className="flex gap-4">
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">LinkedIn</a>
+                </div>
+              </div>
+              <div className="p-4 bg-white border-x border-b border-gray-100 rounded-b-xl">
+                <h3 className="text-lg font-bold text-textMain">Dr. James O'Connor</h3>
+                <p className="text-sm text-primary font-medium">General Dentistry</p>
+              </div>
+            </div>
+
+            {/* Doctor 3 */}
+             <div className="group relative overflow-hidden rounded-2xl">
+              <Image
+                src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=800&h=800&fit=crop"
+                alt="Dr. Emily Chen"
+                width={400}
+                height={400}
+                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <p className="text-white text-sm mb-2">
+                  Dr. Chen is an avid baker known for her sourdough bread.
+                </p>
+                 <div className="flex gap-4">
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">LinkedIn</a>
+                </div>
+              </div>
+              <div className="p-4 bg-white border-x border-b border-gray-100 rounded-b-xl">
+                <h3 className="text-lg font-bold text-textMain">Dr. Emily Chen</h3>
+                <p className="text-sm text-primary font-medium">Orthodontics</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-    </main>
+
+      {/* Gallery Preview */}
+      <section className="py-16 bg-bgBody">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-textMain mb-8">Our Office</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {[1, 2, 3].map((item) => (
+              <div key={item} className="aspect-square overflow-hidden rounded-lg">
+                <Image
+                  src={images[`gallery-${item}` as keyof typeof images].src}
+                  alt={`Office view ${item}`}
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+             <Button asChild variant="secondary">
+               <Link href="/services">Take a Virtual Tour</Link>
+             </Button>
+          </div>
+        </div>
+      </section>
+
+      <CTA />
+    </>
   );
 }

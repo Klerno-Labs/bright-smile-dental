@@ -1,228 +1,137 @@
-'use client';
-import { useState } from 'react';
-import { Check, Calculator, ChevronDown, ChevronUp } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { images } from '@/config/images';
-import Image from 'next/image';
+import { Metadata } from "next";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { Button } from "@/components/ui/Button";
+import { images } from "@/config/images";
+import { CTA } from "@/components/CTA";
+import { motion } from "framer-motion";
+import { ChevronRight, Activity, Smile, Shield, UserCheck, Clock, Zap } from "lucide-react";
+import Link from "next/link";
 
-export const metadata = {
-  title: "Our Services",
-  description: "Explore our comprehensive dental services including cosmetic, restorative, and preventative care.",
-  openGraph: {
-    title: "Our Services - Bright Smile Dental",
-    description: "From fillings to implants, we do it all.",
-    images: [{ url: images['service-1'].src }],
-  }
+export const metadata: Metadata = {
+  title: "Services",
+  description: "Explore our comprehensive dental services including cosmetic, general, and emergency dentistry in Houston, TX.",
 };
 
-const servicesData = [
-  {
-    category: "Cosmetic",
-    items: [
-      {
-        title: "Teeth Whitening",
-        price: "$299",
-        time: "1 Hour",
-        desc: "Professional-grade whitening that removes years of staining in a single session. Safe for enamel.",
-        details: ["Custom trays included", "Zoom! technology", "Immediate results"]
-      },
-      {
-        title: "Porcelain Veneers",
-        price: "$1,200/each",
-        time: "2 Visits",
-        desc: "Thin shells of porcelain that cover the front surface of teeth to improve appearance.",
-        details: ["Stain resistant", "Natural look", "10+ year lifespan"]
-      },
-      {
-        title: "Invisalign",
-        price: "$4,500 - $6,000",
-        time: "12-18 Mo",
-        desc: "Clear aligners that straighten teeth without metal brackets. Virtually invisible.",
-        details: ["Removable", "Comfortable", "Digital scanning"]
-      }
-    ]
-  },
-  {
-    category: "Restorative",
-    items: [
-      {
-        title: "Dental Implants",
-        price: "$3,000+",
-        time: "3-6 Mo",
-        desc: "Permanent replacement roots that support crowns or bridges. The gold standard for missing teeth.",
-        details: ["Titanium posts", "Lifetime guarantee on post", "Looks like real teeth"]
-      },
-      {
-        title: "Crowns & Bridges",
-        price: "$1,100+",
-        time: "1-2 Weeks",
-        desc: "Cover damaged teeth or replace missing ones with durable ceramic restorations.",
-        details: ["Same-day CEREC options", "Color matched", "Metal-free options"]
-      }
-    ]
-  },
-  {
-    category: "Preventative",
-    items: [
-      {
-        title: "Comprehensive Exam",
-        price: "$150",
-        time: "45 Mins",
-        desc: "Full examination including X-rays, oral cancer screening, and gum health assessment.",
-        details: ["Digital X-rays", "Periodontal charting", "Treatment plan"]
-      },
-      {
-        title: "Cleaning",
-        price: "$120",
-        time: "45 Mins",
-        desc: "Professional cleaning to remove plaque and tartar, followed by polishing.",
-        details: ["Ultrasonic scaling", "Fluoride treatment", "Flossing"]
-      }
-    ]
-  }
-];
-
-function FinanceCalculator({ price }: { price: string }) {
-  const [cost, setCost] = useState(2500);
-  const monthlyPayment = (cost / 12) * 1.05; // Simple calculation with interest
-
-  return (
-    <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 mt-6">
-      <div className="flex items-center gap-2 mb-4 text-primary font-semibold">
-        <Calculator className="w-5 h-5 text-secondary" />
-        Finance Calculator
-      </div>
-      <label className="text-sm text-text-muted mb-2 block">Estimated Treatment Cost: ${cost}</label>
-      <input 
-        type="range" 
-        min="500" 
-        max="10000" 
-        step="100" 
-        value={cost}
-        onChange={(e) => setCost(Number(e.target.value))}
-        className="w-full accent-secondary mb-4"
-      />
-      <div className="flex justify-between items-center border-t border-gray-300 pt-4">
-        <span className="text-sm text-text-muted">Est. Monthly Payment (12mo)</span>
-        <span className="text-xl font-bold text-secondary">${Math.round(monthlyPayment)}/mo</span>
-      </div>
-      <p className="text-xs text-text-muted mt-2">*Based on 5% APR for qualified applicants.</p>
-    </div>
-  );
-}
+const services = {
+  general: [
+    { title: "Comprehensive Exams", desc: "Detailed checkups including digital X-rays and oral cancer screenings.", price: "From $150" },
+    { title: "Professional Cleaning", desc: "Remove plaque and tartar build-up to prevent gum disease.", price: "From $120" },
+    { title: "Fillings & Restorations", desc: "Tooth-colored composite fillings that blend seamlessly with your natural teeth.", price: "From $150" },
+    { title: "Pediatric Dentistry", desc: "Gentle care designed specifically for children and teens.", price: "From $100" },
+  ],
+  cosmetic: [
+    { title: "Teeth Whitening", desc: "Professional laser whitening for results up to 8 shades lighter.", price: "From $299" },
+    { title: "Porcelain Veneers", desc: "Custom-made shells to cover imperfections and create a perfect smile.", price: "From $900/tooth" },
+    { title: "Bonding", desc: "Repair chips or cracks using a tooth-colored resin material.", price: "From $200" },
+    { title: "Smile Makeover", desc: "A comprehensive plan combining multiple cosmetic procedures.", price: "Custom Quote" },
+  ],
+  emergency: [
+    { title: "Tooth Extractions", desc: "Safe removal of damaged or impacted teeth.", price: "From $200" },
+    { title: "Root Canals", desc: "Save your natural tooth and relieve pain quickly.", price: "From $600" },
+    { title: "Broken Tooth Repair", desc: "Immediate fixes for chipped, cracked, or broken teeth.", price: "From $150" },
+    { title: "Emergency Exam", desc: "Priority assessment for severe pain or trauma.", price: "$75" },
+  ],
+  ortho: [
+    { title: "Clear Aligners", desc: "Straighten teeth discreetly with clear plastic trays.", price: "From $3,500" },
+    { title: "Traditional Braces", desc: "Effective metal braces for complex alignment issues.", price: "From $4,000" },
+    { title: "Retainers", desc: "Maintain your smile post-treatment with custom retainers.", price: "From $150" },
+  ]
+};
 
 export default function ServicesPage() {
   return (
-    <main>
+    <>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-background">
-        <div className="max-w-[1240px] mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-5xl font-heading font-bold text-primary mb-6">Our Dental Services</h1>
-          <p className="text-xl text-text-main max-w-2xl mx-auto">
-            Transparent pricing, world-class technology, and a gentle touch.
+      <section className="bg-gray-50 py-20 border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-textMain mb-6">Our Dental Services</h1>
+          <p className="text-xl text-textBody max-w-2xl mx-auto">
+            Advanced treatments tailored to your unique smile. We combine comfort with clinical excellence.
           </p>
-          
-          {/* Filters */}
-          <div className="flex flex-wrap justify-center gap-4 mt-10">
-            {['Cosmetic', 'Restorative', 'Preventative'].map((filter) => (
-              <button key={filter} className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition-colors font-medium">
-                {filter}
-              </button>
+        </div>
+      </section>
+
+      {/* Services Tabs */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Tabs defaultValue="general" className="w-full">
+            <TabsList className="grid w-full grid-cols-4 mb-12 h-auto p-1 bg-gray-100">
+              <TabsTrigger value="general" className="py-3 data-[state=active]:bg-white shadow-sm">General</TabsTrigger>
+              <TabsTrigger value="cosmetic" className="py-3 data-[state=active]:bg-white shadow-sm">Cosmetic</TabsTrigger>
+              <TabsTrigger value="emergency" className="py-3 data-[state=active]:bg-white shadow-sm">Emergency</TabsTrigger>
+              <TabsTrigger value="ortho" className="py-3 data-[state=active]:bg-white shadow-sm">Orthodontics</TabsTrigger>
+            </TabsList>
+
+            {Object.entries(services).map(([key, items]) => (
+              <TabsContent key={key} value={key} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                  {items.map((service, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      className="flex flex-col sm:flex-row gap-6 p-6 border border-gray-100 rounded-xl hover:shadow-md transition-shadow bg-white"
+                    >
+                      <div className="w-12 h-12 bg-primaryLight rounded-lg flex-shrink-0 flex items-center justify-center text-primary">
+                        <Activity size={24} />
+                      </div>
+                      <div className="flex-grow">
+                        <div className="flex justify-between items-start mb-2">
+                          <h3 className="text-xl font-bold text-textMain">{service.title}</h3>
+                          <span className="text-sm font-bold bg-secondary/10 text-secondary px-2 py-1 rounded">{service.price}</span>
+                        </div>
+                        <p className="text-textBody mb-4">{service.desc}</p>
+                        <Link href="/contact" className="text-primary font-semibold hover:underline inline-flex items-center text-sm">
+                          Book this <ChevronRight size={14} className="ml-1" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </TabsContent>
             ))}
-          </div>
+          </Tabs>
         </div>
       </section>
 
-      {/* Service List */}
-      <section className="pb-24">
-        <div className="max-w-[800px] mx-auto px-6">
-          {servicesData.map((cat, catIdx) => (
-            <div key={catIdx} className="mb-8">
-              <h2 className="text-2xl font-heading font-bold text-primary mb-4 border-l-4 border-secondary pl-4">{cat.category}</h2>
-              <div className="space-y-4">
-                {cat.items.map((service, idx) => (
-                  <ServiceAccordion key={idx} service={service} />
-                ))}
-              </div>
+      {/* Technology Section */}
+      <section className="py-16 md:py-24 bg-bgBody">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="order-2 lg:order-1">
+               <Image
+                src={images["gallery-1"]}
+                alt="Advanced Technology"
+                width={600}
+                height={500}
+                className="rounded-xl shadow-lg"
+              />
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Service ZigZag */}
-      <section className="bg-white py-24">
-        <div className="max-w-[1240px] mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative h-[500px] w-full rounded-2xl overflow-hidden">
-              <Image src={images['service-3']} alt="Implants" fill className="object-cover" />
-            </div>
-            <div>
-              <span className="text-accent font-bold tracking-wider uppercase text-sm">Most Popular</span>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mt-2 mb-6">Dental Implants</h2>
-              <p className="text-lg text-text-main mb-6 leading-relaxed">
-                Stop hiding your smile. Our 3D-guided implant technology ensures precise placement and faster healing times. 
-                Whether you need a single tooth or a full mouth restoration, Dr. Bennett is an expert in implantology.
+            <div className="order-1 lg:order-2">
+              <h2 className="text-3xl font-bold text-textMain mb-6">State-of-the-Art Technology</h2>
+              <p className="text-lg text-textBody mb-8">
+                We invest in the latest dental technology to ensure your treatments are faster, more comfortable, and more precise.
               </p>
-              <ul className="space-y-3 mb-8">
-                {['Look and feel like natural teeth', 'Prevent bone loss', 'Last a lifetime with care', 'Eat whatever you want'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-text-main">
-                    <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                      <Check className="w-3 h-3" />
-                    </div>
-                    {item}
+              <ul className="space-y-4">
+                {[
+                  { icon: Zap, text: "Digital X-Rays (90% less radiation)" },
+                  { icon: Smile, text: "3D Intraoral Scanners (No more goopy impressions)" },
+                  { icon: Clock, text: "Single-Visit CEREC Crowns" },
+                  { icon: Shield, text: "Laser Cavity Detection" },
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3">
+                    <item.icon className="text-primary" size={20} />
+                    <span className="font-medium text-textBody">{item.text}</span>
                   </li>
                 ))}
               </ul>
-              <FinanceCalculator price="3000" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-secondary text-white text-center">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-3xl font-heading font-bold mb-6">Not sure what you need?</h2>
-          <p className="text-xl mb-8 opacity-90">Book a comprehensive exam and let us create a custom treatment plan for you.</p>
-          <Button variant="secondary" size="lg" className="bg-white text-secondary hover:bg-gray-100">
-            Book Exam ($150)
-          </Button>
-        </div>
-      </section>
-    </main>
-  );
-}
-
-function ServiceAccordion({ service }: { service: any }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="border border-gray-200 rounded-xl overflow-hidden bg-white">
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
-      >
-        <div className="flex items-center gap-4">
-          <div>
-            <h3 className="font-bold text-primary text-lg">{service.title}</h3>
-            <p className="text-sm text-text-muted">Starting at {service.price} • {service.time}</p>
-          </div>
-        </div>
-        {isOpen ? <ChevronUp className="text-secondary" /> : <ChevronDown className="text-secondary" />}
-      </button>
-      {isOpen && (
-        <div className="p-6 pt-0 border-t border-gray-100 animate-in fade-in slide-in-from-top-2 duration-300">
-          <p className="text-text-main mb-4">{service.desc}</p>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {service.details.map((detail: string, i: number) => (
-              <span key={i} className="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium text-gray-600">
-                {detail}
-              </span>
-            ))}
-          </div>
-          <Button size="sm" className="w-full sm:w-auto">Book {service.title}</Button>
-        </div>
-      )}
-    </div>
+      <CTA />
+    </>
   );
 }

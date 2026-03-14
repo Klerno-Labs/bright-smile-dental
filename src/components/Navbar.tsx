@@ -1,129 +1,126 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, X, Phone } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { Button } from './ui/Button';
-
-const navLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'Services', href: '/services' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/#contact' },
-];
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site";
+import { Menu, X, Phone } from "lucide-react";
+import { Button } from "./ui/Button";
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close mobile menu on route change
   useEffect(() => {
-    setIsOpen(false);
+    setIsMobileMenuOpen(false);
   }, [pathname]);
 
   return (
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-          isScrolled || isOpen ? "bg-white/90 backdrop-blur-md shadow-sm border-gray-100" : "bg-transparent"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+          isScrolled ? "bg-white/90 backdrop-blur-lg shadow-sm py-2" : "bg-transparent py-4"
         )}
       >
-        <div className="max-w-[1240px] mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4.5 12.5C4.5 12.5 6 14 9 14s4.5-1.5 4.5-1.5"/>
-                <path d="M12 3a9 9 0 0 1 9 9v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-8a9 9 0 0 1 9-9z"/>
-                <path d="M12 3v6"/>
-              </svg>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="bg-primary text-white p-1.5 rounded-lg group-hover:bg-primaryDark transition-colors">
+                <span className="sr-only">Bright Smile Dental Logo</span>
+                {/* Simple SVG Logo */}
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L14.09 8.26L20.66 9.27L15.92 14.14L17.18 20.67L11.65 17.5L6.12 20.67L7.38 14.14L2.64 9.27L9.21 8.26L12 2Z" fill="currentColor"/>
+                </svg>
+              </div>
+              <span className="font-heading font-bold text-xl tracking-tight text-textMain">
+                Bright Smile
+              </span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-8">
+              {siteConfig.nav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-primary relative",
+                    pathname === item.href ? "text-primary" : "text-textBody"
+                  )}
+                >
+                  {item.title}
+                  {pathname === item.href && (
+                    <span className="absolute -bottom-5 left-0 right-0 h-0.5 bg-primary rounded-full" />
+                  )}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Desktop CTA */}
+            <div className="hidden md:flex items-center gap-4">
+              <a href={`tel:${siteConfig.contact.phone}`} className="text-sm font-semibold text-primary flex items-center gap-2 hover:text-primaryDark transition-colors">
+                <Phone size={16} />
+                <span className="hidden lg:inline">{siteConfig.contact.phone}</span>
+              </a>
+              <Button asChild size="sm" variant="default">
+                <Link href="/contact">Book Now</Link>
+              </Button>
             </div>
-            <span className="font-heading font-bold text-xl text-primary tracking-tight group-hover:text-secondary transition-colors">
-              Bright Smile
-            </span>
-          </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium tracking-wide transition-colors hover:text-secondary",
-                  pathname === link.href ? "text-secondary" : "text-primary"
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
-            <a href="tel:+17135550198" className="hidden lg:flex items-center gap-2 text-sm font-semibold text-primary hover:text-secondary transition-colors">
-              <Phone className="w-4 h-4" />
-              (713) 555-0198
-            </a>
-            <Button size="sm" onClick={() => window.location.href = '/#contact'}>
-              Book Consultation
-            </Button>
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              className="md:hidden p-2 text-textMain hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-primary"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-          >
-            {isOpen ? <X /> : <Menu />}
-          </button>
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-primary/95 backdrop-blur-lg transform transition-transform duration-300 ease-in-out md:hidden",
-          isOpen ? "translate-x-0" : "translate-x-full"
+          "fixed inset-0 z-40 bg-white transform transition-transform duration-300 ease-in-out md:hidden",
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <div className="flex flex-col h-full p-6 pt-24">
+        <div className="flex flex-col h-full pt-20 px-6 pb-6">
           <nav className="flex flex-col gap-6">
-            {navLinks.map((link) => (
+            {siteConfig.nav.map((item) => (
               <Link
-                key={link.name}
-                href={link.href}
+                key={item.href}
+                href={item.href}
                 className={cn(
-                  "text-2xl font-heading font-medium text-white/90 hover:text-secondary transition-colors",
-                  pathname === link.href && "text-secondary"
+                  "text-2xl font-heading font-semibold text-textMain hover:text-primary transition-colors",
+                  pathname === item.href ? "text-primary" : ""
                 )}
               >
-                {link.name}
+                {item.title}
               </Link>
             ))}
           </nav>
-          
-          <div className="mt-auto space-y-4">
-            <a 
-              href="tel:+17135550198"
-              className="flex items-center justify-center gap-3 w-full py-4 rounded-xl border border-white/20 text-white font-semibold hover:bg-white/10 transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              (713) 555-0198
+          <div className="mt-auto">
+            <a href={`tel:${siteConfig.contact.phone}`} className="flex items-center gap-3 text-lg font-semibold text-primary mb-6">
+              <Phone />
+              {siteConfig.contact.phone}
             </a>
-            <Button className="w-full" size="lg" onClick={() => setIsOpen(false)}>
-              Book Online
+            <Button asChild className="w-full" size="lg">
+              <Link href="/contact">Book Appointment</Link>
             </Button>
           </div>
         </div>

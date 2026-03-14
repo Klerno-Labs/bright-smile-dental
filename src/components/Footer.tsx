@@ -1,102 +1,126 @@
-import Link from 'next/link';
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ArrowUp } from 'lucide-react';
-import { Button } from './ui/Button';
+"use client";
+
+import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import { Button } from "./ui/Button";
+import { Facebook, Instagram, Twitter, Linkedin, Mail, MapPin, Phone, Clock } from "lucide-react";
 
 export function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-white pt-20 pb-10">
-      <div className="max-w-[1240px] mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Column 1: Brand */}
+    <footer className="bg-gray-900 text-white pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* Brand Column */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-white">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4.5 12.5C4.5 12.5 6 14 9 14s4.5-1.5 4.5-1.5"/>
-                  <path d="M12 3a9 9 0 0 1 9 9v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-8a9 9 0 0 1 9-9z"/>
-                  <path d="M12 3v6"/>
+            <Link href="/" className="flex items-center gap-2">
+              <div className="bg-primary text-white p-1.5 rounded-lg">
+                 <span className="sr-only">Bright Smile Dental Logo</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L14.09 8.26L20.66 9.27L15.92 14.14L17.18 20.67L11.65 17.5L6.12 20.67L7.38 14.14L2.64 9.27L9.21 8.26L12 2Z" fill="currentColor"/>
                 </svg>
               </div>
               <span className="font-heading font-bold text-xl">Bright Smile</span>
-            </div>
-            <p className="text-gray-400 leading-relaxed">
-              Modern dentistry with a gentle touch. We are committed to providing Houston families with premium care in a relaxing environment.
+            </Link>
+            <p className="text-gray-400 leading-relaxed text-sm">
+              Modern dentistry with a gentle touch. We are committed to providing the highest quality care for you and your family in a comfortable, state-of-the-art environment.
             </p>
-          </div>
-
-          {/* Column 2: Quick Links */}
-          <div>
-            <h3 className="font-heading font-bold text-lg mb-6 text-white">Quick Links</h3>
-            <ul className="space-y-3">
-              <li><Link href="/" className="text-gray-400 hover:text-secondary transition-colors">Home</Link></li>
-              <li><Link href="/services" className="text-gray-400 hover:text-secondary transition-colors">Our Services</Link></li>
-              <li><Link href="/about" className="text-gray-400 hover:text-secondary transition-colors">About Us</Link></li>
-              <li><Link href="/blog" className="text-gray-400 hover:text-secondary transition-colors">Patient Blog</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 3: Contact */}
-          <div>
-            <h3 className="font-heading font-bold text-lg mb-6 text-white">Contact Us</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-gray-400">
-                <MapPin className="w-5 h-5 mt-0.5 text-secondary flex-shrink-0" />
-                <span>4521 Westheimer Rd, Suite 200<br />Houston, TX 77027</span>
-              </li>
-              <li className="flex items-center gap-3 text-gray-400">
-                <Phone className="w-5 h-5 text-secondary flex-shrink-0" />
-                <a href="tel:+17135550198" className="hover:text-white transition-colors">(713) 555-0198</a>
-              </li>
-              <li className="flex items-center gap-3 text-gray-400">
-                <Mail className="w-5 h-5 text-secondary flex-shrink-0" />
-                <a href="mailto:info@brightsmiledental.com" className="hover:text-white transition-colors">info@brightsmiledental.com</a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: Social & Hours */}
-          <div>
-            <h3 className="font-heading font-bold text-lg mb-6 text-white">Office Hours</h3>
-            <ul className="space-y-2 text-sm text-gray-400 mb-6">
-              <li className="flex justify-between"><span>Mon - Fri:</span> <span>8:00 AM - 6:00 PM</span></li>
-              <li className="flex justify-between"><span>Saturday:</span> <span>9:00 AM - 2:00 PM</span></li>
-              <li className="flex justify-between"><span>Sunday:</span> <span className="text-secondary">Closed</span></li>
-            </ul>
             <div className="flex gap-4">
-              <a href="#" aria-label="Facebook" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
-                <Facebook className="w-5 h-5" />
+              <a href={siteConfig.links.twitter} target="_blank" rel="noopener noreferrer" aria-label="Visit our Twitter page" className="text-gray-400 hover:text-white transition-colors">
+                <Twitter size={20} />
               </a>
-              <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
-                <Instagram className="w-5 h-5" />
+              <a href={siteConfig.links.instagram} target="_blank" rel="noopener noreferrer" aria-label="Visit our Instagram page" className="text-gray-400 hover:text-white transition-colors">
+                <Instagram size={20} />
               </a>
-              <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary hover:text-white transition-all">
-                <Linkedin className="w-5 h-5" />
+              <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Visit our LinkedIn page" className="text-gray-400 hover:text-white transition-colors">
+                <Linkedin size={20} />
               </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Visit our Facebook page" className="text-gray-400 hover:text-white transition-colors">
+                <Facebook size={20} />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-heading font-bold text-lg mb-4">Quick Links</h3>
+            <ul className="space-y-3">
+              {siteConfig.nav.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors text-sm">
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/sitemap.xml" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Sitemap
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="font-heading font-bold text-lg mb-4">Contact Us</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3 text-gray-400 text-sm">
+                <MapPin size={18} className="mt-1 flex-shrink-0 text-primary" />
+                <span>{siteConfig.contact.address}</span>
+              </li>
+              <li className="flex items-center gap-3 text-gray-400 text-sm">
+                <Phone size={18} className="flex-shrink-0 text-primary" />
+                <a href={`tel:${siteConfig.contact.phone}`} className="hover:text-white transition-colors">
+                  {siteConfig.contact.phone}
+                </a>
+              </li>
+              <li className="flex items-center gap-3 text-gray-400 text-sm">
+                <Mail size={18} className="flex-shrink-0 text-primary" />
+                <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-white transition-colors">
+                  {siteConfig.contact.email}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Hours */}
+          <div>
+            <h3 className="font-heading font-bold text-lg mb-4">Office Hours</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li className="flex justify-between">
+                <span>Mon - Fri:</span>
+                <span className="text-white">8:00 AM - 6:00 PM</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Saturday:</span>
+                <span className="text-white">9:00 AM - 2:00 PM</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Sunday:</span>
+                <span className="text-white">Closed</span>
+              </li>
+            </ul>
+            <div className="mt-6">
+              <Button asChild variant="outline" className="w-full border-gray-700 text-white hover:bg-gray-800 hover:border-gray-600">
+                <Link href="/contact">Emergency? Contact Us</Link>
+              </Button>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} Bright Smile Dental. All rights reserved.
+            &copy; {currentYear} {siteConfig.name}. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm text-gray-500">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+          <div className="flex gap-6 text-sm">
+            <Link href="/privacy" className="text-gray-500 hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-gray-500 hover:text-white transition-colors">
+              Terms of Service
+            </Link>
           </div>
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={scrollToTop}
-            className="text-gray-400 hover:text-white"
-          >
-            <ArrowUp className="w-4 h-4 mr-2" />
-            Back to Top
-          </Button>
         </div>
       </div>
     </footer>

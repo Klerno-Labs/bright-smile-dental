@@ -1,41 +1,52 @@
-import { NextResponse } from 'next/server';
-import { z } from 'zod';
-
-// Simple validation schema to match frontend
-const contactSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().min(10),
-  service: z.string().optional(),
-  message: z.string().min(10),
-  _gotcha: z.string().optional(),
-});
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    
-    // Validate input
-    const validatedData = contactSchema.parse(body);
+    const { name, email, phone, service, message } = body;
 
-    // Honeypot check
-    if (validatedData._gotcha) {
-      // Return success to fool bots, but don't actually process
-      return NextResponse.json({ success: true }, { status: 200 });
+    // Basic validation
+    if (!name || !email || !phone || !message) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
-    // In a real app, you would send an email here using Resend, SendGrid, or nodemailer
-    // console.log("Form received:", validatedData);
+    // In a real application, you would:
+    // 1. Send an email using a service like SendGrid, Resend, or Nodemailer
+    // 2. Store the lead in a database (PostgreSQL, MongoDB, etc.)
+    // 3. Integrate with a CRM like Salesforce or HubSpot
     
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Example email sending logic (commented out for demo)
+    /*
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: 'info@brightsmiledental.com',
+      subject: `New Appointment Request from ${name}`,
+      html: `
+        <h1>New Contact Form Submission</h1>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Service:</strong> ${service || 'None specified'}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `
+    });
+    */
 
-    return NextResponse.json({ success: true, message: "Email sent successfully" });
+    console.log("Received form submission:", { name, email, phone, service, message });
 
+    // Simulate a delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    return NextResponse.json({ message: "Form submitted successfully" }, { status: 200 });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: "Invalid data", details: error.errors }, { status: 400 });
-    }
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error("Contact form error:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
