@@ -1,8 +1,5 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { images } from "@/config/images";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
@@ -78,7 +75,7 @@ export function Hero() {
                 <div>
                   <div className="flex items-center gap-1 text-accent mb-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
+                      <Star key={i} className="w-4 h-4 style={{ width: "100%", height: "100%", objectFit: "cover" }}-current" />
                     ))}
                     <span className="text-gray-900 font-bold ml-2">4.9/5</span>
                   </div>
@@ -98,13 +95,12 @@ export function Hero() {
             className="lg:col-span-5 relative"
           >
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
-              <Image
+              <img
                 src={images["hero"].src}
                 alt={images["hero"].alt}
                 width={images["hero"].width}
                 height={images["hero"].height}
                 className="object-cover w-full h-[500px] lg:h-[600px]"
-                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               

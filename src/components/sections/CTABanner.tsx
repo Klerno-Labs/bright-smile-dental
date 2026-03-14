@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import { images } from "@/config/images";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
@@ -15,10 +14,9 @@ export function CTABanner({ variant = "appointment" }: CTABannerProps) {
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <Image
+        <img
           src={images["cta"].src}
-          alt={images["cta"].alt}
-          fill
+          alt={images["cta"].alt} style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover"
         />
         <div className="absolute inset-0 bg-primary/90" />
@@ -32,7 +30,7 @@ export function CTABanner({ variant = "appointment" }: CTABannerProps) {
         </h2>
         <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
           {isAppointment
-            ? "Book your consultation today and take the first step towards the smile you&apos;ve always wanted."
+            ? "Book your consultation today and take the first step towards the smile you've always wanted."
             : "Experience the difference of compassionate, expert dental care. New patients are always welcome."}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -1,8 +1,5 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { images } from "@/config/images";
 import { ArrowUpRight, Sparkles, Heart, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
@@ -58,10 +55,9 @@ export function ServiceGrid() {
               className="group bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-xl transition-all duration-300 flex flex-col h-full overflow-hidden"
             >
               <div className="relative h-48 overflow-hidden">
-                <Image
+                <img
                   src={images[service.image as keyof typeof images].src}
-                  alt={images[service.image as keyof typeof images].alt}
-                  fill
+                  alt={images[service.image as keyof typeof images].alt} style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-sm">

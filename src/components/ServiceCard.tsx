@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { images } from "@/config/images";
@@ -34,11 +31,9 @@ export function ServiceCard({
       )}
     >
       <div className="relative h-48 w-full overflow-hidden bg-gray-100">
-        <Image
+        <img
           src={imageData.src}
-          alt={imageData.alt}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt={imageData.alt} style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />

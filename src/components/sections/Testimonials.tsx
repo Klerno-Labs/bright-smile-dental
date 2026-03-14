@@ -1,7 +1,4 @@
-"use client";
-
 import React from "react";
-import Image from "next/image";
 import { Quote, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -52,7 +49,7 @@ export function Testimonials() {
             >
               <div className="flex text-accent mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-current" />
+                  <Star key={i} className="w-5 h-5 style={{ width: "100%", height: "100%", objectFit: "cover" }}-current" />
                 ))}
               </div>
               <p className="text-gray-600 mb-6 italic leading-relaxed">

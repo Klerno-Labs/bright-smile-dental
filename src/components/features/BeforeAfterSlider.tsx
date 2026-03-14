@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import Image from "next/image";
 import { images } from "@/config/images";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -55,12 +54,10 @@ export function BeforeAfterSlider() {
         >
           {/* Before Image (Background) */}
           <div className="absolute inset-0">
-            <Image
+            <img
               src={beforeImg.src}
-              alt={beforeImg.alt}
-              fill
+              alt={beforeImg.alt} style={{ width: "100%", height: "100%", objectFit: "cover" }}
               className="object-cover"
-              priority
             />
             <div className="absolute top-6 left-6 bg-black/50 text-white px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm">
               Before
@@ -72,12 +69,10 @@ export function BeforeAfterSlider() {
             className="absolute inset-0 overflow-hidden"
             style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
           >
-            <Image
+            <img
               src={afterImg.src}
-              alt={afterImg.alt}
-              fill
+              alt={afterImg.alt} style={{ width: "100%", height: "100%", objectFit: "cover" }}
               className="object-cover"
-              priority
             />
             <div className="absolute top-6 right-6 bg-medical/80 text-white px-4 py-2 rounded-full text-sm font-semibold backdrop-blur-sm">
               After

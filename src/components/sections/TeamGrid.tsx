@@ -1,7 +1,4 @@
-"use client";
-
 import React from "react";
-import Image from "next/image";
 import { images } from "@/config/images";
 import { Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
@@ -57,7 +54,7 @@ export function TeamGrid() {
               className="group"
             >
               <div className="relative rounded-2xl overflow-hidden mb-6">
-                <Image
+                <img
                   src={images[member.image as keyof typeof images].src}
                   alt={member.name}
                   width={600}

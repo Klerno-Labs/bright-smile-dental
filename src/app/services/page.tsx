@@ -3,7 +3,6 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle2, ChevronRight } from "lucide-react";
 import { images } from "@/config/images";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -106,7 +105,7 @@ export default function ServicesPage() {
                   </div>
                   <div className="order-1 md:order-2">
                     <div className="relative rounded-2xl overflow-hidden shadow-lg">
-                      <Image
+                      <img
                         src={images[category.image as keyof typeof images].src}
                         alt={images[category.image as keyof typeof images].alt}
                         width={600}
