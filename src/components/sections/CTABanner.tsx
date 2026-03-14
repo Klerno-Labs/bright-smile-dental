@@ -30,7 +30,7 @@ export function CTABanner({ variant = "appointment" }: CTABannerProps) {
         </h2>
         <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
           {isAppointment
-            ? "Book your consultation today and take the first step towards the smile you've always wanted."
+            ? "Book your consultation today and take the first step towards the smile you&apos;ve always wanted."
             : "Experience the difference of compassionate, expert dental care. New patients are always welcome."}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

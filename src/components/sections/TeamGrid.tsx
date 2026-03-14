@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { images } from "@/config/images";
 import { Linkedin, Mail } from "lucide-react";
