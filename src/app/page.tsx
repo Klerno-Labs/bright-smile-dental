@@ -177,7 +177,7 @@ export default function Home() {
             {[
               { name: "Maria L.", service: "Veneers", text: "I was so self-conscious about my smile for years. Dr. Bennett changed my life in just two visits. The staff made me feel so comfortable!" },
               { name: "James T.", service: "Implants", text: "I thought getting an implant would be painful, but it was surprisingly easy. The technology they use is incredible." },
-              { name: "Sarah M.", service: "Cleaning", text: "Best dental experience I've ever had. The office is beautiful, the views are calming, and the cleaning was gentle." }
+              { name: "Sarah M.", service: "Cleaning", text: "Best dental experience I&apos;ve ever had. The office is beautiful, the views are calming, and the cleaning was gentle." }
             ].map((review, i) => (
               <div key={i} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/10">
                 <div className="flex gap-1 mb-4">
@@ -221,7 +221,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h4 className="font-bold text-[#0E3A53]">Insurance Friendly</h4>
-                  <p className="text-[#4B5563]">We handle the paperwork so you don't have to.</p>
+                  <p className="text-[#4B5563]">We handle the paperwork so you don&apos;t have to.</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
