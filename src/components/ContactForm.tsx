@@ -54,7 +54,7 @@ export function ContactForm() {
           </svg>
         </div>
         <h3 className="text-xl font-bold text-green-900 mb-2">Message Sent!</h3>
-        <p className="text-green-700">Thank you for contacting Bright Smile Dental. We'll be in touch within 24 hours.</p>
+        <p className="text-green-700">Thank you for contacting Bright Smile Dental. We&apos;ll be in touch within 24 hours.</p>
         <Button onClick={() => setIsSuccess(false)} variant="ghost" className="mt-4 text-green-700">Send another</Button>
       </div>
     );

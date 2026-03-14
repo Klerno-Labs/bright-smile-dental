@@ -1,5 +1,3 @@
-"use client";
-
 import { Metadata } from "next";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -28,7 +26,7 @@ export default function Home() {
             className="order-2 lg:order-1"
           >
             <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary font-semibold text-sm mb-6 tracking-wide">
-              HOUSTON'S PREMIER DENTAL CARE
+              HOUSTON&apos;S PREMIER DENTAL CARE
             </span>
             <h1 className="font-heading text-5xl lg:text-6xl xl:text-7xl font-bold text-primary leading-[1.1] mb-6">
               Life-changing <br/> <span className="text-secondary">confidence.</span>
@@ -155,7 +153,7 @@ export default function Home() {
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary text-center mb-16">What Our Patients Say</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "Maria L.", text: "I've never felt so comfortable at a dentist. The team explained everything and my new smile is incredible!" },
+              { name: "Maria L.", text: "I&apos;ve never felt so comfortable at a dentist. The team explained everything and my new smile is incredible!" },
               { name: "James T.", text: "Dr. Bennett's attention to detail is unmatched. The painless root canal was a miracle." },
               { name: "Sarah J.", text: "Modern, clean, and friendly. They actually respect your time here. Highly recommended for families." }
             ].map((review, i) => (
