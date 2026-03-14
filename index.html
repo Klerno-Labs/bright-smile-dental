@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Smile Dental | Premium Family & Cosmetic Dentistry</title>
+    <meta name="description" content="Experience world-class dental care at Bright Smile Dental. We combine clinical excellence with spa-like comfort for the whole family.">
+    
+    <!-- Fonts: Playfair Display (Headings), Inter (Body), Montserrat (Accents) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN for standalone requirement) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F3460',      /* Deep Navy */
+                        secondary: '#16213E',    /* Slate/Dark Blue */
+                        accent: '#E94560',       /* Coral Red */
+                        medical: '#008080',      /* Teal */
+                        surface: '#F8F9FA',      /* Off-White */
+                        'surface-alt': '#F3F4F6',/* Light Grey */
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                        accent: ['"Montserrat"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        'glow': '0 0 15px rgba(0, 128, 128, 0.3)',
+                    },
+                    borderRadius: {
+                        'large': '24px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations & Utilities */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F1F1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0F3460;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #16213E;
+        }
+
+        /* Animation Keyframes */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spinTooth {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Flip Card CSS */
+        .flip-card {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+        }
+        .flip-card-back {
+            background-color: #0F3460;
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* Custom Range Slider for Before/After */
+        .ba-slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 1.5rem;
+        }
+        .ba-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .ba-before {
+            width: 50%; /* Initial state */
+            z-index: 2;
+            overflow: hidden;
+            border-right: 2px solid white;
+        }
+        .ba-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            z-index: 10;
+            cursor: ew-resize;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0F3460;
+        }
+        
+        /* Mobile Menu Transition */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        .mobile-menu.closed {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-body selection:bg-medical selection:text-white">
+
+    <!-- STICKY ANNOUNCEMENT BAR -->
+    <div class="bg-primary text-white text-center py-2 text-sm font-accent tracking-wide z-50 relative">
+        <span class="inline-block md:hidden">Accepting New Patients</span>
+        <span class="hidden md:inline">🦷 Welcome to our new practice! We are now accepting new patients. Book your visit today.</span>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar" class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center gap-2 group">
+                        <div class="w-10 h-10 bg-gradient-to-br from-medical to-teal-600 rounded-lg flex items-center justify-center text-white text-xl shadow-lg group-hover:scale-105 transition-transform">
+                            <i class="fa-solid fa-tooth"></i>
+                        </div>
+                        <span class="font-heading font-bold text-2xl text-primary tracking-tight">Bright<span class="text-accent">Smile</span></span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#services" class="text-gray-600 hover:text-medical font-medium transition-colors">Treatments</a>
+                    <a href="#about" class="text-gray-600 hover:text-medical font-medium transition-colors">About Us</a>
+                    <a href="#team" class="text-gray-600 hover:text-medical font-medium transition-colors">Doctors</a>
+                    <a href="#contact" class="px-6 py-2.5 bg-accent hover:bg-red-600 text-white font-accent font-semibold rounded-full transition-all hover:scale-105 shadow-md hover:shadow-lg">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-primary focus:outline-none" aria-label="Open menu">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-white z-50 mobile-menu closed flex flex-col justify-center items-center space-y-8 md:hidden">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-gray-500 hover:text-primary text-3xl focus:outline-none" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <a href="#services" class="mobile-link text-2xl font-heading font-semibold text-primary">Treatments</a>
+            <a href="#about" class="mobile-link text-2xl font-heading font-semibold text-primary">About Us</a>
+            <a href="#team" class="mobile-link text-2xl font-heading font-semibold text-primary">Doctors</a>
+            <a href="#contact" class="px-8 py-4 bg-accent text-white font-accent font-bold rounded-full text-lg shadow-lg">
+                Book Appointment
+            </a>
+            <a href="tel:+15125551234" class="text-medical font-medium flex items-center gap-2">
+                <i class="fa-solid fa-phone"></i> (512) 555-1234
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative pt-12 pb-16 lg:pt-20 lg:pb-24 overflow-hidden bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="lg:col-span-7 space-y-8 animate-on-scroll">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-teal-50 border border-medical/20 text-medical text-sm font-semibold tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-medical mr-2 animate-pulse"></span>
+                        Accepting New Patients
+                    </div>
+                    <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-primary leading-tight">
+                        Crafting World-Class <span class="text-transparent bg-clip-text bg-gradient-to-r from-medical to-teal-400">Smiles</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed">
+                        Experience the perfect blend of clinical excellence and spa-like calmness. We use the latest technology to ensure your visit is comfortable, efficient, and effective.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <a href="#contact" class="inline-flex justify-center items-center px-8 py-4 bg-accent hover:bg-red-600 text-white font-accent font-bold rounded-full transition-all hover:scale-105 shadow-lg hover:shadow-xl text-lg">
+                            Book Consultation
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#services" class="inline-flex justify-center items-center px-8 py-4 bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-accent font-bold rounded-full transition-all text-lg">
+                            View Services
+                        </a>
+                    </div>
+                    <!-- Trust Badges -->
+                    <div class="pt-8 border-t border-gray-200 mt-8">
+                        <p class="text-sm text-gray-500 font-medium mb-4 uppercase tracking-wider">Accepted Insurance</p>
+                        <div class="flex gap-6 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                            <i class="fa-brands fa-cc-visa text-3xl"></i>
+                            <i class="fa-brands fa-cc-mastercard text-3xl"></i>
+                            <i class="fa-solid fa-shield-heart text-3xl"></i> <!-- Placeholder for Delta/Dental -->
+                            <i class="fa-solid fa-file-invoice-dollar text-3xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="lg:col-span-5 relative animate-on-scroll delay-200">
+                    <div class="relative rounded-large overflow-hidden shadow-2xl">
+                        <img id="hero-image" src="" alt="Happy patient with bright smile" class="w-full h-[500px] object-cover">
+                        <!-- Overlay Gradient -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-60"></div>
+                        
+                        <!-- Floating Card -->
+                        <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg animate-fade-up" style="animation-delay: 1s;">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center text-medical text-xl">
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary text-lg">4.9/5 Rating</p>
+                                    <p class="text-gray-600 text-sm">Based on 500+ Reviews</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BEFORE & AFTER SECTION -->
+    <section class="py-20 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">Real Results, Real Confidence</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Drag the slider to see the transformative power of our cosmetic procedures.</p>
+            </div>
+
+            <!-- Interactive Slider -->
+            <div class="relative max-w-4xl mx-auto h-[400px] md:h-[600px] rounded-large shadow-xl overflow-hidden group animate-on-scroll" id="ba-wrapper">
+                <!-- After Image (Background) -->
+                <div class="absolute inset-0">
+                    <img id="img-after" src="" alt="After treatment" class="ba-img w-full h-full object-cover">
+                </div>
+
+                <!-- Before Image (Foreground - Clipped) -->
+                <div id="ba-before" class="ba-before absolute inset-0 top-0 left-0 h-full bg-white">
+                    <img id="img-before" src="" alt="Before treatment" class="ba-img w-full h-full object-cover md:w-[200%] max-w-none"> <!-- Double width for logic -->
+                </div>
+
+                <!-- Labels -->
+                <div class="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm font-bold pointer-events-none z-10">Before</div>
+                <div class="absolute top-4 right-4 bg-medical/80 text-white px-3 py-1 rounded-full text-sm font-bold pointer-events-none z-10">After</div>
+
+                <!-- Handle -->
+                <div id="ba-handle" class="ba-handle">
+                    <i class="fa-solid fa-arrows-left-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-20 lg:py-32 bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <span class="text-medical font-bold tracking-widest uppercase text-sm mb-2 block">Our Expertise</span>
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">Comprehensive Dental Care</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">From routine checkups to complete smile makeovers, we offer a full range of services tailored to your needs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 group animate-on-scroll">
+                    <div class="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center text-medical text-2xl mb-6 group-hover:bg-medical group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-primary mb-3">Cosmetic Dentistry</h3>
+                    <p class="text-gray-600 mb-6">Porcelain veneers, bonding, and teeth whitening to give you the smile you've always dreamed of.</p>
+                    <div class="flex items-center text-accent font-bold font-accent group-hover:underline">
+                        Learn More <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 group animate-on-scroll delay-100">
+                    <div class="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center text-medical text-2xl mb-6 group-hover:bg-medical group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-primary mb-3">Restorative Care</h3>
+                    <p class="text-gray-600 mb-6">High-quality crowns, bridges, and implants using the latest materials for durability and aesthetics.</p>
+                    <div class="flex items-center text-accent font-bold font-accent group-hover:underline">
+                        Learn More <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 group animate-on-scroll delay-200">
+                    <div class="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center text-medical text-2xl mb-6 group-hover:bg-medical group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-child-reaching"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-primary mb-3">Family Dentistry</h3>
+                    <p class="text-gray-600 mb-6">Gentle care for the whole family. We create a positive experience for children and adults alike.</p>
+                    <div class="flex items-center text-accent font-bold font-accent group-hover:underline">
+                        Learn More <i class="fa-solid fa-chevron-right ml-2 text-xs"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SMILE ASSESSMENT WIDGET -->
+    <section class="py-20 lg:py-32 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-primary rounded-3xl p-8 md:p-12 shadow-2xl text-white relative overflow-hidden animate-on-scroll">
+                <!-- Background Decoration -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-medical/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                
+                <div class="relative z-10 text-center">
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">What's your smile goal?</h2>
+                    <p class="text-blue-200 mb-8 text-lg">Take our 30-second assessment to find the best treatment for you.</p>
+
+                    <!-- Assessment Container -->
+                    <div id="assessment-widget" class="bg-white text-primary rounded-2xl p-6 md:p-10 max-w-2xl mx-auto shadow-xl min-h-[300px] flex flex-col justify-center">
+                        <!-- Dynamic content loads here via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION (Flip Cards) -->
+    <section id="team" class="py-20 lg:py-32 bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">Meet Our Specialists</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Board-certified professionals dedicated to your oral health.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="flip-card h-[450px] w-full animate-on-scroll">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front shadow-card rounded-2xl bg-white">
+                            <img id="team-img-1" src="" alt="Dr. Sarah Bennett" class="w-full h-2/3 object-cover rounded-t-2xl">
+                            <div class="p-6 text-left h-1/3 flex flex-col justify-center">
+                                <h3 class="font-heading text-xl font-bold text-primary">Dr. Sarah Bennett</h3>
+                                <p class="text-medical font-semibold text-sm mb-2">Cosmetic Specialist</p>
+                                <p class="text-gray-500 text-sm">"Creating art with science."</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back shadow-xl">
+                            <h3 class="font-heading text-2xl font-bold mb-4">Dr. Sarah Bennett</h3>
+                            <p class="text-blue-100 mb-6 text-center px-4">15+ years of experience in cosmetic reconstruction. Dr. Bennett believes every smile tells a story.</p>
+                            <div class="flex gap-4">
+                                <button class="w-10 h-10 rounded-full bg-white text-primary hover:bg-accent hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </button>
+                                <button class="w-10 h-10 rounded-full bg-white text-primary hover:bg-accent hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-regular fa-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="flip-card h-[450px] w-full animate-on-scroll delay-100">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front shadow-card rounded-2xl bg-white">
+                            <img id="team-img-2" src="" alt="Dr. James Chen" class="w-full h-2/3 object-cover rounded-t-2xl">
+                            <div class="p-6 text-left h-1/3 flex flex-col justify-center">
+                                <h3 class="font-heading text-xl font-bold text-primary">Dr. James Chen</h3>
+                                <p class="text-medical font-semibold text-sm mb-2">Implantology Expert</p>
+                                <p class="text-gray-500 text-sm">"Restoring function and form."</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back shadow-xl">
+                            <h3 class="font-heading text-2xl font-bold mb-4">Dr. James Chen</h3>
+                            <p class="text-blue-100 mb-6 text-center px-4">Specializing in full mouth rehabilitation and dental implants. Harvard Medical School alumni.</p>
+                            <div class="flex gap-4">
+                                <button class="w-10 h-10 rounded-full bg-white text-primary hover:bg-accent hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </button>
+                                <button class="w-10 h-10 rounded-full bg-white text-primary hover:bg-accent hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-regular fa-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="flip-card h-[450px] w-full animate-on-scroll delay-200">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front shadow-card rounded-2xl bg-white">
+                            <img id="team-img-3" src="" alt="Dr. Emily Ross" class="w-full h-2/3 object-cover rounded-t-2xl">
+                            <div class="p-6 text-left h-1/3 flex flex-col justify-center">
+                                <h3 class="font-heading text-xl font-bold text-primary">Dr. Emily Ross</h3>
+                                <p class="text-medical font-semibold text-sm mb-2">Orthodontist</p>
+                                <p class="text-gray-500 text-sm">"Aligning smiles, changing lives."</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back shadow-xl">
+                            <h3 class="font-heading text-2xl font-bold mb-4">Dr. Emily Ross</h3>
+                            <p class="text-blue-100 mb-6 text-center px-4">Expert in Invisalign and clear braces. Dedicated to making orthodontics accessible and comfortable.</p>
+                            <div class="flex gap-4">
+                                <button class="w-10 h-10 rounded-full bg-white text-primary hover:bg-accent hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </button>
+                                <button class="w-10 h-10 rounded-full bg-white text-primary hover:bg-accent hover:text-white transition-colors flex items-center justify-center">
+                                    <i class="fa-regular fa-calendar"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 lg:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Contact Info -->
+                <div class="animate-on-scroll">
+                    <h2 class="font-heading text-4xl font-bold text-primary mb-6">Get in Touch</h2>
+                    <p class="text-gray-600 text-lg mb-8">Ready to start your journey to a better smile? Fill out the form or give us a call. Our friendly team is here to help.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center text-medical text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-primary">Visit Us</h4>
+                                <p class="text-gray-600">4521 Westheimer Rd, Suite 200<br>Houston, TX 77027</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center text-medical text-xl shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-primary">Call Us</h4>
+                                <p class="text-gray-600">(512) 555-1234</p>
+                                <p class="text-sm text-gray-500">Mon-Fri: 8am-6pm</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-lg bg-teal-50 flex items-center justify-center text-medical text-xl shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-primary">Email Us</h4>
+                                <p class="text-gray-600">hello@brightsmiledental.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="bg-surface p-8 md:p-10 rounded-2xl shadow-card animate-on-scroll delay-200">
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-medical focus:border-transparent outline-none transition-shadow">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-medical focus:border-transparent outline-none transition-shadow">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <input type="email" id="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-medical focus:border-transparent outline-none transition-shadow">
+                        </div>
+                        <div>
+                            <label for="service" class="block text-sm font-medium text-gray-700 mb-2">Service of Interest</label>
+                            <select id="service" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-medical focus:border-transparent outline-none transition-shadow bg-white">
+                                <option>General Checkup</option>
+                                <option>Teeth Whitening</option>
+                                <option>Veneers</option>
+                                <option>Implants</option>
+                                <option>Orthodontics</option>
+                                <option>Emergency</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message (Optional)</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-medical focus:border-transparent outline-none transition-shadow"></textarea>
+                        </div>
+                        
+                        <!-- Honeypot -->
+                        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off">
+
+                        <button type="submit" id="submit-btn" class="w-full px-8 py-4 bg-primary hover:bg-secondary text-white font-accent font-bold rounded-full transition-all shadow-md hover:shadow-lg flex justify-center items-center">
+                            <span id="btn-text">Request Appointment</span>
+                            <svg id="btn-loader" class="animate-spin ml-2 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </button>
+                    </form>
+                    <div id="form-success" class="hidden mt-6 p-4 bg-teal-50 border border-medical text-medical rounded-lg text-center">
+                        <i class="fa-solid fa-check-circle text-2xl mb-2"></i>
+                        <p class="font-bold">Request Received!</p>
+                        <p class="text-sm">We'll contact you within 24 hours to confirm.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-secondary text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-8 h-8 bg-gradient-to-br from-medical to-teal-600 rounded-md flex items-center justify-center text-white text-sm">
+                            <i class="fa-solid fa-tooth"></i>
+                        </div>
+                        <span class="font-heading font-bold text-xl">Bright<span class="text-accent">Smile</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Premium dental care combining advanced technology with a gentle touch. Your smile is our priority.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-medical transition-colors text-white" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-medical transition-colors text-white" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-medical transition-colors text-white" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#hero" class="hover:text-medical transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-medical transition-colors">About Us</a></li>
+                        <li><a href="#services" class="hover:text-medical transition-colors">Services</a></li>
+                        <li><a href="#team" class="hover:text-medical transition-colors">Our Team</a></li>
+                        <li><a href="#contact" class="hover:text-medical transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Treatments</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-medical transition-colors">Cosmetic Dentistry</a></li>
+                        <li><a href="#" class="hover:text-medical transition-colors">Dental Implants</a></li>
+                        <li><a href="#" class="hover:text-medical transition-colors">Orthodontics</a></li>
+                        <li><a href="#" class="hover:text-medical transition-colors">Pediatric Dentistry</a></li>
+                        <li><a href="#" class="hover:text-medical transition-colors">Emergency Care</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-6">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-map-pin mt-1 text-medical"></i>
+                            <span>4521 Westheimer Rd, Suite 200<br>Houston, TX 77027</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-medical"></i>
+                            <span>(512) 555-1234</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-medical"></i>
+                            <span>hello@brightsmile.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>&copy; 2024 Bright Smile Dental. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE STICKY BAR -->
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-3 px-6 flex justify-between items-center md:hidden z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <a href="tel:+15125551234" class="flex flex-col items-center justify-center text-primary">
+            <i class="fa-solid fa-phone text-xl mb-1"></i>
+            <span class="text-[10px] font-bold uppercase">Call Now</span>
+        </a>
+        <a href="#contact" class="bg-accent text-white px-8 py-2 rounded-full font-bold text-sm shadow-lg hover:bg-red-600 transition-colors">
+            Book Online
+        </a>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /**
+         * ── IMAGE CONFIGURATION ──────────────────────────────────────────────
+         * ✏️  HOW TO CHANGE IMAGES:
+         * Update the URLs below. The keys (e.g., "hero") correspond to the ID
+         * attributes on the <img> tags throughout the page.
+         */
+        const imageConfig = {
+            "hero-image": {
+                // Hero Banner - Happy patient
+                src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1200&auto=format&fit=crop",
+                alt: "Smiling patient in dental chair"
+            },
+            "img-after": {
+                // Before/After Slider - Perfect smile
+                src: "https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1200&auto=format&fit=crop",
+                alt: "After - Bright white smile"
+            },
+            "img-before": {
+                // Before/After Slider - Simulated "Before" (Grayscale/Yellow tint applied via CSS if needed, or distinct image)
+                // Using a different image to represent "Before"
+                src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1200&auto=format&fit=crop", 
+                alt: "Before - Dental work needed"
+            },
+            "team-img-1": {
+                src: "https://images.unsplash.com/photo-1559839734-2b71ea86c301?q=80&w=800&auto=format&fit=crop",
+                alt: "Dr. Sarah Bennett"
+            },
+            "team-img-2": {
+                src: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=800&auto=format&fit=crop",
+                alt: "Dr. James Chen"
+            },
+            "team-img-3": {
+                src: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=800&auto=format&fit=crop",
+                alt: "Dr. Emily Ross"
+            }
+        };
+
+        // Apply Images on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            for (const [id, data] of Object.entries(imageConfig)) {
+                const img = document.getElementById(id);
+                if (img) {
+                    img.src = data.src;
+                    img.alt = data.alt || '';
+                }
+            }
+        });
+
+        /**
+         * ── INTERACTION LOGIC ───────────────────────────────────────────────
+         */
+        
+        // 1. SCROLL REVEAL ANIMATION (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 2. MOBILE MENU
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.contains('open');
+            if (isOpen) {
+                mobileMenu.classList.remove('open');
+                mobileMenu.classList.add('closed');
+            } else {
+                mobileMenu.classList.remove('closed');
+                mobileMenu.classList.add('open');
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // 3. BEFORE & AFTER SLIDER
+        const baWrapper = document.getElementById('ba-wrapper');
+        const baBefore = document.getElementById('ba-before');
+        const baHandle = document.getElementById('ba-handle');
+        const baImgBefore = document.getElementById('img-before');
+        const baImgAfter = document.getElementById('img-after');
+
+        // Adjust Before image size to match After image aspect ratio visually if they differ
+        // Note: In production, both images should be exact same dimensions.
+        // This logic ensures the image fills the container.
+        baImgBefore.style.width = baWrapper.offsetWidth + 'px';
+
+        let isDragging = false;
+
+        const updateSlider = (x) => {
+            const rect = baWrapper.getBoundingClientRect();
+            let pos = ((x - rect.left) / rect.width) * 100;
+            
+            // Clamp
+            if (pos < 0) pos = 0;
+            if (pos > 100) pos = 100;
+
+            baBefore.style.width = pos + '%';
+            baHandle.style.left = pos + '%';
+        };
+
+        // Mouse Events
+        baWrapper.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            updateSlider(e.clientX);
+        });
+
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            updateSlider(e.clientX);
+        });
+
+        // Touch Events
+        baWrapper.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            updateSlider(e.touches[0].clientX);
+        });
+
+        window.addEventListener('touchend', () => isDragging = false);
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            updateSlider(e.touches[0].clientX);
+        });
+
+        // Handle Drag
+        baHandle.addEventListener('mousedown', (e) => e.preventDefault()); // Prevent text selection
+        baHandle.addEventListener('touchstart', (e) => e.preventDefault());
+
+        // 4. SMILE ASSESSMENT WIDGET
+        const assessmentWidget = document.getElementById('assessment-widget');
+        const steps = [
+            {
+                question: "What bothers you most about your smile?",
+                options: ["Tooth Color", "Alignment/Crookedness", "Missing Teeth", "General Wear"]
+            },
+            {
+                question: "How long have you been thinking about this?",
+                options: ["Just recently", "A few months", "Over a year"]
+            },
+            {
+                question: "What is your primary goal?",
+                options: ["Medical/Health", "Cosmetic/Appearance", "Confidence Boost", "All of the above"]
+            }
+        ];
+
+        let currentStep = 0;
+        let userAnswers = [];
+
+        function renderStep() {
+            if (currentStep < steps.length) {
+                const step = steps[currentStep];
+                let html = `
+                    <h3 class="font-heading text-xl font-bold mb-6 text-center">${step.question}</h3>
+                    <div class="space-y-3">
+                `;
+                step.options.forEach(option => {
+                    html += `
+                        <button onclick="handleAnswer('${option}')" 
+                                class="w-full text-left px-6 py-4 rounded-xl border border-gray-200 hover:border-medical hover:bg-teal-50 font-medium transition-all flex justify-between items-center group">
+                            ${option}
+                            <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-medical"></i>
+                        </button>
+                    `;
+                });
+                html += `</div>
+                <div class="mt-6 text-center">
+                    <p class="text-xs text-gray-400">Step ${currentStep + 1} of ${steps.length}</p>
+                    <div class="w-full bg-gray-200 h-1 rounded-full mt-2 overflow-hidden">
+                        <div class="bg-medical h-full transition-all duration-500" style="width: ${((currentStep) / steps.length) * 100}%"></div>
+                    </div>
+                </div>`;
+                assessmentWidget.innerHTML = html;
+            } else {
+                // Result Step
+                assessmentWidget.innerHTML = `
+                    <div class="text-center animate-fade-up">
+                        <div class="w-20 h-20 bg-teal-100 text-medical rounded-full flex items-center justify-center text-4xl mx-auto mb-6">
+                            <i class="fa-solid fa-tooth"></i>
+                        </div>
+                        <h3 class="font-heading text-2xl font-bold text-primary mb-2">We Can Help!</h3>
+                        <p class="text-gray-600 mb-8">Based on your answers, a consultation with our Cosmetic Specialist would be the perfect first step.</p>
+                        <a href="#contact" class="inline-block px-8 py-3 bg-accent text-white font-bold rounded-full hover:bg-red-600 transition-colors shadow-lg">
+                            Book Free Consult
+                        </a>
+                        <button onclick="resetAssessment()" class="block mt-6 text-sm text-gray-400 underline mx-auto">Start Over</button>
+                    </div>
+                `;
+            }
+        }
+
+        window.handleAnswer = (answer) => {
+            userAnswers.push(answer);
+            currentStep++;
+            renderStep();
+        };
+
+        window.resetAssessment = () => {
+            currentStep = 0;
+            userAnswers = [];
+            renderStep();
+        };
+
+        // Initialize Widget
+        renderStep();
+
+        // 5. CONTACT FORM HANDLING
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnLoader = document.getElementById('btn-loader');
+        const formSuccess = document.getElementById('form-success');
+        const gotcha = document.querySelector('input[name="_gotcha"]');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Honeypot check
+            if (gotcha && gotcha.value !== '') return;
+
+            // Set Loading State
+            submitBtn.disabled = true;
+            btnText.textContent = "Sending...";
+            btnLoader.classList.remove('hidden');
+
+            // Simulate API Call
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Success State
+            form.reset();
+            form.classList.add('hidden');
+            formSuccess.classList.remove('hidden');
+            
+            // Reset button (in case of reset logic later)
+            submitBtn.disabled = false;
+            btnText.textContent = "Request Appointment";
+            btnLoader.classList.add('hidden');
+        });
+
+    </script>
+</body>
+</html>
