@@ -3,6 +3,7 @@
 import { useState, useRef, MouseEvent } from "react";
 import { images } from "@/config/images";
 
+import Image from "next/image";
 export function BeforeAfterSlider() {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
