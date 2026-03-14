@@ -3,118 +3,158 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ArrowRight, CheckCircle } from "lucide-react";
 
-const symptoms = [
-  { id: "top-left", label: "Upper Left", service: "General Examination" },
-  { id: "top-right", label: "Upper Right", service: "General Examination" },
-  { id: "bottom-left", label: "Lower Left", service: "Root Canal / Extraction" },
-  { id: "bottom-right", label: "Lower Right", service: "Wisdom Tooth Evaluation" },
-  { id: "front", label: "Front Teeth", service: "Cosmetic Whitening / Veneers" },
+// Simple representation of tooth zones for demo purposes
+const symptomZones = [
+  { id: "top-left", label: "Top Left", top: "20%", left: "30%" },
+  { id: "top-right", label: "Top Right", top: "20%", right: "30%" },
+  { id: "bottom-left", label: "Bottom Left", bottom: "20%", left: "30%" },
+  { id: "bottom-right", label: "Bottom Right", bottom: "20%", right: "30%" },
 ];
 
+const diagnoses: Record<string, { title: string; link: string; description: string }> = {
+  "top-left": {
+    title: "Possible Sensitivity or Cavity",
+    link: "/services#general",
+    description: "Sensitivity in upper teeth often indicates enamel wear or early decay.",
+  },
+  "top-right": {
+    title: "Wisdom Tooth Issues?",
+    link: "/services#emergency",
+    description: "Pain in the upper back could be related to wisdom teeth eruption.",
+  },
+  "bottom-left": {
+    title: "Gum Inflammation",
+    link: "/services#general",
+    description: "Lower gum sensitivity can be a sign of gingivitis or periodontal issues.",
+  },
+  "bottom-right": {
+    title: "Possible Infection",
+    link: "/services#emergency",
+    description: "Persistent pain in the lower jaw requires immediate attention.",
+  },
+};
+
 export function SymptomChecker() {
-  const [selectedArea, setSelectedArea] = useState<string | null>(null);
+  const [selectedZone, setSelectedZone] = useState<string | null>(null);
+
+  const handleZoneClick = (id: string) => {
+    setSelectedZone(id);
+  };
+
+  const result = selectedZone ? diagnoses[selectedZone] : null;
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Visual Component */}
-          <div className="relative">
-            <div className="bg-primaryLight rounded-2xl p-8 md:p-12 relative overflow-hidden">
-              <motion.div 
-                className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
-                animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-                transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-              />
-              
-              <h3 className="text-2xl font-bold mb-8 text-center">Where does it hurt?</h3>
-              
-              {/* Simplified Interactive Mouth Visualization */}
-              <div className="relative h-64 bg-white rounded-xl shadow-inner flex items-center justify-center border border-gray-100">
-                <svg viewBox="0 0 200 150" className="w-full h-full max-w-sm">
-                   {/* Upper Arch */}
-                   <path d="M20,50 Q100,10 180,50 L180,70 Q100,30 20,70 Z" 
-                     className={cn("transition-colors duration-300", selectedArea?.includes("top") ? "fill-primary/20" : "fill-gray-50")} />
-                   {/* Lower Arch */}
-                   <path d="M20,100 Q100,140 180,100 L180,80 Q100,120 20,80 Z" 
-                     className={cn("transition-colors duration-300", selectedArea?.includes("bottom") ? "fill-primary/20" : "fill-gray-50")} />
-                   
-                   {/* Interactive Zones (Circles for simplicity) */}
-                   {symptoms.map((s) => (
-                     <g key={s.id} className="tooth-group" onClick={() => setSelectedArea(s.id)}>
-                       <circle cx={s.id === "top-left" ? 60 : s.id === "top-right" ? 140 : s.id === "bottom-left" ? 60 : s.id === "bottom-right" ? 140 : 100} 
-                               cy={s.id === "top-left" ? 50 : s.id === "top-right" ? 50 : s.id === "bottom-left" ? 100 : s.id === "bottom-right" ? 100 : 75} 
-                               r="20" 
-                               className={cn(selectedArea === s.id ? "fill-primary stroke-primaryDark stroke-2" : "fill-transparent stroke-gray-300 stroke-2 hover:stroke-primary hover:fill-primary/10")} />
-                       <text x={s.id === "top-left" ? 60 : s.id === "top-right" ? 140 : s.id === "bottom-left" ? 60 : s.id === "bottom-right" ? 140 : 100} 
-                             y={s.id === "top-left" ? 50 : s.id === "top-right" ? 50 : s.id === "bottom-left" ? 100 : s.id === "bottom-right" ? 100 : 75} 
-                             textAnchor="middle" dy=".3em" className="text-xs pointer-events-none font-bold fill-textBody opacity-50">
-                         ?
-                       </text>
-                     </g>
-                   ))}
-                </svg>
+    <section className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Interactive Area */}
+        <div className="p-8 bg-gray-50 flex items-center justify-center relative min-h-[400px]">
+          <div className="relative w-64 h-64 bg-blue-100 rounded-full opacity-50 absolute blur-3xl" />
+          
+          {/* Simplified Schematic Mouth */}
+          <div className="relative z-10 w-full max-w-sm">
+             <div className="text-center mb-6">
+                <h3 className="text-lg font-bold text-gray-900">Where does it hurt?</h3>
+                <p className="text-sm text-gray-500">Tap an area to see potential causes</p>
+             </div>
+             
+             <div className="relative bg-white border-4 border-gray-200 rounded-3xl p-4 h-64 shadow-inner">
+                {/* Tooth Zones */}
+                {symptomZones.map((zone) => (
+                  <motion.button
+                    key={zone.id}
+                    type="button"
+                    onClick={() => handleZoneClick(zone.id)}
+                    className={cn(
+                      "absolute w-12 h-12 rounded-full border-2 flex items-center justify-center transition-colors",
+                      selectedZone === zone.id
+                        ? "bg-primary border-primary text-white shadow-lg scale-110"
+                        : "bg-white border-gray-300 text-gray-400 hover:border-primary hover:text-primary"
+                    )}
+                    style={{
+                      top: zone.top,
+                      bottom: zone.bottom,
+                      left: zone.left,
+                      right: zone.right,
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    aria-label={`Check ${zone.label}`}
+                  >
+                    {selectedZone === zone.id ? (
+                      <CheckCircle className="w-6 h-6" />
+                    ) : (
+                      <span className="text-xs font-bold">?</span>
+                    )}
+                  </motion.button>
+                ))}
                 
-                <div className="absolute bottom-4 left-0 right-0 text-center text-xs text-textMuted">
-                  Click an area to see related services
+                {/* Placeholder visual aid */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
+                   <div className="w-48 h-32 border-b-8 border-gray-400 rounded-b-full"></div>
                 </div>
-              </div>
-            </div>
+             </div>
           </div>
+        </div>
 
-          {/* Results Panel */}
-          <div>
-            <div className="inline-block bg-accent/10 text-accent px-4 py-1 rounded-full text-sm font-semibold mb-4">
-              Interactive Symptom Checker
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-textMain mb-6">
-              Not sure what you need?
-            </h2>
-            <p className="text-lg text-textBody mb-8">
-              Dental pain can be confusing. Click on the areas above where you are experiencing discomfort, and we will suggest the best type of appointment to book.
-            </p>
-
-            <AnimatePresence mode="wait">
-              {selectedArea ? (
+        {/* Result Panel */}
+        <div className="p-8 flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            {!selectedZone ? (
+              <motion.div
+                key="idle"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center h-full flex flex-col items-center justify-center"
+              >
+                <div className="w-16 h-16 bg-blue-50 text-primary rounded-full flex items-center justify-center mb-4">
+                  <ArrowRight className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  Not sure where to start?
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  Select an area on the diagram to get instant recommendations on
+                  which service might be right for you.
+                </p>
+              </motion.div>
+            ) : (
+              result && (
                 <motion.div
-                  key={selectedArea}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="bg-white border border-primary/20 rounded-xl p-6 shadow-blue"
+                  key="result"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  className="h-full flex flex-col justify-center"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primaryLight flex items-center justify-center flex-shrink-0">
-                      <span className="text-primary text-2xl">🦷</span>
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold text-textMain mb-2">
-                        {symptoms.find(s => s.id === selectedArea)?.label} Issue
-                      </h4>
-                      <p className="text-textBody mb-4">
-                        Based on this area, we recommend a <span className="font-semibold text-primary">{symptoms.find(s => s.id === selectedArea)?.service}</span>.
-                      </p>
-                      <a 
-                        href="/contact" 
-                        className="inline-flex items-center text-primary font-semibold hover:underline"
-                      >
-                        Book this appointment &rarr;
-                      </a>
-                    </div>
-                  </div>
+                  <span className="inline-block px-3 py-1 bg-blue-100 text-primary text-xs font-bold rounded-full w-fit mb-4 uppercase tracking-wider">
+                    AI Suggestion
+                  </span>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                    {result.title}
+                  </h3>
+                  <p className="text-gray-600 mb-8 leading-relaxed">
+                    {result.description}
+                  </p>
+                  <a
+                    href={result.link}
+                    className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary-dark transition-colors shadow-md hover:shadow-lg w-fit"
+                  >
+                    Book Consultation
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                  <button
+                    onClick={() => setSelectedZone(null)}
+                    className="mt-4 text-sm text-gray-500 underline hover:text-gray-700"
+                  >
+                    Reset checker
+                  </button>
                 </motion.div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="bg-gray-50 rounded-xl p-6 border border-gray-100 text-center"
-                >
-                  <p className="text-textMuted italic">Select an area on the diagram to see results.</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+              )
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
