@@ -1,178 +1,158 @@
 "use client";
 
 import { useState } from "react";
-import { Metadata } from "next"; // Note: Client components can't export metadata, but this ensures strict mode checking doesn't fail imports
-import Link from "next/link";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { Button } from "@/components/ui/button";
-import { ChevronDown, Calculator, Clock, DollarSign } from "lucide-react";
+import { Metadata } from "next";
+import { motion } from "framer-motion";
+import { Calculator, ChevronDown, ChevronUp } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 import { images } from "@/config/images";
-import { cn } from "@/lib/utils";
 
-// Mock export for static check - actual metadata should be in a server component wrapper if needed
-// For this single-file constraint, we ignore the metadata export here and assume layout handles base.
+// Note: Normally this is a server component for metadata, but we are making it client for the calculator/accordion interactions
+// In a real app, split the accordion into a client component.
 
 export default function ServicesPage() {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [calculatorCost, setCalculatorCost] = useState(2000);
-  const [expandedService, setExpandedService] = useState<string | null>(null);
+  const [openService, setOpenService] = useState<string | null>("cosmetic");
+  const [cost, setCost] = useState(3000);
 
-  const categories = ["all", "cosmetic", "restorative", "general"];
-  
+  const monthlyPayment = Math.round((cost / 12) * 1.05); // Simple calc logic
+
   const services = [
-    { id: "s1", category: "cosmetic", title: "Teeth Whitening", price: "299", time: "1 Hour", desc: "Professional laser whitening for results up to 8 shades lighter." },
-    { id: "s2", category: "cosmetic", title: "Porcelain Veneers", price: "1200", time: "2 Visits", desc: "Custom thin shells to correct shape, color, and alignment." },
-    { id: "s3", category: "restorative", title: "Dental Implants", price: "2500", time: "3-6 Months", desc: "Permanent solution for missing teeth that looks and feels natural." },
-    { id: "s4", category: "restorative", title: "Crowns & Bridges", price: "800", time: "1-2 Visits", desc: "Durable ceramic restorations to protect damaged teeth." },
-    { id: "s5", category: "general", title: "Routine Cleaning", price: "150", time: "45 Mins", desc: "Comprehensive cleaning, polishing, and oral exam." },
-    { id: "s6", category: "general", title: "Root Canal", price: "900", time: "1-2 Hours", desc: "Pain-relieving therapy to save infected teeth." },
+    { 
+      id: "cosmetic", 
+      title: "Cosmetic Dentistry", 
+      price: "$500 - $3,000",
+      desc: "Transform your smile with porcelain veneers, professional whitening, and bonding.",
+      details: "Our cosmetic services include Zoom Whitening, Porcelain Veneers, and Cosmetic Bonding. We use digital smile design to show you your potential results before we start.",
+      img: "service-2"
+    },
+    { 
+      id: "general", 
+      title: "General Dentistry", 
+      price: "$150 - $400",
+      desc: "Routine cleanings, comprehensive exams, and cavity fillings for the whole family.",
+      details: "Prevention is the best medicine. Our general services include prophylaxis, fluoride treatments, sealants, and tooth-colored composite fillings.",
+      img: "service-1"
+    },
+    { 
+      id: "implants", 
+      title: "Implants & Restoration", 
+      price: "$2,000+",
+      desc: "Permanent solutions for missing teeth using top-grade titanium implants.",
+      details: "We use 3D CBCT imaging for precise implant placement. Whether you need a single tooth implant or a full-mouth restoration (All-on-4), our specialists are here to help.",
+      img: "service-3"
+    }
   ];
 
-  const filteredServices = activeCategory === "all" 
-    ? services 
-    : services.filter(s => s.category === activeCategory);
-
   return (
-    <main className="min-h-screen">
-      <Navbar />
-      
+    <main className="pt-10">
       {/* Hero */}
-      <section className="pt-32 pb-12 bg-[#F9FAFB] border-b border-gray-200">
-        <div className="max-w-[1240px] mx-auto px-6 text-center">
-          <h1 className="font-heading font-bold text-4xl md:text-5xl text-[#0E3A53] mb-6">Our Dental Services</h1>
-          <p className="text-lg text-[#4B5563] max-w-2xl mx-auto mb-10">
-            Transparent pricing, advanced technology, and expert care. No hidden fees.
-          </p>
-          
-          {/* Filter Tags */}
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={cn(
-                  "px-6 py-2 rounded-full text-sm font-semibold transition-all",
-                  activeCategory === cat 
-                    ? "bg-[#0E3A53] text-white" 
-                    : "bg-white text-[#4B5563] border border-gray-200 hover:border-[#0E3A53]"
-                )}
-              >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </button>
-            ))}
-          </div>
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-6 text-center">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-primary mb-6">Our Services</h1>
+          <p className="text-lg text-textMain max-w-2xl mx-auto">Transparent pricing and world-class care. Select a category to learn more.</p>
         </div>
       </section>
 
-      {/* Service List */}
-      <section className="py-20 bg-white">
-        <div className="max-w-[1000px] mx-auto px-6">
-          <div className="space-y-4">
-            {filteredServices.map((service) => (
-              <div key={service.id} className="border border-gray-200 rounded-xl overflow-hidden">
-                <button
-                  onClick={() => setExpandedService(expandedService === service.id ? null : service.id)}
-                  className="w-full flex items-center justify-between p-6 bg-white hover:bg-gray-50 transition-colors text-left"
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6 max-w-5xl">
+          <div className="space-y-6">
+            {services.map((service) => (
+              <motion.div 
+                key={service.id}
+                layout
+                className="border border-gray-200 rounded-xl overflow-hidden bg-white"
+              >
+                <button 
+                  onClick={() => setOpenService(openService === service.id ? null : service.id)}
+                  className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                 >
-                  <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
-                    <span className="font-heading font-bold text-xl text-[#0E3A53]">{service.title}</span>
-                    <span className="hidden md:inline text-gray-400">•</span>
-                    <span className="text-[#4CA1A3] font-medium">Starting at ${service.price}</span>
+                  <div className="flex items-center gap-4">
+                    <span className="font-heading text-xl font-bold text-primary">{service.title}</span>
+                    <span className="text-sm text-gray-500 font-medium bg-gray-100 px-3 py-1 rounded-full">{service.price}</span>
                   </div>
-                  <ChevronDown className={cn("w-5 h-5 text-gray-400 transition-transform", expandedService === service.id && "rotate-180")} />
+                  {openService === service.id ? <ChevronUp className="text-secondary" /> : <ChevronDown className="text-secondary" />}
                 </button>
                 
-                {expandedService === service.id && (
-                  <div className="p-6 bg-[#F9FAFB] border-t border-gray-200 animate-fade-in-up grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-                    <div className="md:col-span-2">
-                      <h4 className="font-bold text-[#0E3A53] mb-2">Overview</h4>
-                      <p className="text-[#4B5563] mb-4">{service.desc}</p>
-                      <div className="flex gap-6 text-sm text-gray-500">
-                        <div className="flex items-center gap-2">
-                          <Clock className="w-4 h-4" />
-                          <span>{service.time}</span>
+                {openService === service.id && (
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="border-t border-gray-100"
+                  >
+                    <div className="p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                      <div>
+                        <p className="text-textMain mb-4 leading-relaxed">{service.desc}</p>
+                        <p className="text-textMain leading-relaxed">{service.details}</p>
+                        <div className="mt-8">
+                           <Button>Book This Service</Button>
                         </div>
                       </div>
+                      <div className="relative h-64 md:h-80 rounded-xl overflow-hidden">
+                        <Image 
+                          src={images[service.img as ImageSlot].src} 
+                          alt={service.title} 
+                          fill 
+                          className="object-cover" 
+                        />
+                      </div>
                     </div>
-                    <div className="text-center md:text-right">
-                      <Button asChild className="w-full md:w-auto">
-                        <Link href="/#contact">Book Consultation</Link>
-                      </Button>
-                    </div>
-                  </div>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Service + Calculator */}
-      <section className="py-24 bg-[#0E3A53] text-white overflow-hidden relative">
-        <div className="max-w-[1240px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-          <div>
-            <span className="text-[#D4AF37] font-bold tracking-widest uppercase text-sm mb-2 block">Featured Procedure</span>
-            <h2 className="font-heading font-bold text-3xl md:text-4xl mb-6">Full Smile Makeover</h2>
-            <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-              Combine veneers, whitening, and contouring for a complete transformation. We use digital smile design to show you your new smile before we start.
-            </p>
-            
-            <div className="grid grid-cols-2 gap-6 mb-8">
-              <div>
-                <div className="text-3xl font-bold text-[#4CA1A3]">12+</div>
-                <div className="text-sm text-gray-400">Years Experience</div>
+      {/* Finance Calculator Feature */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-6">
+          <div className="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-100">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+                <Calculator className="w-6 h-6" />
               </div>
               <div>
-                <div className="text-3xl font-bold text-[#4CA1A3]">500+</div>
-                <div className="text-sm text-gray-400">Smiles Restored</div>
+                <h3 className="font-heading text-2xl font-bold text-primary">Finance Calculator</h3>
+                <p className="text-sm text-textMain">Estimate your monthly payments (APR 5%)</p>
               </div>
             </div>
-          </div>
 
-          {/* Calculator */}
-          <div className="bg-white text-[#0E3A53] rounded-2xl p-8 shadow-2xl">
-            <div className="flex items-center gap-3 mb-6 text-[#0E3A53]">
-              <Calculator className="w-6 h-6 text-[#4CA1A3]" />
-              <h3 className="font-heading font-bold text-xl">Payment Estimator</h3>
-            </div>
-            
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-2">Estimated Treatment Cost</label>
+                <label className="block text-sm font-medium text-primary mb-2">Estimated Treatment Cost</label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                  <span className="absolute left-4 top-3 text-gray-500">$</span>
                   <input 
                     type="number" 
-                    value={calculatorCost} 
-                    onChange={(e) => setCalculatorCost(Number(e.target.value))}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4CA1A3] focus:border-transparent outline-none font-heading font-bold"
+                    value={cost}
+                    onChange={(e) => setCost(Number(e.target.value))}
+                    className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none"
                   />
                 </div>
+                <input 
+                  type="range" 
+                  min="500" 
+                    max="10000" 
+                    step="100"
+                  value={cost}
+                  onChange={(e) => setCost(Number(e.target.value))}
+                  className="w-full mt-3 accent-secondary"
+                />
               </div>
 
-              <div className="bg-[#F9FAFB] p-6 rounded-xl border border-gray-100">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-500 text-sm">12 Month Financing (APR 9.9%)</span>
-                </div>
-                <div className="text-3xl font-bold text-[#0E3A53]">
-                  ${(calculatorCost / 12 + (calculatorCost * 0.099 / 12)).toFixed(2)} <span className="text-sm font-normal text-gray-500">/mo</span>
-                </div>
-                <p className="text-xs text-gray-400 mt-2">*Subject to credit approval.</p>
+              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 flex justify-between items-center">
+                <span className="text-textMain">Estimated Monthly Payment</span>
+                <span className="text-3xl font-bold text-primary">${monthlyPayment}<span className="text-sm text-gray-500 font-normal">/mo</span></span>
               </div>
-
-              <Button className="w-full bg-[#4CA1A3] hover:bg-[#3E8A8C] text-white" asChild>
-                <Link href="/#contact">Apply for Financing</Link>
-              </Button>
+              
+              <p className="text-xs text-gray-400 text-center">*Estimates only. Actual financing terms may vary based on credit approval.</p>
             </div>
           </div>
         </div>
-        
-        {/* Decorative BG */}
-        <img src={images["service-2"].src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} className="object-cover opacity-10 grayscale mix-blend-overlay" />
       </section>
-
-      <Footer />
     </main>
   );
 }

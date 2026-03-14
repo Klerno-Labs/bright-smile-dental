@@ -1,47 +1,35 @@
-import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
+import { ButtonHTMLAttributes, forwardRef } from "react";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-95",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-white shadow hover:bg-primaryDark hover:shadow-blue hover:-translate-y-0.5",
-        secondary: "bg-transparent border-2 border-primary text-primary hover:bg-primaryLight hover:-translate-y-0.5",
-        accent: "bg-accent text-white shadow hover:bg-red-500 hover:-translate-y-0.5",
-        ghost: "bg-transparent text-textBody hover:bg-gray-100",
-      },
-      size: {
-        default: "h-12 px-6 py-3",
-        sm: "h-10 px-4 py-2",
-        lg: "h-14 px-8 py-4 text-lg",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "secondary" | "ghost";
+  isLoading?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = "primary", isLoading, children, disabled, ...props }, ref) => {
     return (
       <button
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          "inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          {
+            "bg-secondary text-white hover:bg-teal-700 hover:shadow-md active:scale-95": variant === "primary",
+            "border-2 border-primary text-primary hover:bg-primary hover:text-white active:scale-95": variant === "secondary",
+            "text-secondary hover:underline hover:underline-offset-4": variant === "ghost",
+          },
+          className
+        )}
+        disabled={disabled || isLoading}
         ref={ref}
         {...props}
-      />
+      >
+        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {children}
+      </button>
     );
   }
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+export { Button };

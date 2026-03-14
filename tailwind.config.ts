@@ -9,42 +9,34 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: "#0056b3",
-          dark: "#004494",
-          light: "#e6f0fa",
-        },
-        secondary: {
-          DEFAULT: "#00a8cc",
-          dark: "#008cab",
-        },
-        accent: {
-          DEFAULT: "#ff6b6b",
-        },
-        success: "#28a745",
-        bgBody: "#f8f9fa",
-        textMain: "#1a202c",
-        textBody: "#4a5568",
-        textMuted: "#a0aec0",
-        borderColor: "#e2e8f0",
+        primary: "#0E3A53",
+        secondary: "#4CA1A3",
+        accent: "#D4AF37",
+        surface: "#FFFFFF",
+        background: "#F9FAFB",
+        textMain: "#4B5563",
       },
       fontFamily: {
-        heading: ["var(--font-heading)", "sans-serif"],
-        body: ["var(--font-body)", "sans-serif"],
+        sans: ["var(--font-inter)", "sans-serif"],
+        heading: ["var(--font-manrope)", "sans-serif"],
+        serif: ["var(--font-playfair)", "serif"],
+      },
+      borderRadius: {
+        lg: "8px",
+        xl: "12px",
+        "2xl": "24px",
       },
       boxShadow: {
-        "card": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-        "blue": "0 4px 14px 0 rgba(0, 86, 179, 0.39)",
+        card: "0 4px 6px -1px rgba(14, 58, 83, 0.05), 0 2px 4px -1 rgba(14, 58, 83, 0.03)",
+        hover: "0 20px 25px -5px rgba(14, 58, 83, 0.1), 0 10px 10px -5px rgba(14, 58, 83, 0.04)",
       },
       animation: {
-        "blob": "blob 7s infinite",
+        "fade-in-up": "fadeInUp 0.8s ease-out forwards",
       },
       keyframes: {
-        blob: {
-          "0%": { transform: "translate(0px, 0px) scale(1)" },
-          "33%": { transform: "translate(30px, -50px) scale(1.1)" },
-          "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
-          "100%": { transform: "translate(0px, 0px) scale(1)" },
+        fadeInUp: {
+          "0%": { opacity: "0", transform: "translateY(40px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
     },

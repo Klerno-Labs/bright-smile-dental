@@ -1,226 +1,146 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { useState, FormEvent } from "react";
 import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
-import { Loader2, CheckCircle, AlertCircle } from "lucide-react";
-
-import { z } from "zod";
-const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  service: z.string().optional(),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-  _gotcha: z.string(), // Honeypot
-});
-
-type FormData = z.infer<typeof formSchema>;
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      _gotcha: "",
-    },
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+    _gotcha: "" // Honeypot
   });
 
-  const onSubmit = async (data: FormData) => {
-    // Honeypot check
-    if (data._gotcha) return;
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (formData._gotcha) return; // Bot detected
 
     setIsSubmitting(true);
-    setSubmitStatus("idle");
-
     try {
-      const response = await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          service: data.service,
-          message: data.message,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setSubmitStatus("success");
-        reset();
+      if (res.ok) {
+        setIsSuccess(true);
+        setFormData({ name: "", email: "", phone: "", service: "", message: "", _gotcha: "" });
       } else {
-        setSubmitStatus("error");
+        alert("Something went wrong. Please try again.");
       }
     } catch (error) {
-      setSubmitStatus("error");
+      alert("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  return (
-    <div className="bg-white rounded-xl shadow-card p-8 md:p-10">
-      {submitStatus === "success" ? (
-        <div className="text-center py-12">
-          <div className="w-16 h-16 bg-success/10 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-success" />
-          </div>
-          <h3 className="text-2xl font-bold text-textMain mb-2">Message Sent!</h3>
-          <p className="text-textBody">
-            Thank you for contacting Bright Smile Dental. We&apos;ll be in touch within 24 hours to confirm your appointment.
-          </p>
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  if (isSuccess) {
+    return (
+      <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
+        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
         </div>
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Honeypot Field */}
-          <input type="text" {...register("_gotcha")} className="hidden" tabIndex={-1} autoComplete="off" />
+        <h3 className="text-xl font-bold text-green-900 mb-2">Message Sent!</h3>
+        <p className="text-green-700">Thank you for contacting Bright Smile Dental. We'll be in touch within 24 hours.</p>
+        <Button onClick={() => setIsSuccess(false)} variant="ghost" className="mt-4 text-green-700">Send another</Button>
+      </div>
+    );
+  }
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-semibold text-textMain block mb-1">
-                Full Name <span className="text-accent">*</span>
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder="John Doe"
-                {...register("name")}
-                className={cn(
-                  "w-full h-12 px-4 rounded-lg border bg-white transition-all outline-none focus:ring-2 focus:ring-primary focus:border-transparent",
-                  errors.name ? "border-accent" : "border-gray-200"
-                )}
-              />
-              {errors.name && (
-                <p className="text-xs text-accent flex items-center gap-1">
-                  <AlertCircle size={12} /> {errors.name.message}
-                </p>
-              )}
-            </div>
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label htmlFor="name" className="block text-sm font-medium text-primary mb-1">Full Name</label>
+        <input
+          required
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition-shadow"
+          placeholder="John Doe"
+        />
+      </div>
 
-            <div className="space-y-2">
-              <label htmlFor="phone" className="text-sm font-semibold text-textMain block mb-1">
-                Phone Number <span className="text-accent">*</span>
-              </label>
-              <input
-                id="phone"
-                type="tel"
-                placeholder="(713) 555-0198"
-                {...register("phone")}
-                className={cn(
-                  "w-full h-12 px-4 rounded-lg border bg-white transition-all outline-none focus:ring-2 focus:ring-primary focus:border-transparent",
-                  errors.phone ? "border-accent" : "border-gray-200"
-                )}
-              />
-              {errors.phone && (
-                <p className="text-xs text-accent flex items-center gap-1">
-                  <AlertCircle size={12} /> {errors.phone.message}
-                </p>
-              )}
-            </div>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-primary mb-1">Email Address</label>
+          <input
+            required
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition-shadow"
+            placeholder="john@example.com"
+          />
+        </div>
+        <div>
+          <label htmlFor="phone" className="block text-sm font-medium text-primary mb-1">Phone Number</label>
+          <input
+            required
+            type="tel"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition-shadow"
+            placeholder="(713) 555-0123"
+          />
+        </div>
+      </div>
 
-          <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-semibold text-textMain block mb-1">
-              Email Address <span className="text-accent">*</span>
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="john@example.com"
-              {...register("email")}
-              className={cn(
-                "w-full h-12 px-4 rounded-lg border bg-white transition-all outline-none focus:ring-2 focus:ring-primary focus:border-transparent",
-                errors.email ? "border-accent" : "border-gray-200"
-              )}
-            />
-            {errors.email && (
-              <p className="text-xs text-accent flex items-center gap-1">
-                <AlertCircle size={12} /> {errors.email.message}
-              </p>
-            )}
-          </div>
+      <div>
+        <label htmlFor="service" className="block text-sm font-medium text-primary mb-1">Service of Interest</label>
+        <select
+          id="service"
+          name="service"
+          value={formData.service}
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition-shadow bg-white"
+        >
+          <option value="">Select a service...</option>
+          <option value="general">General Checkup</option>
+          <option value="cosmetic">Cosmetic/Veneers</option>
+          <option value="implants">Implants</option>
+          <option value="ortho">Orthodontics</option>
+        </select>
+      </div>
 
-          <div className="space-y-2">
-            <label htmlFor="service" className="text-sm font-semibold text-textMain block mb-1">
-              Service Interest
-            </label>
-            <select
-              id="service"
-              {...register("service")}
-              className="w-full h-12 px-4 rounded-lg border border-gray-200 bg-white focus:ring-2 focus:ring-primary outline-none appearance-none cursor-pointer"
-            >
-              <option value="">Select a service (optional)</option>
-              <option value="General Checkup">General Checkup</option>
-              <option value="Cosmetic Whitening">Cosmetic Whitening</option>
-              <option value="Orthodontics">Orthodontics</option>
-              <option value="Emergency">Emergency Care</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+      <div>
+        <label htmlFor="message" className="block text-sm font-medium text-primary mb-1">How can we help?</label>
+        <textarea
+          id="message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          rows={4}
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition-shadow"
+          placeholder="Briefly describe your needs..."
+        />
+      </div>
 
-          <div className="space-y-2">
-            <label htmlFor="message" className="text-sm font-semibold text-textMain block mb-1">
-              Message <span className="text-accent">*</span>
-            </label>
-            <textarea
-              id="message"
-              rows={4}
-              placeholder="How can we help you today?"
-              {...register("message")}
-              className={cn(
-                "w-full px-4 py-3 rounded-lg border bg-white transition-all outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none",
-                errors.message ? "border-accent" : "border-gray-200"
-              )}
-            ></textarea>
-            {errors.message && (
-              <p className="text-xs text-accent flex items-center gap-1">
-                <AlertCircle size={12} /> {errors.message.message}
-              </p>
-            )}
-          </div>
+      {/* Honeypot */}
+      <input type="text" name="_gotcha" value={formData._gotcha} onChange={handleChange} className="hidden" tabIndex={-1} autoComplete="off" />
 
-          {submitStatus === "error" && (
-            <div className="bg-red-50 text-red-700 p-3 rounded-lg text-sm flex items-center gap-2">
-              <AlertCircle size={16} />
-              Something went wrong. Please try again.
-            </div>
-          )}
-
-          <Button
-            type="submit"
-            variant="default"
-            size="lg"
-            className="w-full h-14 text-base"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                Sending...
-              </>
-            ) : (
-              "Request Appointment"
-            )}
-          </Button>
-          
-          <p className="text-xs text-center text-textMuted mt-4">
-            By submitting this form, you agree to our Terms of Service and Privacy Policy.
-          </p>
-        </form>
-      )}
-    </div>
+      <Button type="submit" isLoading={isSubmitting} className="w-full py-4 text-lg">
+        Book Appointment
+      </Button>
+    </form>
   );
 }
