@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { images } from '@/config/images';
 import { cn } from '@/lib/utils';
 
-import { useState } from "react";
 export function BeforeAfterSlider() {
   const [sliderPosition, setSliderPosition] = useState(50);
   const containerRef = useRef<HTMLDivElement>(null);
