@@ -1,30 +1,36 @@
-import { Container } from "@/components/ui/Container";
+"use client";
 
-const logos = [
-  { name: "Delta Dental", path: "M10 20L20 10L10 0L0 10L10 20Z" }, // Diamond
-  { name: "Cigna", path: "M12 2L2 22H22L12 2Z" }, // Triangle
-  { name: "Aetna", path: "M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" }, // Circle
-  { name: "Humana", path: "M12 2L2 12L12 22L22 12L12 2Z" }, // Square-ish
+import { useInView } from "framer-motion";
+import { useRef, useEffect } from "react";
+
+const partners = [
+  { name: "Delta Dental", height: 30 },
+  { name: "Aetna", height: 30 },
+  { name: "Cigna", height: 30 },
+  { name: "Humana", height: 30 },
+  { name: "MetLife", height: 30 },
 ];
 
 export function TrustBar() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <section className="py-8 border-y border-gray-100 bg-white">
-      <Container>
-        <p className="text-center text-sm font-semibold text-gray-400 mb-6 uppercase tracking-wider">
-          Accepted Insurances & Partners
+    <div ref={ref} className="py-12 border-y border-[#E5E7EB] bg-white">
+      <div className="max-w-[1280px] mx-auto px-6">
+        <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
+          Trusted by Major Insurance Providers
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
-          {logos.map((logo, index) => (
-            <div key={index} className="flex items-center gap-2 hover:opacity-100 hover:text-[#4CA1A3] transition-all cursor-default">
-               <svg className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
-                 <path d={logo.path} />
-               </svg>
-               <span className="font-bold text-lg">{logo.name}</span>
+        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-50 grayscale transition-all duration-700 hover:grayscale-0 hover:opacity-100">
+          {partners.map((partner) => (
+            <div key={partner.name} className="font-heading font-bold text-2xl text-[#0F3460] flex items-center gap-2">
+              {/* Placeholder for actual logo images */}
+              <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+              {partner.name}
             </div>
           ))}
         </div>
-      </Container>
-    </section>
+      </div>
+    </div>
   );
 }
