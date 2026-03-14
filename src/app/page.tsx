@@ -1,3 +1,5 @@
+"use client";
+
 import { Metadata } from "next";
 import { motion } from "framer-motion";
 import { CheckCircle2, Star } from "lucide-react";
