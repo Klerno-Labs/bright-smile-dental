@@ -1,5 +1,4 @@
 import { Container } from "@/components/ui/Container";
-import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { images } from "@/config/images";
 
@@ -7,10 +6,9 @@ export function CallToAction() {
   return (
     <section className="relative py-24 bg-[#0E3A53]">
       <div className="absolute inset-0 z-0">
-        <Image
+        <img
           src={images["cta"].src}
-          alt="Background"
-          fill
+          alt="Background" style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover opacity-10"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0E3A53] via-[#0E3A53]/95 to-[#0E3A53]/70" />

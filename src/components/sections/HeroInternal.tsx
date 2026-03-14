@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { images } from "@/config/images";
 
@@ -12,12 +11,10 @@ export function HeroInternal({ title, subtitle, imageKey }: HeroInternalProps) {
   return (
     <section className="relative h-[60vh] flex items-center justify-center">
       <div className="absolute inset-0 z-0">
-        <Image
+        <img
           src={images[imageKey].src}
-          alt={images[imageKey].alt}
-          fill
+          alt={images[imageKey].alt} style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover"
-          priority
         />
         <div className="absolute inset-0 bg-[#0E3A53]/70" />
       </div>

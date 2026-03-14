@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 import { images } from "@/config/images";
 import { cn } from "@/lib/utils";
 
@@ -31,10 +30,9 @@ export function BeforeAfterSlider() {
     >
       {/* After Image (Background) */}
       <div className="absolute inset-0">
-        <Image
+        <img
           src={images["service-2"].src}
-          alt="After treatment"
-          fill
+          alt="After treatment" style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover"
         />
         <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
@@ -47,10 +45,9 @@ export function BeforeAfterSlider() {
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <Image
+        <img
           src={images["service-1"].src} // Using service-1 as a placeholder for "Before"
-          alt="Before treatment"
-          fill
+          alt="Before treatment" style={{ width: "100%", height: "100%", objectFit: "cover" }}
           className="object-cover w-full h-full"
         />
         <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">

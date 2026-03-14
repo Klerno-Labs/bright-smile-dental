@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -20,7 +19,7 @@ export function HeroHome() {
           className="space-y-8"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E0F2F2] text-[#0E3A53] text-sm font-semibold">
-            <Star className="h-4 w-4 text-[#D4AF37] fill-[#D4AF37]" />
+            <Star className="h-4 w-4 text-[#D4AF37] style={{ width: "100%", height: "100%", objectFit: "cover" }}-[#D4AF37]" />
             <span>Top Rated Dental Practice in Houston</span>
           </div>
           
@@ -46,7 +45,7 @@ export function HeroHome() {
             <p className="text-sm text-gray-500 mb-2">Trusted by patients for exceptional care</p>
             <div className="flex items-center gap-1">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-5 w-5 text-[#D4AF37] fill-[#D4AF37]" />
+                <Star key={i} className="h-5 w-5 text-[#D4AF37] style={{ width: "100%", height: "100%", objectFit: "cover" }}-[#D4AF37]" />
               ))}
               <span className="ml-2 font-semibold text-[#0E3A53]">4.9/5</span>
               <span className="text-gray-400">(250+ Reviews)</span>
@@ -63,12 +62,10 @@ export function HeroHome() {
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-[#0E3A53]/20 to-transparent rounded-[2rem] translate-x-4 translate-y-4" />
           <div className="relative h-full w-full rounded-[2rem] overflow-hidden shadow-2xl">
-            <Image
+            <img
               src={images["hero"].src}
-              alt={images["hero"].alt}
-              fill
+              alt={images["hero"].alt} style={{ width: "100%", height: "100%", objectFit: "cover" }}
               className="object-cover"
-              priority
             />
           </div>
           
@@ -81,7 +78,7 @@ export function HeroHome() {
           >
             <div className="flex items-center gap-3 mb-3">
                <div className="h-10 w-10 rounded-full bg-[#4CA1A3] flex items-center justify-center text-white">
-                 <Star className="h-5 w-5 fill-white" />
+                 <Star className="h-5 w-5 style={{ width: "100%", height: "100%", objectFit: "cover" }}-white" />
                </div>
                <div>
                  <p className="font-bold text-[#0E3A53]">New Patient Special</p>

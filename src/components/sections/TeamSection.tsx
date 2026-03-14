@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Link } from "lucide-react";
@@ -49,10 +48,9 @@ export function TeamSection() {
               className="group"
             >
               <div className="relative h-[350px] mb-6 rounded-t-[2rem] overflow-hidden bg-white shadow-sm">
-                <Image
+                <img
                   src={images[member.image as keyof typeof images].src}
-                  alt={member.name}
-                  fill
+                  alt={member.name} style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0E3A53]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
