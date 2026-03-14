@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Check } from "lucide-react";
 import { Container } from "@/components/ui/Container";
