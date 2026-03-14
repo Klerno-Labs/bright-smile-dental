@@ -1,28 +1,56 @@
-import { Button } from "@/components/ui/Button";
+import React from "react";
+import Image from "next/image";
 import { images } from "@/config/images";
-import { Calendar } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { ArrowRight } from "lucide-react";
+import { siteConfig } from "@/config/site";
 
-export function CTABanner() {
+interface CTABannerProps {
+  variant?: "appointment" | "meet-team";
+}
+
+export function CTABanner({ variant = "appointment" }: CTABannerProps) {
+  const isAppointment = variant === "appointment";
+
   return (
-    <section id="contact" className="py-section-gap relative bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${images["cta"].src})` }}>
-      <div className="absolute inset-0 bg-[#0F3460]/90"></div>
-      
-      <div className="max-w-[1280px] mx-auto px-6 relative z-10 text-center text-white">
-        <div className="inline-block p-4 bg-[#008080] rounded-full mb-8">
-           <Calendar className="w-8 h-8 text-white" />
-        </div>
-        <h2 className="font-heading font-bold text-4xl md:text-5xl mb-6">Ready to Transform Your Smile?</h2>
-        <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-10">
-          Book your appointment today and take the first step towards a healthier, brighter you. New patients always welcome.
+    <section className="relative py-24 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={images["cta"].src}
+          alt={images["cta"].alt}
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-primary/90" />
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="text-3xl md:text-5xl font-heading font-bold text-white mb-6">
+          {isAppointment
+            ? "Ready to Transform Your Smile?"
+            : "Join Our Family of Patients"}
+        </h2>
+        <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+          {isAppointment
+            ? "Book your consultation today and take the first step towards the smile you've always wanted."
+            : "Experience the difference of compassionate, expert dental care. New patients are always welcome."}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-           <Button size="lg" className="bg-white text-[#0F3460] hover:bg-gray-100">
-             Schedule Visit
-           </Button>
-           <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-            Call (713) 555-0123
-           </Button>
+          <Button size="lg" className="bg-accent hover:bg-red-600 text-white border-0">
+            {isAppointment ? "Book Appointment" : "Call Us Now"} <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+          {!isAppointment && (
+            <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10">
+               View Services
+            </Button>
+          )}
         </div>
+        <p className="mt-8 text-sm text-gray-300">
+          Or call us directly at{" "}
+          <a href={`tel:${siteConfig.contact.phone}`} className="font-bold text-white hover:underline">
+            {siteConfig.contact.phone}
+          </a>
+        </p>
       </div>
     </section>
   );

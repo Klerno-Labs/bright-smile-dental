@@ -1,22 +1,21 @@
 export const siteConfig = {
   name: "Bright Smile Dental",
-  description: "Premium dental care in Houston. Cosmetic, Implant, and General Dentistry.",
-  url: "https://example.com", // Replace with actual domain
+  description: "Experience world-class dentistry with a gentle touch. Comprehensive family care, cosmetic enhancements, and restorative procedures in Houston, TX.",
+  url: "https://brightsmiledental-demo.com",
   links: {
     twitter: "https://twitter.com",
     instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
     linkedin: "https://linkedin.com",
   },
   contact: {
-    phone: "(713) 555-0123",
-    email: "info@brightsmiledental.com",
     address: "4521 Westheimer Rd, Suite 200, Houston, TX 77027",
+    phone: "(713) 555-0198",
+    email: "info@brightsmiledental.com",
+    hours: "Mon-Fri: 8am-6pm, Sat: 9am-2pm, Sun: Closed",
   },
-  nav: [
+  navItems: [
     { title: "Home", href: "/" },
-    { title: "About", href: "/about" },
+    { title: "About Us", href: "/about" },
     { title: "Services", href: "/services" },
-    { title: "Contact", href: "/#contact" },
   ],
 };

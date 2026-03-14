@@ -1,23 +1,22 @@
 import { MetadataRoute } from "next";
+import { siteConfig } from "@/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://example.com/bright-smile-dental"; // Update with actual domain
-  
   return [
     {
-      url: baseUrl,
+      url: siteConfig.url,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${siteConfig.url}/about`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services`,
+      url: `${siteConfig.url}/services`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

@@ -1,36 +1,46 @@
-"use client";
+import React from "react";
+import { Shield, Award, Clock, Users } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-import { useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
-
-const partners = [
-  { name: "Delta Dental", height: 30 },
-  { name: "Aetna", height: 30 },
-  { name: "Cigna", height: 30 },
-  { name: "Humana", height: 30 },
-  { name: "MetLife", height: 30 },
+const trustFactors = [
+  {
+    icon: Shield,
+    title: "Top Rated",
+    description: "4.9/5 Stars on Google",
+  },
+  {
+    icon: Award,
+    title: "Award Winning",
+    description: "Best of Houston 2023",
+  },
+  {
+    icon: Clock,
+    title: "Same Day",
+    description: "Emergency Appointments",
+  },
+  {
+    icon: Users,
+    title: "15+ Years",
+    description: "Serving Houston Families",
+  },
 ];
 
 export function TrustBar() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
   return (
-    <div ref={ref} className="py-12 border-y border-[#E5E7EB] bg-white">
-      <div className="max-w-[1280px] mx-auto px-6">
-        <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
-          Trusted by Major Insurance Providers
-        </p>
-        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-50 grayscale transition-all duration-700 hover:grayscale-0 hover:opacity-100">
-          {partners.map((partner) => (
-            <div key={partner.name} className="font-heading font-bold text-2xl text-[#0F3460] flex items-center gap-2">
-              {/* Placeholder for actual logo images */}
-              <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
-              {partner.name}
+    <section className="bg-surface py-12 border-y border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {trustFactors.map((item, index) => (
+            <div key={index} className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-medical mb-4">
+                <item.icon className="w-6 h-6" />
+              </div>
+              <h4 className="font-bold text-primary mb-1">{item.title}</h4>
+              <p className="text-sm text-gray-500">{item.description}</p>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

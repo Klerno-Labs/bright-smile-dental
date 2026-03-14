@@ -9,116 +9,100 @@
 // to edit to swap any image on the entire website.
 
 export const images = {
-  // Homepage hero banner — the first image visitors see — REPLACE with a real Unsplash URL matching: "Modern office workspace with natural light"
+  // Homepage hero banner — the first image visitors see
   "hero": {
     src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop",
-    alt: "Bright Smile Dental Office Reception",
+    alt: "Bright modern dental office reception area with natural light",
     width: 1200,
     height: 800,
   },
 
-  // Alternative hero image (used on inner pages or as fallback) — REPLACE with a real Unsplash URL matching: "Professional team collaborating in bright office"
+  // Alternative hero image (used on inner pages or as fallback)
   "hero-alt": {
-    src: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=2000&auto=format&fit=crop",
-    alt: "Smiling patient with dentist",
-    width: 1200,
-    height: 800,
-  },
-
-  // About page or About section on homepage — REPLACE with a real Unsplash URL matching: "Business professionals in modern meeting room"
-  "about": {
-    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2069&auto=format&fit=crop",
-    alt: "Dental team meeting in modern office",
-    width: 1200,
-    height: 800,
-  },
-
-  // First service card image — REPLACE with a real Unsplash URL matching: "Creative professionals working together"
-  "service-1": {
     src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2068&auto=format&fit=crop",
-    alt: "Cosmetic dentistry procedure",
+    alt: "Dental team collaborating in a bright office",
     width: 1200,
     height: 800,
   },
 
-  // Second service card image — REPLACE with a real Unsplash URL matching: "Data analytics dashboard on screen"
+  // About page or About section on homepage
+  "about": {
+    src: "https://images.unsplash.com/photo-1579684385147-6ef0db5f648f?q=80&w=2070&auto=format&fit=crop",
+    alt: "Business professionals in modern meeting room",
+    width: 1200,
+    height: 800,
+  },
+
+  // First service card image
+  "service-1": {
+    src: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=2070&auto=format&fit=crop",
+    alt: "Cosmetic dentistry procedure showing a bright smile",
+    width: 1200,
+    height: 800,
+  },
+
+  // Second service card image
   "service-2": {
-    src: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=2070&auto=format&fit=crop",
-    alt: "Dental implant tools and models",
-    width: 1200,
-    height: 800,
-  },
-
-  // Third service card image — REPLACE with a real Unsplash URL matching: "Team workshop and brainstorming session"
-  "service-3": {
     src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2070&auto=format&fit=crop",
-    alt: "Family dentistry checkup",
+    alt: "Advanced dental implant technology",
     width: 1200,
     height: 800,
   },
 
-  // Gallery image 1 — REPLACE with a real Unsplash URL matching: "Professional handshake in business setting"
+  // Third service card image
+  "service-3": {
+    src: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=2070&auto=format&fit=crop",
+    alt: "General dental checkup in progress",
+    width: 1200,
+    height: 800,
+  },
+
+  // Gallery image 1
   "gallery-1": {
-    src: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop",
-    alt: "Patient smiling after treatment",
+    src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop",
+    alt: "Interior of dental clinic waiting room",
     width: 1200,
     height: 800,
   },
 
-  // Gallery image 2 — REPLACE with a real Unsplash URL matching: "Modern conference room with city view"
+  // Gallery image 2
   "gallery-2": {
-    src: "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=2070&auto=format&fit=crop",
-    alt: "Dental hygienist cleaning teeth",
+    src: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=2070&auto=format&fit=crop",
+    alt: "Modern dental treatment room",
     width: 1200,
     height: 800,
   },
 
-  // Team member photo — REPLACE with a real Unsplash URL matching: "Diverse team celebrating success"
+  // Team member photo
   "team-1": {
     src: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=1974&auto=format&fit=crop",
-    alt: "Dr. Sarah Bennett Headshot",
+    alt: "Lead dentist smiling confidently",
     width: 600,
     height: 600,
   },
 
-  // Gallery image 3 — REPLACE with a real Unsplash URL matching: "Technology workspace with multiple screens"
+  // Gallery image 3
   "gallery-3": {
-    src: "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?q=80&w=2073&auto=format&fit=crop",
-    alt: "State of the art dental technology",
+    src: "https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?q=80&w=2070&auto=format&fit=crop",
+    alt: "State of the art dental equipment",
     width: 1200,
     height: 800,
   },
 
-  // Call-to-action section background — REPLACE with a real Unsplash URL matching: "Innovation and technology concept"
+  // Call-to-action section background
   "cta": {
-    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
-    alt: "Professional smile consultation",
-    width: 1200,
-    height: 600,
-  },
-
-  // Testimonials section background or decoration — REPLACE with a real Unsplash URL matching: "Professional business environment"
-  "testimonial-bg": {
-    src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b955?q=80&w=2070&auto=format&fit=crop",
-    alt: "Relaxed waiting area",
+    src: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?q=80&w=2070&auto=format&fit=crop",
+    alt: "Happy patient leaving the clinic",
     width: 1200,
     height: 800,
   },
 
-  // Before/After - Before
-  "before-teeth": {
-    src: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?q=80&w=1974&auto=format&fit=crop",
-    alt: "Teeth before whitening",
-    width: 800,
-    height: 600,
-  },
-
-  // Before/After - After
-  "after-teeth": {
-    src: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?q=80&w=1974&auto=format&fit=crop", // Using same but ideally different, for demo structure
-    alt: "Teeth after whitening",
-    width: 800,
-    height: 600,
+  // Testimonials section background or decoration
+  "testimonial-bg": {
+    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
+    alt: "Professional business environment",
+    width: 1200,
+    height: 800,
   },
 } as const;
 

@@ -1,60 +1,74 @@
-import { Star, Quote } from "lucide-react";
+import React from "react";
+import Image from "next/image";
+import { Quote, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const testimonials = [
   {
     name: "Maria L.",
     role: "Patient",
-    content: "I haven't smiled in photos for years until now. Dr. Bennett changed my life with the veneers. The process was so comfortable!",
+    content: "I've always been terrified of the dentist, but Dr. Bennett made me feel so comfortable. The sedation options and gentle approach changed everything for me.",
     rating: 5,
   },
   {
     name: "James T.",
     role: "Patient",
-    content: "Best dental experience in Houston. The staff is incredibly friendly and the facility is cleaner than a hospital. Highly recommend.",
+    content: "Got my implants here last year. The technology is insane—it was over faster than I expected and healed perfectly. Best investment I've made.",
     rating: 5,
   },
   {
     name: "Sarah J.",
     role: "Patient",
-    content: "I was terrified of the dentist, but their sedation options and gentle approach made my implant surgery completely painless.",
+    content: "Bringing my kids here is a breeze. They actually look forward to the treasure box! The staff is patient, kind, and incredibly professional.",
     rating: 5,
   },
 ];
 
 export function Testimonials() {
   return (
-    <section className="py-section-gap bg-[#0F3460] text-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
-      
-      <div className="max-w-[1280px] mx-auto px-6 relative z-10">
+    <section className="py-24 bg-surface relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-           <Quote className="w-12 h-12 text-[#008080] mx-auto mb-6" />
-          <h2 className="font-heading font-bold text-4xl mb-4">Patient Stories</h2>
-          <p className="text-lg text-gray-300">
-            Don't just take our word for it. Hear from the neighbors we've helped smile brighter.
-          </p>
+          <span className="text-accent font-accent font-bold tracking-widest uppercase text-sm">
+            Testimonials
+          </span>
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-primary mt-4">
+            What Our Patients Say
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((item, idx) => (
-            <div key={idx} className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-colors">
-              <div className="flex gap-1 text-yellow-400 mb-6">
-                {[...Array(item.rating)].map((_, i) => (
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white p-8 rounded-2xl shadow-card hover:-translate-y-2 transition-transform duration-300"
+            >
+              <div className="flex text-accent mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-current" />
                 ))}
               </div>
-              <p className="text-gray-200 mb-6 leading-relaxed italic">"{item.content}"</p>
+              <p className="text-gray-600 mb-6 italic leading-relaxed">
+                "{testimonial.content}"
+              </p>
               <div className="flex items-center gap-4">
-                 <div className="w-10 h-10 bg-[#008080] rounded-full flex items-center justify-center font-bold text-white">
-                   {item.name.charAt(0)}
-                 </div>
-                 <div>
-                   <p className="font-bold text-white">{item.name}</p>
-                   <p className="text-xs text-[#008080] uppercase tracking-wider">{item.role}</p>
-                 </div>
+                <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                   {/* Placeholder avatar */}
+                   <div className="w-full h-full bg-primary text-white flex items-center justify-center font-bold">
+                     {testimonial.name[0]}
+                   </div>
+                </div>
+                <div>
+                  <p className="font-bold text-primary">{testimonial.name}</p>
+                  <p className="text-sm text-gray-400">{testimonial.role}</p>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

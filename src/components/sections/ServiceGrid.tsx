@@ -1,81 +1,91 @@
+import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { ArrowRight, Sparkles, Heart, Shield } from "lucide-react";
+import Image from "next/image";
 import { images } from "@/config/images";
+import { ArrowUpRight, Sparkles, Heart, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
 
 const services = [
   {
     title: "Cosmetic Dentistry",
-    description: "Transform your smile with veneers, bonding, and professional whitening tailored to your facial features.",
-    icon: <Sparkles className="w-8 h-8" />,
-    image: images["service-1"],
-    link: "/services#cosmetic",
-    price: "From $250"
+    description: "Transform your smile with veneers, bonding, and professional whitening for a confident look.",
+    icon: Sparkles,
+    image: "service-1",
+    price: "Consultation from $150",
+    link: "/services#cosmetic"
   },
   {
-    title: "Dental Implants",
-    description: "Restore function and aesthetics with permanent, natural-looking implant solutions.",
-    icon: <Heart className="w-8 h-8" />,
-    image: images["service-2"],
-    link: "/services#implants",
-    price: "Consultation Free"
+    title: "Implants & Restoration",
+    description: "Permanent solutions for missing teeth using state-of-the-art implant technology.",
+    icon: ShieldCheck,
+    image: "service-2",
+    price: "Financing Available",
+    link: "/services#restorative"
   },
   {
-    title: "Family Dentistry",
-    description: "Comprehensive care for all ages, from pediatric checkups to geriatric dental health management.",
-    icon: <Shield className="w-8 h-8" />,
-    image: images["service-3"],
-    link: "/services#general",
-    price: "Insurance Welcome"
+    title: "General Family Care",
+    description: "Comprehensive checkups, cleanings, and preventative care for the whole family.",
+    icon: Heart,
+    image: "service-3",
+    price: "Most Insurance Accepted",
+    link: "/services#general"
   },
 ];
 
 export function ServiceGrid() {
   return (
-    <section className="py-section-gap bg-surface">
-      <div className="max-w-[1280px] mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-          <div className="max-w-2xl">
-            <h2 className="font-heading font-bold text-4xl text-[#0F3460] mb-4">Comprehensive Care</h2>
-            <p className="text-lg text-gray-600">
-              We combine cutting-edge technology with compassionate care to provide a full spectrum of dental services.
-            </p>
-          </div>
-          <Button variant="outline" asChild>
-            <Link href="/services">View All Services</Link>
-          </Button>
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-medical font-accent font-bold tracking-widest uppercase text-sm">
+            Our Expertise
+          </span>
+          <h2 className="text-3xl md:text-5xl font-heading font-bold text-primary mt-4">
+            Comprehensive Dental Solutions
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white rounded-[12px] p-[40px] border border-[#E5E7EB] shadow-card hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col h-full group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-xl transition-all duration-300 flex flex-col h-full overflow-hidden"
             >
-              <div className="text-[#008080] mb-6">
-                {service.icon}
+              <div className="relative h-48 overflow-hidden">
+                <Image
+                  src={images[service.image as keyof typeof images].src}
+                  alt={images[service.image as keyof typeof images].alt}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-sm">
+                  <service.icon className="w-6 h-6 text-medical" />
+                </div>
               </div>
-              
-              <h3 className="font-heading text-[28px] text-[#0F3460] mb-4 font-bold">
-                {service.title}
-              </h3>
-              
-              <p className="text-gray-600 mb-6 flex-grow leading-relaxed">
-                {service.description}
-              </p>
-
-              <div className="flex items-center justify-between border-t border-[#E5E7EB] pt-6">
-                <span className="text-sm font-accent text-[#E94560] font-bold tracking-wide">
-                  {service.price}
-                </span>
-                <Link 
-                  href={service.link} 
-                  className="text-[#0F3460] font-bold flex items-center group-hover:text-[#008080] transition-colors"
-                >
-                  Learn More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+              <div className="p-8 flex flex-col flex-1">
+                <h3 className="text-xl font-heading font-bold text-primary mb-3 group-hover:text-medical transition-colors">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 mb-6 flex-1">
+                  {service.description}
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-gray-100">
+                  <span className="text-sm font-semibold text-accent">
+                    {service.price}
+                  </span>
+                  <Link 
+                    href={service.link}
+                    className="flex items-center text-primary font-bold hover:text-medical transition-colors"
+                  >
+                    Learn More <ArrowUpRight className="w-4 h-4 ml-1" />
+                  </Link>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

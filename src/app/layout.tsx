@@ -1,27 +1,13 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Montserrat } from "next/font/google";
+import { Inter, Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { siteConfig } from "@/config/site";
 
-const playfair = Playfair_Display({ 
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-montserrat",
-  display: "swap",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", display: "swap" });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat", display: "swap" });
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +15,10 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  metadataBase: new URL("https://example.com"),
+  keywords: ["Dentist", "Houston", "Cosmetic Dentistry", "Implants", "Family Dentistry"],
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -37,6 +26,11 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
   },
 };
 
@@ -46,49 +40,47 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${playfair.variable} ${inter.variable} ${montserrat.variable} font-body bg-white text-[#1F2937] antialiased`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${montserrat.variable}`}>
+      <body className="font-body bg-white text-gray-900 antialiased">
         <Navbar />
-        <main className="min-h-screen pt-20">{children}</main>
+        <main className="min-h-screen">{children}</main>
         <Footer />
-        
-        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Dentist",
-              "name": siteConfig.name,
-              "image": "https://example.com/og.jpg",
-              "address": {
+              name: siteConfig.name,
+              image: `${siteConfig.url}/logo.png`,
+              address: {
                 "@type": "PostalAddress",
-                "streetAddress": "4521 Westheimer Rd, Suite 200",
-                "addressLocality": "Houston",
-                "addressRegion": "TX",
-                "postalCode": "77027",
-                "addressCountry": "US",
+                streetAddress: "4521 Westheimer Rd, Suite 200",
+                addressLocality: "Houston",
+                addressRegion: "TX",
+                postalCode: "77027",
+                addressCountry: "US",
               },
-              "geo": {
+              geo: {
                 "@type": "GeoCoordinates",
-                "latitude": 29.7373,
-                "longitude": -95.4618,
+                latitude: 29.7374,
+                longitude: -95.4633,
               },
-              "url": siteConfig.url,
-              "telephone": siteConfig.contact.phone,
-              "priceRange": "$$",
-              "openingHoursSpecification": [
+              url: siteConfig.url,
+              telephone: siteConfig.contact.phone,
+              priceRange: "$$",
+              openingHoursSpecification: [
                 {
                   "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                  "opens": "08:00",
-                  "closes": "18:00",
+                  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                  opens: "08:00",
+                  closes: "18:00",
                 },
                 {
                   "@type": "OpeningHoursSpecification",
-                  "dayOfWeek": "Saturday",
-                  "opens": "09:00",
-                  "closes": "14:00",
+                  dayOfWeek: "Saturday",
+                  opens: "09:00",
+                  closes: "14:00",
                 },
               ],
             }),

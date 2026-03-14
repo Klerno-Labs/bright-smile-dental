@@ -1,118 +1,165 @@
 import { Metadata } from "next";
-import { Button } from "@/components/ui/Button";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { CheckCircle, Clock, Shield } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { CheckCircle2, ChevronRight } from "lucide-react";
+import { images } from "@/config/images";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Our Services",
-  description: "Comprehensive dental services including cosmetic, general, and restorative dentistry.",
+  description: "Comprehensive dental services including cosmetic dentistry, implants, orthodontics, and general family care.",
 };
 
-const services = [
-  {
-    category: "Cosmetic Dentistry",
-    id: "cosmetic",
+const services = {
+  cosmetic: {
+    title: "Cosmetic Dentistry",
+    desc: "Enhance the appearance of your smile with our aesthetic treatments.",
     items: [
-      { name: "Teeth Whitening", desc: "Professional Zoom whitening for instant results.", price: "$299" },
-      { name: "Porcelain Veneers", desc: "Custom-crafted shells for a perfect smile alignment.", price: "From $1,200/tooth" },
-      { name: "Invisalign", desc: "Clear aligners to straighten teeth discreetly.", price: "From $4,000" },
-    ]
+      { name: "Professional Whitening", price: "$299 - $499" },
+      { name: "Porcelain Veneers", price: "$1,200 - $2,500 per tooth" },
+      { name: "Invisalign", price: "$3,500 - $6,000" },
+      { name: "Bonding & Contouring", price: "$300 - $600 per tooth" },
+    ],
+    image: "service-1",
   },
-  {
-    category: "Restorative & Implants",
-    id: "implants",
+  general: {
+    title: "General Dentistry",
+    desc: "Preventative care to keep your smile healthy and functional.",
     items: [
-      { name: "Dental Implants", desc: "Permanent replacement for missing teeth.", price: "From $3,000" },
-      { name: "Crowns & Bridges", desc: "Durable restorations for damaged or missing teeth.", price: "From $800" },
-      { name: "Root Canal Therapy", desc: "Pain-relieving treatment to save natural teeth.", price: "From $600" },
-    ]
+      { name: "Comprehensive Exam", price: "$150 (New Patient Special)" },
+      { name: "Cleaning & Hygiene", price: "$99 - $175" },
+      { name: "Fillings (Composite)", price: "$150 - $400" },
+      { name: "Root Canal Therapy", price: "$600 - $1,200" },
+    ],
+    image: "service-3",
   },
-  {
-    category: "General & Family",
-    id: "general",
+  restorative: {
+    title: "Restorative & Implants",
+    desc: "Repair and replace missing or damaged teeth.",
     items: [
-      { name: "Comprehensive Exam", desc: "Digital X-rays and full oral health assessment.", price: "$150 (New Patient)" },
-      { name: "Cleanings", desc: "Routine hygiene appointments to prevent decay.", price: "From $100" },
-      { name: "Pediatric Dentistry", desc: "Gentle care designed specifically for children.", price: "Insurance Accepted" },
-    ]
+      { name: "Dental Implants", price: "$2,500 - $4,000" },
+      { name: "Crowns & Bridges", price: "$800 - $1,500 per unit" },
+      { name: "Dentures (Partial/Full)", price: "$1,000 - $3,000" },
+      { name: "Bone Grafting", price: "$400 - $1,200" },
+    ],
+    image: "service-2",
   },
-];
-
-const faqs = [
-  { q: "Do you accept my insurance?", a: "We accept most major PPO insurance plans including Delta, Aetna, Cigna, and MetLife. Contact our front desk to verify your specific coverage." },
-  { q: "What if I have a dental emergency?", a: "We reserve time daily for emergency patients. Call us immediately at (713) 555-0123 if you are experiencing pain or have broken a tooth." },
-  { q: "Are financing options available?", a: "Yes! We partner with CareCredit and offer in-house payment plans to make your treatment affordable." },
-];
+};
 
 export default function ServicesPage() {
   return (
-    <div className="bg-white">
-       {/* Header */}
-       <section className="pt-32 pb-16 bg-[#F8F9FA] border-b border-[#E5E7EB]">
-         <div className="max-w-[1280px] mx-auto px-6">
-           <h1 className="font-heading font-bold text-4xl text-[#0F3460] mb-4">Our Treatments</h1>
-           <p className="text-lg text-gray-600 max-w-2xl">
-             From preventative care to complex cosmetic transformations, we offer a full range of services to meet your needs.
-           </p>
-         </div>
-       </section>
+    <>
+      <section className="pt-32 pb-16 bg-surface-alt">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-heading font-bold text-primary mb-6">
+            Comprehensive Dental Care
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            From routine cleanings to complex full-mouth reconstructions, we offer a full range of services under one roof.
+          </p>
+        </div>
+      </section>
 
-       {/* Services List */}
-       <div className="max-w-[1280px] mx-auto px-6 py-section-gap grid grid-cols-1 lg:grid-cols-3 gap-12">
-         <div className="lg:col-span-2 space-y-20">
-           {services.map((group) => (
-             <div key={group.id} id={group.id} className="scroll-mt-24">
-               <div className="flex items-center gap-4 mb-8">
-                 <div className="w-12 h-12 bg-[#008080]/10 rounded-full flex items-center justify-center text-[#008080]">
-                    <CheckCircle className="w-6 h-6" />
-                 </div>
-                 <h2 className="font-heading font-bold text-3xl text-[#0F3460]">{group.category}</h2>
-               </div>
-               
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                 {group.items.map((item) => (
-                   <div key={item.name} className="bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                     <div className="flex justify-between items-start mb-2">
-                       <h3 className="font-bold text-xl text-[#0F3460]">{item.name}</h3>
-                       <span className="text-[#E94560] font-bold text-sm bg-[#E94560]/10 px-2 py-1 rounded">{item.price}</span>
-                     </div>
-                     <p className="text-gray-600 text-sm">{item.desc}</p>
-                   </div>
-                 ))}
-               </div>
-             </div>
-           ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Sidebar */}
+          <aside className="hidden lg:block">
+            <nav className="sticky top-24 space-y-1">
+              <a href="#cosmetic" className="block px-4 py-3 text-lg font-medium text-primary bg-medical/10 border-l-4 border-medical rounded-r-lg">
+                Cosmetic Dentistry
+              </a>
+              <a href="#general" className="block px-4 py-3 text-lg font-medium text-gray-600 hover:text-primary hover:bg-gray-50 border-l-4 border-transparent hover:border-gray-200 transition-all rounded-r-lg">
+                General Dentistry
+              </a>
+              <a href="#restorative" className="block px-4 py-3 text-lg font-medium text-gray-600 hover:text-primary hover:bg-gray-50 border-l-4 border-transparent hover:border-gray-200 transition-all rounded-r-lg">
+                Restorative & Implants
+              </a>
+            </nav>
+          </aside>
 
-           {/* FAQ Section */}
-           <div className="border-t border-[#E5E7EB] pt-16">
-             <h2 className="font-heading font-bold text-3xl text-[#0F3460] mb-8">Common Questions</h2>
-             <div className="space-y-6">
-               {faqs.map((faq, i) => (
-                 <details key={i} className="group border-b border-[#E5E7EB] pb-6">
-                   <summary className="flex justify-between items-center cursor-pointer list-none text-lg font-semibold text-[#0F3460]">
-                     {faq.q}
-                     <span className="transition group-open:rotate-180">
-                       <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
-                     </span>
-                   </summary>
-                   <p className="text-gray-600 mt-4 leading-relaxed">{faq.a}</p>
-                 </details>
-               ))}
-             </div>
-           </div>
-         </div>
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-24">
+            {Object.entries(services).map(([key, category], index) => (
+              <section id={key} key={key} className="scroll-mt-24">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start mb-8">
+                  <div className="order-2 md:order-1">
+                    <h2 className="text-3xl font-heading font-bold text-primary mb-4">
+                      {category.title}
+                    </h2>
+                    <p className="text-gray-600 text-lg mb-6">
+                      {category.desc}
+                    </p>
+                    <ul className="space-y-4">
+                      {category.items.map((item, i) => (
+                        <li key={i} className="flex items-center justify-between p-4 border border-gray-100 rounded-lg bg-white shadow-sm">
+                          <div className="flex items-center gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-medical shrink-0" />
+                            <span className="font-medium text-gray-900">{item.name}</span>
+                          </div>
+                          <span className="text-sm font-bold text-gray-500 bg-gray-50 px-3 py-1 rounded">
+                            {item.price}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="order-1 md:order-2">
+                    <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                      <Image
+                        src={images[category.image as keyof typeof images].src}
+                        alt={images[category.image as keyof typeof images].alt}
+                        width={600}
+                        height={400}
+                        className="object-cover w-full h-64 md:h-full"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+            ))}
 
-         {/* Sidebar / Sticky Form */}
-         <div className="relative">
-           <div className="sticky top-28 bg-[#F8F9FA] p-8 rounded-2xl border border-[#E5E7EB] shadow-card">
-             <h3 className="font-heading font-bold text-2xl text-[#0F3460] mb-4">Book Consultation</h3>
-             <p className="text-sm text-gray-600 mb-6">
-               Unsure which treatment is right for you? Schedule a consultation, and our doctors will create a personalized plan.
-             </p>
-             <ContactForm context="Services Consultation" />
-           </div>
-         </div>
-       </div>
-    </div>
+            {/* FAQ Section */}
+            <section className="pt-12 border-t border-gray-200">
+              <h2 className="text-3xl font-heading font-bold text-primary mb-8">
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-4">
+                {[
+                  { q: "Do you accept insurance?", a: "Yes, we accept most major dental insurance plans, including Delta, Aetna, Cigna, and MetLife. We handle the paperwork for you to maximize your benefits." },
+                  { q: "What if I have a dental emergency?", a: "We reserve time daily for emergency patients. Please call us immediately at (713) 555-0198 if you are experiencing pain or have broken a tooth." },
+                  { q: "Do you offer financing?", a: "Absolutely. We partner with CareCredit and offer in-house payment plans to make your dental care affordable." },
+                ].map((faq, i) => (
+                  <details key={i} className="group bg-white border border-gray-200 rounded-lg">
+                    <summary className="flex justify-between items-center font-medium cursor-pointer list-none p-6 text-primary">
+                      <span>{faq.q}</span>
+                      <span className="transition group-open:rotate-180">
+                        <ChevronRight className="w-5 h-5" />
+                      </span>
+                    </summary>
+                    <div className="text-gray-600 px-6 pb-6 leading-relaxed">
+                      {faq.a}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </section>
+
+            {/* Contact Form */}
+            <section id="book" className="pt-12 border-t border-gray-200">
+              <div className="bg-surface rounded-2xl p-8 md:p-12">
+                <h2 className="text-3xl font-heading font-bold text-primary mb-4">
+                  Request a Consultation
+                </h2>
+                <p className="text-gray-600 mb-8">
+                  Ready to get started? Fill out the form below and we will contact you to schedule your visit.
+                </p>
+                <ContactForm context="Services Page Consultation" />
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

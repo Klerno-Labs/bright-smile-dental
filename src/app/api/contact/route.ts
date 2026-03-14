@@ -1,19 +1,49 @@
 import { NextResponse } from "next/server";
+import { sanitizeInput } from "@/lib/utils";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     
-    // Basic validation
-    if (!body.name || !body.email || !body.phone) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    // Honeypot check
+    if (body._gotcha) {
+      return NextResponse.json({ message: "Spam detected" }, { status: 200 });
     }
 
-    // In a real app, you would send an email here using Nodemailer, SendGrid, or Resend
-    // console.log("Form submission:", body);
+    // Sanitize inputs
+    const data = {
+      name: sanitizeInput(body.name),
+      email: sanitizeInput(body.email),
+      phone: sanitizeInput(body.phone),
+      service: sanitizeInput(body.service),
+      message: sanitizeInput(body.message),
+      context: sanitizeInput(body.context || "General"),
+    };
 
-    return NextResponse.json({ success: true, message: "Form received" }, { status: 200 });
+    // Basic Validation
+    if (!data.name || !data.email || !data.message) {
+      return NextResponse.json(
+        { message: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    // Simulate email sending or database storage
+    // In a real app, you would use nodemailer or SendGrid here
+    console.log("Received Contact Form Submission:", data);
+
+    // Simulate delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    return NextResponse.json(
+      { message: "Message sent successfully" },
+      { status: 200 }
+    );
   } catch (error) {
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    console.error("Contact API Error:", error);
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
