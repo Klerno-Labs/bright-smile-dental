@@ -1,59 +1,70 @@
-import { Container } from "../ui/Container";
-import { SectionHeading } from "../ui/SectionHeading";
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
+import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Link } from "lucide-react";
 import { images } from "@/config/images";
-import { Linkedin, Twitter } from "lucide-react";
 
 const team = [
   {
-    name: "Dr. Sarah Bennett",
-    role: "Lead Dentist, DDS",
-    bio: "Over 15 years of experience specializing in cosmetic restoration and implantology.",
-    img: "team-1",
+    name: "Dr. Elena Vance",
+    title: "Lead Dentist, DDS",
+    bio: "Dr. Vance has over 15 years of experience transforming smiles with a focus on minimally invasive cosmetic techniques.",
+    image: "team-1"
   },
   {
-    name: "Dr. Michael Ross",
-    role: "Orthodontist",
-    bio: "Expert in Invisalign and clear braces for adults and teens.",
-    img: "about",
+    name: "Dr. Marcus Thorne",
+    title: "Orthodontist",
+    bio: "Specializing in clear aligners and modern orthodontics, Dr. Thorne helps patients achieve perfect alignment comfortably.",
+    image: "about" 
   },
-  {
-    name: "Emily Chen",
-    role: "Hygienist",
-    bio: "Passionate about preventative care and patient education.",
-    img: "hero-alt",
-  },
+   {
+    name: "Sarah Jenkins",
+    title: "Lead Hygienist",
+    bio: "Sarah is known for her gentle touch and patient education, ensuring every visit leaves you smiling.",
+    image: "gallery-3"
+  }
 ];
 
 export function TeamSection() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-gray-50">
       <Container>
         <SectionHeading 
-          title="Meet Your Care Team" 
-          subtitle="Dedicated professionals committed to your comfort and health."
+          title="Meet Our Experts" 
+          subtitle="The Team"
+          align="left"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {team.map((member, idx) => (
-            <div key={idx} className="group text-center">
-              <div className="relative mx-auto w-64 h-64 mb-6 overflow-hidden rounded-full border-4 border-white shadow-lg">
+          {team.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="group"
+            >
+              <div className="relative h-[350px] mb-6 rounded-t-[2rem] overflow-hidden bg-white shadow-sm">
                 <Image
-                  src={images[member.img as keyof typeof images].src}
+                  src={images[member.image as keyof typeof images].src}
                   alt={member.name}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0E3A53]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
+                   <Link className="text-white font-bold flex items-center gap-2">View Full Bio</Link>
+                </div>
               </div>
-              <h3 className="font-heading text-xl font-bold text-primary mb-1">{member.name}</h3>
-              <p className="text-secondary font-medium text-sm mb-3">{member.role}</p>
-              <p className="text-text-main text-sm leading-relaxed px-4">{member.bio}</p>
-              
-              <div className="flex justify-center gap-4 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                 <a href="#" className="text-muted hover:text-primary transition-colors"><Twitter className="w-4 h-4" /></a>
-                 <a href="#" className="text-muted hover:text-primary transition-colors"><Linkedin className="w-4 h-4" /></a>
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-[#0E3A53]">{member.name}</h3>
+                <p className="text-[#4CA1A3] font-medium mb-2">{member.title}</p>
+                <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{member.bio}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </Container>

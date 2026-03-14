@@ -1,109 +1,98 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import Image from "next/image";
-import { Button } from "../ui/Button";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 import { images } from "@/config/images";
-import { BeforeAfterSlider } from "./BeforeAfterSlider";
 
 export function HeroHome() {
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-background pt-20 overflow-hidden">
-      <div className="max-w-[1240px] mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center">
+    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
+      <Container className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
         
-        {/* Content Left */}
-        <motion.div
+        {/* Left Content */}
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="space-y-8 z-10"
+          transition={{ duration: 0.8 }}
+          className="space-y-8"
         >
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-100 shadow-sm"
-          >
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <span className="text-sm font-medium text-primary">Accepting New Patients</span>
-          </motion.div>
-
-          <h1 className="font-heading text-5xl lg:text-6xl font-bold text-primary leading-[1.1]">
-            Life-changing confidence starts with your smile.
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E0F2F2] text-[#0E3A53] text-sm font-semibold">
+            <Star className="h-4 w-4 text-[#D4AF37] fill-[#D4AF37]" />
+            <span>Top Rated Dental Practice in Houston</span>
+          </div>
+          
+          <h1 className="font-manrope font-bold text-[#0E3A53] leading-[1.1] text-5xl md:text-6xl lg:text-7xl">
+            Life-changing confidence starts with a smile.
           </h1>
-
-          <p className="text-lg text-text-main max-w-lg leading-relaxed">
-            Experience modern dentistry in a calming environment. We combine advanced technology with a gentle touch to create the smile you've always wanted.
+          
+          <p className="text-lg text-[#4B5563] leading-relaxed max-w-xl">
+            Experience gentle, modern dentistry designed for your comfort. From routine checkups to complete smile makeovers, we treat you like family.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button size="lg" className="group">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button size="lg" className="shadow-lg hover:shadow-xl transition-shadow">
               Book Consultation
-              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button variant="secondary" size="lg">
               Virtual Tour
             </Button>
           </div>
 
-          <div className="flex items-center gap-6 pt-4 text-sm text-muted">
-            <div className="flex -space-x-2">
-               {/* Avatar placeholders */}
-               {[1,2,3].map(i => (
-                 <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                    <Image src={`https://i.pravatar.cc/150?img=${i+10}`} alt="Patient" width={32} height={32} />
-                 </div>
-               ))}
-            </div>
-            <div>
-              <div className="flex text-accent mb-1">★★★★★</div>
-              <span className="text-primary">4.9/5 from 500+ reviews</span>
+          <div className="pt-4 border-t border-gray-100">
+            <p className="text-sm text-gray-500 mb-2">Trusted by patients for exceptional care</p>
+            <div className="flex items-center gap-1">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-5 w-5 text-[#D4AF37] fill-[#D4AF37]" />
+              ))}
+              <span className="ml-2 font-semibold text-[#0E3A53]">4.9/5</span>
+              <span className="text-gray-400">(250+ Reviews)</span>
             </div>
           </div>
         </motion.div>
 
-        {/* Content Right */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative h-[600px] hidden lg:block"
+        {/* Right Content */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative hidden lg:block h-[85vh]"
         >
-          <div className="absolute inset-0 bg-gradient-to-tr from-secondary/20 to-transparent rounded-[40px] rotate-3 scale-95" />
-          <div className="relative h-full w-full rounded-[32px] overflow-hidden shadow-2xl">
-             <BeforeAfterSlider 
-               beforeSrc={images["gallery-2"].src}
-               afterSrc={images["hero"].src}
-             />
-             
-             {/* Floating Glass Card */}
-             <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/50">
-                <div className="flex items-center justify-between mb-2">
-                   <span className="text-sm font-semibold text-primary">Emergency?</span>
-                   <span className="text-sm text-secondary">Available Today</span>
-                </div>
-                <p className="text-xs text-text-main mb-4">Same-day appointments available for pain relief.</p>
-                <Link href="/contact" className="block w-full text-center py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
-                   Book Emergency Slot
-                </Link>
-             </div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-[#0E3A53]/20 to-transparent rounded-[2rem] translate-x-4 translate-y-4" />
+          <div className="relative h-full w-full rounded-[2rem] overflow-hidden shadow-2xl">
+            <Image
+              src={images["hero"].src}
+              alt={images["hero"].alt}
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
+          
+          {/* Floating Glass Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="absolute bottom-10 -left-10 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl max-w-xs border border-white/50"
+          >
+            <div className="flex items-center gap-3 mb-3">
+               <div className="h-10 w-10 rounded-full bg-[#4CA1A3] flex items-center justify-center text-white">
+                 <Star className="h-5 w-5 fill-white" />
+               </div>
+               <div>
+                 <p className="font-bold text-[#0E3A53]">New Patient Special</p>
+                 <p className="text-xs text-gray-500">Limited time offer</p>
+               </div>
+            </div>
+            <p className="text-sm text-gray-600 font-medium">Get a comprehensive exam & X-rays for just <span className="text-[#4CA1A3]">$49</span></p>
+          </motion.div>
         </motion.div>
 
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted"
-      >
-        <span className="text-xs uppercase tracking-widest">Scroll</span>
-        <ChevronDown className="w-5 h-5 animate-bounce text-primary" />
-      </motion.div>
+      </Container>
     </section>
   );
 }

@@ -1,89 +1,79 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
+import { images } from "@/config/images";
+import { cn } from "@/lib/utils";
 
-interface BeforeAfterSliderProps {
-  beforeSrc: string;
-  afterSrc: string;
-}
-
-export function BeforeAfterSlider({ beforeSrc, afterSrc }: BeforeAfterSliderProps) {
+export function BeforeAfterSlider() {
   const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleSliderMove = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleSliderMove = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
+    
     const rect = containerRef.current.getBoundingClientRect();
-    const x = "touches" in e ? e.touches[0].clientX : e.clientX;
-    const position = ((x - rect.left) / rect.width) * 100;
-    setSliderPosition(Math.min(100, Math.max(0, position)));
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    
+    let x = clientX - rect.left;
+    if (x < 0) x = 0;
+    if (x > rect.width) x = rect.width;
+    
+    setSliderPosition((x / rect.width) * 100);
   };
-
-  useEffect(() => {
-    const handleStop = () => setIsDragging(false);
-    if (isDragging) {
-      window.addEventListener("mouseup", handleStop);
-      window.addEventListener("touchend", handleStop);
-      return () => {
-        window.removeEventListener("mouseup", handleStop);
-        window.removeEventListener("touchend", handleStop);
-      };
-    }
-  }, [isDragging]);
 
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-full cursor-ew-resize select-none"
-      onMouseDown={() => setIsDragging(true)}
-      onTouchStart={() => setIsDragging(true)}
-      onMouseMove={isDragging ? handleSliderMove : undefined}
-      onTouchMove={isDragging ? handleSliderMove : undefined}
+      className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg cursor-ew-resize select-none group"
+      onMouseMove={handleSliderMove}
+      onTouchMove={handleSliderMove}
     >
-      {/* Before Image (Background) */}
+      {/* After Image (Background) */}
       <div className="absolute inset-0">
-         <Image 
-           src={beforeSrc} 
-           alt="Before Treatment" 
-           fill 
-           className="object-cover filter brightness-90"
-           draggable={false}
-         />
-         <div className="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
-           Before
-         </div>
+        <Image
+          src={images["service-2"].src}
+          alt="After treatment"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute bottom-4 right-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
+          After
+        </div>
       </div>
 
-      {/* After Image (Foreground with Clip Path) */}
+      {/* Before Image (Clipped) */}
       <div 
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
-        <Image 
-          src={afterSrc} 
-          alt="After Treatment" 
-          fill 
-          className="object-cover"
-          draggable={false}
+        <Image
+          src={images["service-1"].src} // Using service-1 as a placeholder for "Before"
+          alt="Before treatment"
+          fill
+          className="object-cover w-full h-full"
         />
-        <div className="absolute top-4 right-4 bg-secondary text-white px-3 py-1 rounded-full text-xs font-medium">
-           After
+        <div className="absolute bottom-4 left-4 bg-black/60 text-white px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
+          Before
         </div>
       </div>
 
       {/* Slider Handle */}
       <div 
-        className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize shadow-lg flex items-center justify-center"
+        className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] pointer-events-none"
         style={{ left: `${sliderPosition}%` }}
       >
-        <div className="w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center text-primary border-2 border-secondary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-            <polyline points="9 18 15 12 9 6" transform="rotate(180 12 12)"></polyline>
-          </svg>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white text-[#0E3A53] shadow-lg flex items-center justify-center">
+          <div className="flex gap-1">
+            <div className="w-1 h-4 bg-[#4CA1A3] rounded-full" />
+            <div className="w-1 h-4 bg-gray-300 rounded-full" />
+          </div>
         </div>
+      </div>
+      
+      {/* Center Prompt */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <span className="bg-black/50 text-white px-4 py-2 rounded-full text-sm backdrop-blur-md">Drag to compare</span>
       </div>
     </div>
   );

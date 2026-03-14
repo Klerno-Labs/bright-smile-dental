@@ -1,31 +1,30 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://example.com";
   return [
     {
-      url: baseUrl,
+      url: "https://brightsmiledental-demo.com",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/about`,
+      url: "https://brightsmiledental-demo.com/about",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services`,
+      url: "https://brightsmiledental-demo.com/services",
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.9,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: "https://brightsmiledental-demo.com/contact",
       lastModified: new Date(),
       changeFrequency: "yearly",
-      priority: 0.8,
+      priority: 0.5,
     },
   ];
 }

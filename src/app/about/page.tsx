@@ -1,81 +1,85 @@
 import { HeroInternal } from "@/components/sections/HeroInternal";
-import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Container } from "@/components/ui/Container";
 import { TeamSection } from "@/components/sections/TeamSection";
-import { Badge, Clock, ShieldCheck } from "lucide-react";
-import { Metadata } from "next";
+import { CheckCircle, Award, Users } from "lucide-react";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "About Us",
-  description: "Learn about Bright Smile Dental's philosophy, technology, and expert team.",
+  description: "Learn more about Bright Smile Dental's philosophy, technology, and expert team in Houston, TX.",
 };
 
 export default function AboutPage() {
   return (
     <>
       <HeroInternal 
-        title="About Bright Smile Dental" 
-        subtitle="Where advanced dentistry meets compassionate care."
-        imageKey="about"
+        title="About Our Practice" 
+        subtitle="Excellence in dentistry since 1990"
+        imageKey="about" 
       />
 
-      <section className="py-24 bg-surface">
+      {/* Philosophy Section */}
+      <section className="py-24 bg-white">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="font-heading text-3xl font-bold text-primary mb-6">Our Philosophy</h2>
-              <p className="text-text-main leading-relaxed mb-6">
-                At Bright Smile Dental, we believe a visit to the dentist should be something to smile about. Founded in 2010, our practice was built on the foundation of patient-centered care. We listen to your concerns, explain your options clearly, and prioritize your comfort above all else.
+              <h2 className="text-3xl md:text-4xl font-bold text-[#0E3A53] mb-6">
+                We Treat Patients, Not Just Teeth
+              </h2>
+              <p className="text-[#4B5563] mb-6 leading-relaxed">
+                At Bright Smile Dental, we believe that visiting the dentist should be a positive, stress-free experience. Founded on the principles of compassion and integrity, our practice has served the Houston community for over three decades.
               </p>
-              <p className="text-text-main leading-relaxed mb-8">
-                We understand that every smile is unique. That's why we create personalized treatment plans tailored to your specific needs and goals, ensuring you receive the most effective and appropriate care.
+              <p className="text-[#4B5563] mb-8 leading-relaxed">
+                Our philosophy is simple: provide the highest quality care using the latest technology, delivered with a gentle touch. We listen to your concerns, explain your options clearly, and empower you to make the best decisions for your oral health.
               </p>
-              
-              <blockquote className="font-serif text-2xl text-secondary italic border-l-4 border-secondary pl-6 py-2 bg-secondary/5 rounded-r-lg">
-                "We treat our patients like family, because that's exactly what they are to us."
+              <blockquote className="border-l-4 border-[#D4AF37] pl-6 py-2 mb-6">
+                <p className="font-playfair text-2xl italic text-[#0E3A53]">
+                  "Your smile is our passion. We dedicate ourselves to crafting beautiful, healthy smiles that last a lifetime."
+                </p>
+                <cite className="not-italic text-sm text-gray-500 mt-2 block">— Dr. Elena Vance, Lead Dentist</cite>
               </blockquote>
-              <p className="text-sm font-bold text-primary mt-2">— Dr. Sarah Bennett</p>
             </div>
-            
-            <div className="bg-background p-8 rounded-2xl shadow-lg">
-              <h3 className="font-heading text-2xl font-bold text-primary mb-8">Why Choose Us</h3>
-              <div className="space-y-6">
-                {[
-                  { icon: Badge, title: "Expert Care", desc: "Board-certified specialists with years of experience." },
-                  { icon: Clock, title: "Respect for Time", desc: "We value your schedule with minimal wait times." },
-                  { icon: ShieldCheck, title: "Safe & Sterile", desc: "Hospital-grade sterilization protocols for your safety." }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex gap-4">
-                    <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
-                      <item.icon className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-primary mb-1">{item.title}</h4>
-                      <p className="text-sm text-text-main">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <Award className="h-10 w-10 text-[#4CA1A3] mb-4" />
+                <h3 className="font-bold text-[#0E3A53] text-lg mb-2">Award Winning</h3>
+                <p className="text-sm text-[#4B5563]">Recognized as Houston's Top Dentist for 5 consecutive years.</p>
+              </div>
+              <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                <Users className="h-10 w-10 text-[#4CA1A3] mb-4" />
+                <h3 className="font-bold text-[#0E3A53] text-lg mb-2">Family Friendly</h3>
+                <p className="text-sm text-[#4B5563]">We create a welcoming environment for patients of all ages.</p>
+              </div>
+               <div className="bg-gray-50 p-6 rounded-xl border border-gray-100 sm:col-span-2">
+                <CheckCircle className="h-10 w-10 text-[#4CA1A3] mb-4" />
+                <h3 className="font-bold text-[#0E3A53] text-lg mb-2">Gentle Guarantee</h3>
+                <p className="text-sm text-[#4B5563]">If you feel any discomfort, simply raise your hand and we will pause immediately.</p>
               </div>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="py-24 bg-background">
+      {/* Technology Section */}
+      <section className="py-24 bg-gray-50">
         <Container>
           <SectionHeading 
-            title="Modern Technology" 
-            subtitle="We invest in the latest technology to provide faster, more accurate, and comfortable treatments."
+            title="Advanced Technology" 
+            subtitle="State-of-the-Art Equipment"
+            align="center"
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
             {[
-              { title: "Digital X-Rays", desc: "90% less radiation than traditional film." },
-              { title: "3D Imaging", desc: "Precise planning for implants and orthodontics." },
-              { title: "Laser Dentistry", desc: "Minimally invasive gum treatment." }
-            ].map((tech, idx) => (
-              <div key={idx} className="p-6 border border-gray-100 rounded-xl hover:shadow-md transition-shadow">
-                <h3 className="font-heading text-xl font-bold text-primary mb-2">{tech.title}</h3>
-                <p className="text-text-main text-sm">{tech.desc}</p>
+              "3D Digital Imaging (CBCT)",
+              "Intraoral Cameras",
+              "Laser Cavity Detection",
+              "CEREC Same-Day Crowns",
+              "Digital Impressions (No Goop!)",
+              "Sedation Dentistry Options"
+            ].map((tech, i) => (
+              <div key={i} className="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm">
+                <div className="h-2 w-2 rounded-full bg-[#4CA1A3]" />
+                <span className="font-medium text-[#0E3A53]">{tech}</span>
               </div>
             ))}
           </div>

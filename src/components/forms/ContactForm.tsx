@@ -1,216 +1,178 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Button } from "../ui/Button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
 import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 
-const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  service: z.string().optional(),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-  _gotcha: z.string(), // Honeypot
-});
-
-type FormData = z.infer<typeof formSchema>;
-
-interface ContactFormProps {
-  className?: string;
-  submitText?: string;
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+  _gotcha: string; // Honeypot
 }
 
-export function ContactForm({ className, submitText = "Send Message" }: ContactFormProps) {
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      _gotcha: "", // Initialize honeypot as empty
-    },
+export function ContactForm() {
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    phone: "",
+    service: "general",
+    message: "",
+    _gotcha: "",
   });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const onSubmit = async (data: FormData) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
     // Honeypot check
-    if (data._gotcha) {
-      return; // Silent fail for bots
-    }
+    if (formData._gotcha) return;
 
-    setIsSubmitting(true);
-    setError(null);
+    setStatus("loading");
+    setErrorMsg("");
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
       });
 
       if (res.ok) {
-        setIsSuccess(true);
-        reset();
-        setTimeout(() => setIsSuccess(false), 5000);
+        setStatus("success");
+        setFormData({ name: "", email: "", phone: "", service: "general", message: "", _gotcha: "" });
       } else {
-        setError("Something went wrong. Please try again.");
+        const data = await res.json();
+        throw new Error(data.message || "Something went wrong");
       }
-    } catch (err) {
-      setError("Network error. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+    } catch (error: any) {
+      setStatus("error");
+      setErrorMsg(error.message || "Network error. Please try again.");
     }
   };
 
-  if (isSuccess) {
-    return (
-      <div className="flex flex-col items-center justify-center p-8 bg-green-50 rounded-xl text-center">
-        <CheckCircle2 className="w-16 h-16 text-green-600 mb-4" />
-        <h3 className="text-xl font-bold text-green-800 mb-2">Message Sent!</h3>
-        <p className="text-green-700">Thank you for reaching out. We'll be in touch within 24 hours.</p>
-      </div>
-    );
-  }
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={cn("space-y-6", className)}>
-      <div className="hidden">
-        <input type="text" {...register("_gotcha")} tabIndex={-1} autoComplete="off" />
-      </div>
-
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <label htmlFor="name" className="text-sm font-medium text-primary">
-            Full Name
+          <label htmlFor="name" className="block text-sm font-medium text-[#0E3A53]">
+            Full Name <span className="text-red-500">*</span>
           </label>
           <input
-            id="name"
             type="text"
-            {...register("name")}
-            className={cn(
-              "w-full px-4 py-3 bg-white border border-gray-200 rounded-md outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all",
-              errors.name && "border-red-500 ring-1 ring-red-500"
-            )}
-            placeholder="John Doe"
+            id="name"
+            name="name"
+            required
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all bg-white"
+            placeholder="Dr. John Doe"
           />
-          {errors.name && (
-            <p className="text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.name.message}
-            </p>
-          )}
         </div>
-
         <div className="space-y-2">
-          <label htmlFor="phone" className="text-sm font-medium text-primary">
-            Phone Number
+          <label htmlFor="phone" className="block text-sm font-medium text-[#0E3A53]">
+            Phone Number <span className="text-red-500">*</span>
           </label>
           <input
-            id="phone"
             type="tel"
-            {...register("phone")}
-            className={cn(
-              "w-full px-4 py-3 bg-white border border-gray-200 rounded-md outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all",
-              errors.phone && "border-red-500 ring-1 ring-red-500"
-            )}
-            placeholder="(512) 555-0198"
+            id="phone"
+            name="phone"
+            required
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all bg-white"
+            placeholder="(713) 555-0198"
           />
-          {errors.phone && (
-            <p className="text-xs text-red-500 flex items-center gap-1">
-              <AlertCircle className="w-3 h-3" /> {errors.phone.message}
-            </p>
-          )}
         </div>
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="email" className="text-sm font-medium text-primary">
-          Email Address
+        <label htmlFor="email" className="block text-sm font-medium text-[#0E3A53]">
+          Email Address <span className="text-red-500">*</span>
         </label>
         <input
-          id="email"
           type="email"
-          {...register("email")}
-          className={cn(
-            "w-full px-4 py-3 bg-white border border-gray-200 rounded-md outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all",
-            errors.email && "border-red-500 ring-1 ring-red-500"
-          )}
+          id="email"
+          name="email"
+          required
+          value={formData.email}
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all bg-white"
           placeholder="john@example.com"
         />
-        {errors.email && (
-          <p className="text-xs text-red-500 flex items-center gap-1">
-            <AlertCircle className="w-3 h-3" /> {errors.email.message}
-          </p>
-        )}
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="service" className="text-sm font-medium text-primary">
-          Service Interest (Optional)
+        <label htmlFor="service" className="block text-sm font-medium text-[#0E3A53]">
+          Interested Service
         </label>
         <select
           id="service"
-          {...register("service")}
-          className="w-full px-4 py-3 bg-white border border-gray-200 rounded-md outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all"
+          name="service"
+          value={formData.service}
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all bg-white"
         >
-          <option value="">Select a service...</option>
           <option value="general">General Checkup</option>
           <option value="cosmetic">Cosmetic Dentistry</option>
+          <option value="whitening">Teeth Whitening</option>
           <option value="implants">Dental Implants</option>
-          <option value="orthodontics">Orthodontics</option>
+          <option value="ortho">Orthodontics</option>
+          <option value="emergency">Emergency Care</option>
         </select>
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="message" className="text-sm font-medium text-primary">
-          Message
+        <label htmlFor="message" className="block text-sm font-medium text-[#0E3A53]">
+          How can we help?
         </label>
         <textarea
           id="message"
+          name="message"
           rows={4}
-          {...register("message")}
-          className={cn(
-            "w-full px-4 py-3 bg-white border border-gray-200 rounded-md outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all resize-none",
-            errors.message && "border-red-500 ring-1 ring-red-500"
-          )}
-          placeholder="How can we help you?"
+          value={formData.message}
+          onChange={handleChange}
+          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all bg-white resize-none"
+          placeholder="Tell us about your dental concerns or desired appointment time..."
         />
-        {errors.message && (
-          <p className="text-xs text-red-500 flex items-center gap-1">
-            <AlertCircle className="w-3 h-3" /> {errors.message.message}
-          </p>
-        )}
       </div>
 
-      {error && (
-        <div className="p-3 bg-red-50 border border-red-200 rounded-md text-sm text-red-700 flex items-center gap-2">
-          <AlertCircle className="w-4 h-4" /> {error}
-        </div>
-      )}
+      {/* Honeypot for bots */}
+      <input
+        type="text"
+        name="_gotcha"
+        value={formData._gotcha}
+        onChange={handleChange}
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+      />
 
       <Button
         type="submit"
         variant="primary"
         size="lg"
         className="w-full"
-        disabled={isSubmitting}
+        disabled={status === "loading" || status === "success"}
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Sending...
-          </>
-        ) : (
-          submitText
-        )}
+        {status === "loading" && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
+        {status === "success" && <CheckCircle2 className="mr-2 h-5 w-5" />}
+        {status === "success" ? "Message Sent!" : status === "loading" ? "Sending..." : "Send Message"}
       </Button>
+
+      {status === "error" && (
+        <div className="flex items-center gap-2 text-red-600 bg-red-50 p-3 rounded-lg text-sm">
+          <AlertCircle className="h-4 w-4 shrink-0" />
+          {errorMsg}
+        </div>
+      )}
     </form>
   );
 }

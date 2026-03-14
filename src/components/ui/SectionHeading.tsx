@@ -7,29 +7,18 @@ interface SectionHeadingProps {
   className?: string;
 }
 
-export function SectionHeading({
-  title,
-  subtitle,
-  align = "center",
-  className,
-}: SectionHeadingProps) {
+export function SectionHeading({ title, subtitle, align = "center", className }: SectionHeadingProps) {
   return (
-    <div
-      className={cn(
-        "mb-12 md:mb-16 max-w-3xl",
-        align === "center" ? "mx-auto text-center" : "text-left",
-        className
-      )}
-    >
-      <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">
-        {title}
-      </h2>
+    <div className={cn("mb-12 md:mb-16", align === "center" && "text-center mx-auto max-w-3xl", className)}>
       {subtitle && (
-        <p className="text-lg text-text-main leading-relaxed font-body">
+        <p className="text-[#4CA1A3] font-semibold tracking-wide uppercase text-sm mb-3">
           {subtitle}
         </p>
       )}
-      <div className={cn("w-20 h-1.5 bg-secondary mt-6", align === "left" ? "" : "mx-auto")} />
+      <h2 className="font-manrope font-bold text-[clamp(2rem,4vw,3rem)] text-[#0E3A53] leading-[1.2] mb-4">
+        {title}
+      </h2>
+      <div className={cn("h-1 w-20 bg-[#D4AF37] rounded-full", align === "center" ? "mx-auto" : "ml-0")} />
     </div>
   );
 }

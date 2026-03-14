@@ -1,57 +1,83 @@
-import { Mail, MapPin, Phone, Facebook, Instagram, Twitter, Linkedin, ArrowUp } from "lucide-react";
-import { Button } from "./ui/Button";
-import siteConfig from "@/config/site";
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import { MapPin, Mail, Phone, Facebook, Instagram, ArrowUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "./ui/Button";
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="bg-primary text-white pt-20 pb-8">
-      <div className="max-w-[1240px] mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+    <footer className="bg-[#0E3A53] text-white pt-16 pb-8">
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-heading font-bold text-2xl">Bright Smile Dental</h3>
-            <p className="text-white/80 leading-relaxed text-sm">
-              Providing exceptional dental care with a gentle touch. Your smile is our top priority.
+            <div className="flex items-center gap-2">
+               <span className="font-manrope font-bold text-xl tracking-tight text-white">
+                Bright<span className="text-[#4CA1A3]">Smile</span>
+              </span>
+            </div>
+            <p className="text-gray-300 leading-relaxed text-sm">
+              Modern dentistry with a gentle touch. We are committed to providing you and your family with the highest quality dental care in a comfortable, relaxed atmosphere.
             </p>
+            <div className="flex gap-4 pt-2">
+              <a 
+                href={siteConfig.links.facebook || "#"} 
+                className="p-2 bg-white/10 rounded-full hover:bg-[#4CA1A3] transition-colors"
+                aria-label="Visit our Facebook page"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+              <a 
+                href={siteConfig.links.instagram || "#"} 
+                className="p-2 bg-white/10 rounded-full hover:bg-[#4CA1A3] transition-colors"
+                aria-label="Visit our Instagram page"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-lg mb-6 text-accent">Quick Links</h4>
-            <ul className="space-y-3">
-              {siteConfig.navItems.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className="text-white/80 hover:text-white transition-colors">
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
+            <h3 className="font-manrope font-bold text-lg mb-4 text-[#D4AF37]">Quick Links</h3>
+            <ul className="space-y-3 text-sm text-gray-300">
+              <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/services" className="hover:text-white transition-colors">Our Services</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/contact#new-patients" className="hover:text-white transition-colors">New Patients</Link></li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact Info */}
           <div>
-            <h4 className="font-semibold text-lg mb-6 text-accent">Contact Us</h4>
-            <ul className="space-y-4 text-white/80">
+            <h3 className="font-manrope font-bold text-lg mb-4 text-[#D4AF37]">Contact Us</h3>
+            <ul className="space-y-4 text-sm text-gray-300">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 mt-0.5 text-secondary" />
-                <span className="text-sm leading-relaxed">
-                  {siteConfig.contact.address}
+                <MapPin className="h-5 w-5 text-[#4CA1A3] shrink-0 mt-0.5" />
+                <span>
+                  {siteConfig.contact.address}<br />
+                  {siteConfig.contact.city}, {siteConfig.contact.state} {siteConfig.contact.zip}
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-secondary" />
+                <Phone className="h-5 w-5 text-[#4CA1A3] shrink-0" />
                 <a href={`tel:${siteConfig.contact.phone}`} className="hover:text-white transition-colors">
                   {siteConfig.contact.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-secondary" />
+                <Mail className="h-5 w-5 text-[#4CA1A3] shrink-0" />
                 <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-white transition-colors">
                   {siteConfig.contact.email}
                 </a>
@@ -59,67 +85,38 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter / Social */}
+          {/* Hours */}
           <div>
-            <h4 className="font-semibold text-lg mb-6 text-accent">Follow Us</h4>
-            <div className="flex gap-4 mb-6">
-              <a
-                href={siteConfig.links.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit our Facebook page"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
-              >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href={siteConfig.links.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit our Instagram page"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href={siteConfig.links.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit our Twitter page"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit our LinkedIn page"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-            </div>
+            <h3 className="font-manrope font-bold text-lg mb-4 text-[#D4AF37]">Office Hours</h3>
+            <ul className="space-y-2 text-sm text-gray-300">
+              <li className="flex justify-between border-b border-white/10 pb-2">
+                <span>{siteConfig.hours.weekdays}</span>
+              </li>
+              <li className="flex justify-between border-b border-white/10 pb-2">
+                <span>{siteConfig.hours.saturday}</span>
+              </li>
+              <li className="flex justify-between">
+                <span>{siteConfig.hours.sunday}</span>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-white/60">
-            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
-          </p>
-          <div className="flex gap-6 text-sm text-white/60">
-            <Link href="/privacy" className="hover:text-white">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white">Terms of Service</Link>
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+          <p>&copy; {currentYear} {siteConfig.name}. All rights reserved.</p>
+          <div className="flex gap-6">
+             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
-          <button
-            onClick={scrollToTop}
-            aria-label="Back to top"
-            className="p-2 bg-white/10 rounded-full hover:bg-secondary transition-colors"
+          <button 
+            onClick={scrollToTop} 
+            className="p-2 rounded-full bg-white/10 hover:bg-[#4CA1A3] transition-colors text-white"
+            aria-label="Scroll to top"
           >
-            <ArrowUp className="w-5 h-5" />
+            <ArrowUp className="h-4 w-4" />
           </button>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

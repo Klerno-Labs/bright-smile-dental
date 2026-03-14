@@ -1,32 +1,35 @@
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const body = await req.json();
-    
-    // Basic server-side validation
-    if (!body.name || !body.email || !body.message) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
+    const body = await request.json();
+    const { name, email, phone, service, message, _gotcha } = body;
+
+    // Honeypot validation
+    if (_gotcha) {
+      return NextResponse.json({ message: "Bot detected" }, { status: 200 });
     }
 
-    // In a real production environment, you would send an email here
-    // using Nodemailer, SendGrid, or Resend. For this showcase, we simulate success.
-    console.log("Form submission received:", body);
+    // Basic validation
+    if (!name || !email || !phone) {
+      return NextResponse.json({ message: "Missing required fields" }, { status: 400 });
+    }
 
-    // Simulate network delay
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ message: "Invalid email address" }, { status: 400 });
+    }
+
+    // In a real app, you would send this to an email service like Resend, SendGrid, or save to a database.
+    // console.log("Received Contact Form:", { name, email, phone, service, message });
+
+    // Simulating a delay for the UX
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    return NextResponse.json(
-      { success: true, message: "Message received" },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: "Message sent successfully" }, { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { error: "Internal Server Error" },
-      { status: 500 }
-    );
+    console.error("Contact form error:", error);
+    return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }

@@ -1,55 +1,56 @@
 "use client";
 
 import { useState } from "react";
-import { DollarSign, Info } from "lucide-react";
+import { Calculator, DollarSign } from "lucide-react";
 
-export function FinanceCalculator() {
-  const [cost, setCost] = useState(3000);
-  const months = 12;
-  const interestRate = 0.05; // 5% APR for calculation example
+interface FinanceCalculatorProps {
+  basePrice: number;
+}
 
-  const monthlyPayment = (cost / months) * (1 + interestRate);
+export function FinanceCalculator({ basePrice }: FinanceCalculatorProps) {
+  const [months, setMonths] = useState(12);
+  
+  // Simple calculation logic: Base Price / Months + Small Interest Fee (simulated)
+  const interestRate = 0.05; 
+  const totalWithInterest = basePrice * (1 + interestRate);
+  const monthlyPayment = Math.round(totalWithInterest / months);
 
   return (
-    <div className="bg-[#F0F9FA] p-8 rounded-2xl border border-secondary/20">
-      <h3 className="font-heading text-xl font-bold text-primary mb-2">Finance Calculator</h3>
-      <p className="text-sm text-text-main mb-6">Estimate your monthly payments. Subject to credit approval.</p>
+    <div className="bg-[#E0F2F2] p-6 rounded-xl border border-[#4CA1A3]/20">
+      <div className="flex items-center gap-2 mb-4 text-[#0E3A53]">
+        <Calculator className="h-5 w-5 text-[#4CA1A3]" />
+        <h4 className="font-bold text-lg">Finance Calculator</h4>
+      </div>
       
-      <div className="space-y-6">
+      <div className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-primary mb-2 flex justify-between">
-            <span>Treatment Cost</span>
-            <span className="text-secondary">${cost.toLocaleString()}</span>
+          <label className="block text-sm font-medium text-[#0E3A53] mb-2">
+            Treatment Cost: ${basePrice.toLocaleString()}
           </label>
           <input
             type="range"
-            min="500"
-            max="15000"
-            step="100"
-            value={cost}
-            onChange={(e) => setCost(Number(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-secondary"
+            min="3"
+            max="24"
+            step="3"
+            value={months}
+            onChange={(e) => setMonths(parseInt(e.target.value))}
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#4CA1A3]"
           />
-          <div className="flex justify-between text-xs text-muted mt-1">
-            <span>$500</span>
-            <span>$15,000</span>
+          <div className="flex justify-between text-xs text-gray-500 mt-1">
+            <span>3 Mo</span>
+            <span className="font-bold text-[#4CA1A3]">{months} Months</span>
+            <span>24 Mo</span>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm text-center">
-          <div className="text-sm text-muted mb-1 flex items-center justify-center gap-1">
-            <Info className="w-3 h-3" /> Est. Monthly Payment
+        <div className="bg-white p-4 rounded-lg text-center border border-gray-200">
+          <p className="text-sm text-gray-500 mb-1">Est. Monthly Payment</p>
+          <div className="flex items-center justify-center gap-1 text-[#0E3A53]">
+            <DollarSign className="h-6 w-6 text-[#4CA1A3]" />
+            <span className="text-3xl font-bold">{monthlyPayment}</span>
           </div>
-          <div className="text-3xl font-bold text-primary flex items-center justify-center gap-1">
-            <DollarSign className="w-6 h-6" />
-            {monthlyPayment.toFixed(2)}
-          </div>
-          <div className="text-xs text-muted mt-2">{months} months at 5% APR</div>
+          <p className="text-xs text-gray-400 mt-2">*Approved credit required. APR approx 5%.</p>
         </div>
-
-        <button className="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
-          Apply for Financing
-        </button>
       </div>
     </div>
   );

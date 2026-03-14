@@ -9,98 +9,98 @@
 // to edit to swap any image on the entire website.
 
 export const images = {
-  // Homepage hero banner — the first image visitors see — REPLACE with a real Unsplash URL matching: "Modern office workspace with natural light"
+  // Homepage hero banner — the first image visitors see — REPLACE with a real Unsplash URL matching: "Modern dental office reception with warm lighting"
   "hero": {
-    src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop",
-    alt: "Bright Smile Dental Interior Reception",
+    src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1600&auto=format&fit=crop",
+    alt: "Modern dental office reception with warm lighting",
     width: 1200,
     height: 800,
   },
 
-  // Alternative hero image (used on inner pages or as fallback) — REPLACE with a real Unsplash URL matching: "Professional team collaborating in bright office"
+  // Alternative hero image (used on inner pages or as fallback) — REPLACE with a real Unsplash URL matching: "Professional dentist examining patient"
   "hero-alt": {
-    src: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=2070&auto=format&fit=crop",
-    alt: "Dental Team Meeting",
+    src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=1600&auto=format&fit=crop",
+    alt: "Professional dentist examining patient with care",
     width: 1200,
     height: 800,
   },
 
-  // About page or About section on homepage — REPLACE with a real Unsplash URL matching: "Business professionals in modern meeting room"
+  // About page or About section on homepage — REPLACE with a real Unsplash URL matching: "Smiling dental team in scrubs"
   "about": {
-    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop",
-    alt: "Dr. Sarah Bennett Consulting Patient",
+    src: "https://images.unsplash.com/photo-1538869337831-4f4c5cfcd69c?q=80&w=1600&auto=format&fit=crop",
+    alt: "Smiling dental team in scrubs",
     width: 1200,
     height: 800,
   },
 
-  // First service card image — REPLACE with a real Unsplash URL matching: "Creative professionals working together"
+  // First service card image — REPLACE with a real Unsplash URL matching: "Dental tools on tray"
   "service-1": {
-    src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2069&auto=format&fit=crop",
-    alt: "Cosmetic Dentistry Procedure",
+    src: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?q=80&w=800&auto=format&fit=crop",
+    alt: "Sterile dental tools on a tray",
     width: 1200,
     height: 800,
   },
 
-  // Second service card image — REPLACE with a real Unsplash URL matching: "Data analytics dashboard on screen"
+  // Second service card image — REPLACE with a real Unsplash URL matching: "Cosmetic dentistry result"
   "service-2": {
-    src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2080&auto=format&fit=crop",
-    alt: "Advanced Dental Imaging Technology",
+    src: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=800&auto=format&fit=crop",
+    alt: "Bright smile showing cosmetic results",
     width: 1200,
     height: 800,
   },
 
-  // Third service card image — REPLACE with a real Unsplash URL matching: "Team workshop and brainstorming session"
+  // Third service card image — REPLACE with a real Unsplash URL matching: "Digital dental x-ray on screen"
   "service-3": {
-    src: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?q=80&w=2070&auto=format&fit=crop",
-    alt: "Family Dentistry Checkup",
+    src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=800&auto=format&fit=crop",
+    alt: "Digital dental x-ray displayed on monitor",
     width: 1200,
     height: 800,
   },
 
-  // Gallery image 1 — REPLACE with a real Unsplash URL matching: "Professional handshake in business setting"
+  // Gallery image 1 — REPLACE with a real Unsplash URL matching: "Comfortable dental waiting area"
   "gallery-1": {
-    src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&w=2070&auto=format&fit=crop",
-    alt: "Patient Happy Smile",
+    src: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=800&auto=format&fit=crop",
+    alt: "Comfortable dental waiting area with plants",
     width: 1200,
     height: 800,
   },
 
-  // Gallery image 2 — REPLACE with a real Unsplash URL matching: "Modern conference room with city view"
+  // Gallery image 2 — REPLACE with a real Unsplash URL matching: "Dental chair and equipment"
   "gallery-2": {
-    src: "https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=2068&auto=format&fit=crop",
-    alt: "Modern Dental Chair",
+    src: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?q=80&w=800&auto=format&fit=crop",
+    alt: "Modern dental chair with advanced equipment",
     width: 1200,
     height: 800,
   },
 
-  // Team member photo — REPLACE with a real Unsplash URL matching: "Diverse team celebrating success"
+  // Team member photo — REPLACE with a real Unsplash URL matching: "Female lead dentist portrait"
   "team-1": {
-    src: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=2070&auto=format&fit=crop",
-    alt: "Dr. Sarah Bennett",
+    src: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800&auto=format&fit=crop",
+    alt: "Dr. Elena Vance portrait",
     width: 1200,
     height: 800,
   },
 
-  // Gallery image 3 — REPLACE with a real Unsplash URL matching: "Technology workspace with multiple screens"
+  // Gallery image 3 — REPLACE with a real Unsplash URL matching: "Child smiling at dentist"
   "gallery-3": {
-    src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2080&auto=format&fit=crop",
-    alt: "3D Dental Modeling",
+    src: "https://images.unsplash.com/photo-1486299267070-83823f5448dd?q=80&w=800&auto=format&fit=crop",
+    alt: "Happy child smiling during dental visit",
     width: 1200,
     height: 800,
   },
 
-  // Call-to-action section background — REPLACE with a real Unsplash URL matching: "Innovation and technology concept"
+  // Call-to-action section background — REPLACE with a real Unsplash URL matching: "Smiling family"
   "cta": {
-    src: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
-    alt: "Dental Practice Team",
+    src: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?q=80&w=1600&auto=format&fit=crop",
+    alt: "Happy family smiling together",
     width: 1200,
     height: 800,
   },
 
-  // Testimonials section background or decoration — REPLACE with a real Unsplash URL matching: "Professional business environment"
+  // Testimonials section background or decoration — REPLACE with a real Unsplash URL matching: "Patient consultation"
   "testimonial-bg": {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop",
-    alt: "Bright Smile Clinic Exterior",
+    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1600&auto=format&fit=crop",
+    alt: "Patient having a consultation with dentist",
     width: 1200,
     height: 800,
   },

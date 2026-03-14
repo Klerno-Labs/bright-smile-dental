@@ -1,30 +1,30 @@
-import Image from "next/image";
+import { Container } from "@/components/ui/Container";
 
-// Simulating logos using text/images
-const partners = [
-  { name: "Delta Dental", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Delta_Dental_logo.svg/2560px-Delta_Dental_logo.svg.png" }, // Placeholder logic, using Unsplash generic for safety in this demo
-  { name: "Cigna", src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=100&h=50&fit=crop" }, // Using generic abstract logos to prevent broken links
-  { name: "Aetna", src: "https://images.unsplash.com/photo-1614064641938-3bcee529cfc4?w=100&h=50&fit=crop" },
-  { name: "Humana", src: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=100&h=50&fit=crop" },
-  { name: "MetLife", src: "https://images.unsplash.com/photo-1600607686527-6fb886090705?w=100&h=50&fit=crop" },
+const logos = [
+  { name: "Delta Dental", path: "M10 20L20 10L10 0L0 10L10 20Z" }, // Diamond
+  { name: "Cigna", path: "M12 2L2 22H22L12 2Z" }, // Triangle
+  { name: "Aetna", path: "M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" }, // Circle
+  { name: "Humana", path: "M12 2L2 12L12 22L22 12L12 2Z" }, // Square-ish
 ];
 
 export function TrustBar() {
   return (
-    <section className="py-12 border-b border-gray-100 bg-white">
-      <div className="max-w-[1240px] mx-auto px-6">
-        <p className="text-center text-sm font-semibold text-muted uppercase tracking-widest mb-8">
-          We Work With Most Major Insurance Plans
+    <section className="py-8 border-y border-gray-100 bg-white">
+      <Container>
+        <p className="text-center text-sm font-semibold text-gray-400 mb-6 uppercase tracking-wider">
+          Accepted Insurances & Partners
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-          {partners.map((partner, idx) => (
-            <div key={idx} className="flex items-center gap-2">
-               {/* In a real build, use SVGs. Here using generic placeholders for reliability */}
-               <div className="text-xl font-heading font-bold text-gray-400">{partner.name}</div>
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+          {logos.map((logo, index) => (
+            <div key={index} className="flex items-center gap-2 hover:opacity-100 hover:text-[#4CA1A3] transition-all cursor-default">
+               <svg className="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                 <path d={logo.path} />
+               </svg>
+               <span className="font-bold text-lg">{logo.name}</span>
             </div>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

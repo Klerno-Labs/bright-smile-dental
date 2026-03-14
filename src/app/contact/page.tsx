@@ -2,12 +2,11 @@ import { HeroInternal } from "@/components/sections/HeroInternal";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Container } from "@/components/ui/Container";
 import { MapPin, Mail, Phone, Clock } from "lucide-react";
-import { Metadata } from "next";
-import siteConfig from "@/config/site";
+import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Contact Us",
-  description: "Get in touch with Bright Smile Dental. Book your appointment today.",
+  description: "Get in touch with Bright Smile Dental. Schedule your appointment or ask us a question.",
 };
 
 export default function ContactPage() {
@@ -15,78 +14,97 @@ export default function ContactPage() {
     <>
       <HeroInternal 
         title="Contact Us" 
-        subtitle="We are here to help. Reach out to schedule an appointment or ask a question."
-        imageKey="gallery-1"
+        subtitle="We are here to help you smile"
+        imageKey="gallery-1" 
       />
 
-      <section className="py-24 bg-surface">
+      <section className="py-24 bg-gray-50" id="new-patients">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Info */}
             <div>
-              <h2 className="font-heading text-3xl font-bold text-primary mb-8">Get in Touch</h2>
+              <h2 className="text-3xl font-bold text-[#0E3A53] mb-8">Visit Our Clinic</h2>
               
               <div className="space-y-8 mb-12">
                 <div className="flex gap-4">
-                  <MapPin className="w-6 h-6 text-secondary shrink-0" />
+                  <div className="h-12 w-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
+                    <MapPin className="h-6 w-6" />
+                  </div>
                   <div>
-                    <h3 className="font-bold text-primary mb-1">Location</h3>
-                    <p className="text-text-main">
-                      1234 Medical Parkway, Suite 100<br />
-                      Austin, TX 78701
+                    <h3 className="font-bold text-[#0E3A53] mb-1">Address</h3>
+                    <p className="text-[#4B5563] leading-relaxed">
+                      {siteConfig.contact.address}<br />
+                      {siteConfig.contact.city}, {siteConfig.contact.state} {siteConfig.contact.zip}
                     </p>
+                    <a 
+                      href={siteConfig.contact.mapUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-[#4CA1A3] text-sm font-semibold hover:underline mt-1 inline-block"
+                    >
+                      Get Directions
+                    </a>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <Phone className="w-6 h-6 text-secondary shrink-0" />
+                  <div className="h-12 w-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
+                    <Phone className="h-6 w-6" />
+                  </div>
                   <div>
-                    <h3 className="font-bold text-primary mb-1">Phone</h3>
-                    <a href={`tel:${siteConfig.contact.phone}`} className="text-text-main hover:text-secondary transition-colors">
+                    <h3 className="font-bold text-[#0E3A53] mb-1">Phone</h3>
+                    <a href={`tel:${siteConfig.contact.phone}`} className="text-[#4B5563] text-lg font-semibold hover:text-[#4CA1A3]">
                       {siteConfig.contact.phone}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <Mail className="w-6 h-6 text-secondary shrink-0" />
+                  <div className="h-12 w-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
+                    <Mail className="h-6 w-6" />
+                  </div>
                   <div>
-                    <h3 className="font-bold text-primary mb-1">Email</h3>
-                    <a href={`mailto:${siteConfig.contact.email}`} className="text-text-main hover:text-secondary transition-colors">
+                    <h3 className="font-bold text-[#0E3A53] mb-1">Email</h3>
+                    <a href={`mailto:${siteConfig.contact.email}`} className="text-[#4B5563] hover:text-[#4CA1A3]">
                       {siteConfig.contact.email}
                     </a>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
-                  <Clock className="w-6 h-6 text-secondary shrink-0" />
+                  <div className="h-12 w-12 rounded-full bg-[#E0F2F2] flex items-center justify-center text-[#4CA1A3] shrink-0">
+                    <Clock className="h-6 w-6" />
+                  </div>
                   <div>
-                    <h3 className="font-bold text-primary mb-1">Hours</h3>
-                    <p className="text-text-main text-sm leading-relaxed">
-                      Mon - Fri: 8:00 AM - 6:00 PM<br />
-                      Saturday: 9:00 AM - 2:00 PM<br />
-                      Sunday: Closed
-                    </p>
+                    <h3 className="font-bold text-[#0E3A53] mb-1">Hours</h3>
+                    <ul className="text-[#4B5563] space-y-1">
+                      <li>{siteConfig.hours.weekdays}</li>
+                      <li>{siteConfig.hours.saturday}</li>
+                      <li>{siteConfig.hours.sunday}</li>
+                    </ul>
                   </div>
                 </div>
               </div>
 
-              {/* Embedded Map Placeholder */}
+              {/* Map Placeholder */}
               <div className="w-full h-64 bg-gray-200 rounded-xl overflow-hidden relative">
-                 <div className="absolute inset-0 flex items-center justify-center text-muted font-medium">
-                    <iframe 
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3446.1!2d-97.7!3d30.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDEyJzAwLjAiTiA5N8KwNDInMDAuMCJX!5e0!3m2!1sen!2sus!4v1600000000000!5m2!1sen!2sus" 
-                      width="100%" 
-                      height="100%" 
-                      style={{border:0}} 
-                      allowFullScreen
-                      loading="lazy"
-                    ></iframe>
-                 </div>
+                 <iframe 
+                  width="100%" 
+                  height="100%" 
+                  frameBorder="0" 
+                  scrolling="no" 
+                  marginHeight={0} 
+                  marginWidth={0} 
+                  src="https://maps.google.com/maps?q=4521%20Westheimer%20Rd%2C%20Suite%20200%2C%20Houston%2C%20TX%2077027&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  title="Google Map"
+                 ></iframe>
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-              <ContactForm submitText="Send Message" />
+            {/* Form */}
+            <div className="bg-white p-8 md:p-12 rounded-2xl shadow-lg h-fit">
+              <h3 className="text-2xl font-bold text-[#0E3A53] mb-6">Send a Message</h3>
+              <ContactForm />
             </div>
           </div>
         </Container>
