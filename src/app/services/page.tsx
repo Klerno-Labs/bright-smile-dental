@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import { motion } from "framer-motion";
 import { Calculator, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import Image from "next/image";
 import { images } from "@/config/images";
 
 // Note: Normally this is a server component for metadata, but we are making it client for the calculator/accordion interactions
@@ -30,8 +29,8 @@ export default function ServicesPage() {
       id: "general", 
       title: "General Dentistry", 
       price: "$150 - $400",
-      desc: "Routine cleanings, comprehensive exams, and cavity fillings for the whole family.",
-      details: "Prevention is the best medicine. Our general services include prophylaxis, fluoride treatments, sealants, and tooth-colored composite fillings.",
+      desc: "Routine cleanings, comprehensive exams, and cavity style={{ width: "100%", height: "100%", objectFit: "cover" }}ings for the whole family.",
+      details: "Prevention is the best medicine. Our general services include prophylaxis, fluoride treatments, sealants, and tooth-colored composite style={{ width: "100%", height: "100%", objectFit: "cover" }}ings.",
       img: "service-1"
     },
     { 
@@ -90,10 +89,9 @@ export default function ServicesPage() {
                         </div>
                       </div>
                       <div className="relative h-64 md:h-80 rounded-xl overflow-hidden">
-                        <Image 
+                        <img 
                           src={images[service.img as ImageSlot].src} 
-                          alt={service.title} 
-                          fill 
+                          alt={service.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} 
                           className="object-cover" 
                         />
                       </div>
