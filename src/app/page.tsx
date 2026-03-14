@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Star, Phone, Calendar, Shield, Clock } from "lucide-react";
 import { Navbar } from "@/components/navbar";
@@ -50,7 +49,7 @@ export default function Home() {
                 <span>Accepting New Patients</span>
               </div>
               <div className="flex items-center gap-2">
-                <Star className="w-5 h-5 fill-[#D4AF37] text-[#D4AF37]" />
+                <Star className="w-5 h-5 style={{ width: "100%", height: "100%", objectFit: "cover" }}-[#D4AF37] text-[#D4AF37]" />
                 <span>5.0 Rated on Google</span>
               </div>
             </div>
@@ -141,10 +140,9 @@ export default function Home() {
             ].map((service, i) => (
               <div key={i} className="group bg-[#F9FAFB] rounded-[24px] overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer border border-gray-100">
                 <div className="relative h-64 overflow-hidden">
-                  <Image
+                  <img
                     src={images[service.img as keyof typeof images].src}
-                    alt={service.title}
-                    fill
+                    alt={service.title} style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0E3A53]/60 to-transparent opacity-60" />
@@ -166,7 +164,7 @@ export default function Home() {
       <section className="py-24 bg-[#0E3A53] text-white relative overflow-hidden">
         {/* Background Decor */}
         <div className="absolute inset-0 opacity-10">
-          <Image src={images["testimonial-bg"].src} alt="" fill className="object-cover grayscale" />
+          <img src={images["testimonial-bg"].src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} className="object-cover grayscale" />
         </div>
         
         <div className="max-w-[1240px] mx-auto px-6 relative z-10">
@@ -184,7 +182,7 @@ export default function Home() {
               <div key={i} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/10">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
-                    <Star key={j} className="w-5 h-5 fill-[#D4AF37] text-[#D4AF37]" />
+                    <Star key={j} className="w-5 h-5 style={{ width: "100%", height: "100%", objectFit: "cover" }}-[#D4AF37] text-[#D4AF37]" />
                   ))}
                 </div>
                 <p className="font-serif text-lg leading-relaxed mb-6 text-gray-200">&quot;{review.text}&quot;</p>
@@ -261,7 +259,6 @@ function ContactForm() {
               name="name"
               required 
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all placeholder:text-gray-400"
-              placeholder="John Doe"
             />
           </div>
           <div className="space-y-2">
@@ -272,7 +269,6 @@ function ContactForm() {
               name="phone"
               required 
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all placeholder:text-gray-400"
-              placeholder="(713) 555-0123"
             />
           </div>
         </div>
@@ -285,7 +281,6 @@ function ContactForm() {
             name="email"
             required 
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all placeholder:text-gray-400"
-            placeholder="john@example.com"
           />
         </div>
 
@@ -308,7 +303,6 @@ function ContactForm() {
             name="message"
             rows={3} 
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#4CA1A3] focus:ring-2 focus:ring-[#4CA1A3]/20 outline-none transition-all placeholder:text-gray-400 resize-none"
-            placeholder="How can we help you?"
           />
         </div>
 

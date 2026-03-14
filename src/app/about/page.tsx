@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
@@ -33,7 +32,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-            <Image src={images["about"].src} alt="Our Clinic Philosophy" fill className="object-cover" priority />
+            <img src={images["about"].src} alt="Our Clinic Philosophy" style={{ width: "100%", height: "100%", objectFit: "cover" }} className="object-cover" />
           </div>
         </div>
       </section>
@@ -47,7 +46,7 @@ export default function AboutPage() {
                 <Heart className="w-6 h-6" />
               </div>
               <h3 className="font-heading font-bold text-xl text-[#0E3A53] mb-3">Patient-First</h3>
-              <p className="text-[#4B5563]">Your comfort is our priority. We offer amenities like noise-canceling headphones and blankets to make your visit relaxing.</p>
+              <p className="text-[#4B5563]">Your comfort is our. We offer amenities like noise-canceling headphones and blankets to make your visit relaxing.</p>
             </div>
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 bg-[#E0F2F2] rounded-full flex items-center justify-center text-[#4CA1A3] mb-6">
@@ -98,10 +97,9 @@ export default function AboutPage() {
             ].map((member, i) => (
               <div key={i} className="group text-center">
                 <div className="relative w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-[#F9FAFB] shadow-lg group-hover:scale-105 transition-transform duration-300">
-                  <Image
+                  <img
                     src={images[member.img as keyof typeof images].src}
-                    alt={member.name}
-                    fill
+                    alt={member.name} style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     className="object-cover"
                   />
                 </div>

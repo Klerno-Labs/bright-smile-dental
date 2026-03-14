@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Metadata } from "next"; // Note: Client components can't export metadata, but this ensures strict mode checking doesn't fail imports
-import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -170,7 +169,7 @@ export default function ServicesPage() {
         </div>
         
         {/* Decorative BG */}
-        <Image src={images["service-2"].src} alt="" fill className="object-cover opacity-10 grayscale mix-blend-overlay" />
+        <img src={images["service-2"].src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} className="object-cover opacity-10 grayscale mix-blend-overlay" />
       </section>
 
       <Footer />
