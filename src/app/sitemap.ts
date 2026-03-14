@@ -1,25 +1,26 @@
-import { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
+import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = "https://brightsmiledental.com";
+  
   return [
     {
-      url: siteConfig.url,
+      url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: "weekly",
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
-      url: `${siteConfig.url}/about`,
+      url: `${baseUrl}/about`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${siteConfig.url}/services`,
+      url: `${baseUrl}/services`,
       lastModified: new Date(),
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
-  ];
+  ]
 }
