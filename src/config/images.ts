@@ -1,3 +1,4 @@
+```typescript
 // ── Image Configuration ──────────────────────────────────────────────
 // ✏️  HOW TO CHANGE IMAGES:
 // 1. Find the slot you want to change below (e.g. "hero", "about", "service-1")
@@ -11,107 +12,100 @@
 export const images = {
   // Homepage hero banner — the first image visitors see — REPLACE with a real Unsplash URL matching: "Modern office workspace with natural light"
   "hero": {
-    src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=1200&h=800&fit=crop&q=80",
-    alt: "Bright modern dental office reception with natural light",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Modern office workspace with natural light",
     width: 1200,
     height: 800,
   },
 
   // Alternative hero image (used on inner pages or as fallback) — REPLACE with a real Unsplash URL matching: "Professional team collaborating in bright office"
   "hero-alt": {
-    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&h=800&fit=crop&q=80",
-    alt: "Dental team collaborating in bright modern office",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Professional team collaborating in bright office",
     width: 1200,
     height: 800,
   },
 
   // About page or About section on homepage — REPLACE with a real Unsplash URL matching: "Business professionals in modern meeting room"
   "about": {
-    src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1200&h=800&fit=crop&q=80",
-    alt: "Modern dental clinic interior with advanced technology",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Business professionals in modern meeting room",
     width: 1200,
     height: 800,
   },
 
   // First service card image — REPLACE with a real Unsplash URL matching: "Creative professionals working together"
   "service-1": {
-    src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&h=800&fit=crop&q=80",
-    alt: "Professional teeth cleaning procedure",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Creative professionals working together",
     width: 1200,
     height: 800,
   },
 
   // Second service card image — REPLACE with a real Unsplash URL matching: "Data analytics dashboard on screen"
   "service-2": {
-    src: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=1200&h=800&fit=crop&q=80",
-    alt: "Cosmetic dentistry smile makeover tools",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Data analytics dashboard on screen",
     width: 1200,
     height: 800,
   },
 
   // Third service card image — REPLACE with a real Unsplash URL matching: "Team workshop and brainstorming session"
   "service-3": {
-    src: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=1200&h=800&fit=crop&q=80",
-    alt: "Dental implants consultation and planning",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Team workshop and brainstorming session",
     width: 1200,
     height: 800,
   },
 
   // Gallery image 1 — REPLACE with a real Unsplash URL matching: "Professional handshake in business setting"
   "gallery-1": {
-    src: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=1200&h=800&fit=crop&q=80",
-    alt: "Happy patient smiling after treatment",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Professional handshake in business setting",
     width: 1200,
     height: 800,
   },
 
   // Gallery image 2 — REPLACE with a real Unsplash URL matching: "Modern conference room with city view"
   "gallery-2": {
-    src: "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=1200&h=800&fit=crop&q=80",
-    alt: "State of the art dental equipment",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Modern conference room with city view",
     width: 1200,
     height: 800,
   },
 
   // Team member photo — REPLACE with a real Unsplash URL matching: "Diverse team celebrating success"
   "team-1": {
-    src: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=1200&h=800&fit=crop&q=80",
-    alt: "Lead Dentist Dr. Sarah Bennett",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Diverse team celebrating success",
     width: 1200,
     height: 800,
   },
 
   // Gallery image 3 — REPLACE with a real Unsplash URL matching: "Technology workspace with multiple screens"
   "gallery-3": {
-    src: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1200&h=800&fit=crop&q=80",
-    alt: "Pediatric dentistry colorful environment",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Technology workspace with multiple screens",
     width: 1200,
     height: 800,
   },
 
   // Call-to-action section background — REPLACE with a real Unsplash URL matching: "Innovation and technology concept"
   "cta": {
-    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&h=800&fit=crop&q=80",
-    alt: "Welcoming dental practice reception area",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Innovation and technology concept",
     width: 1200,
     height: 800,
   },
 
   // Testimonials section background or decoration — REPLACE with a real Unsplash URL matching: "Professional business environment"
   "testimonial-bg": {
-    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop&q=80",
-    alt: "Comfortable patient waiting area",
+    src: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=800&fit=crop",
+    alt: "Professional business environment",
     width: 1200,
     height: 800,
   },
-
-  // Founder/Doctor specific image
-  "founder": {
-    src: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=1200&h=800&fit=crop&q=80",
-    alt: "Dr. James Sterling, Founder of Bright Smile Dental",
-    width: 1200,
-    height: 800,
-  }
 } as const;
 
 export type ImageSlot = keyof typeof images;
+```
