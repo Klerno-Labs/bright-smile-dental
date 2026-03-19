@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Activity } from "lucide-react";
 
 const symptoms = [
@@ -82,13 +81,7 @@ export default function SymptomChecker() {
           <div className="w-full lg:w-1/2 min-h-[300px]">
             <AnimatePresence mode="wait">
               {!activeTooth ? (
-                <motion.div
-                  key="placeholder"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="h-full flex flex-col justify-center items-center text-center p-8 border-2 border-dashed border-neutral-border rounded-2xl"
-                >
+                <div className="h-full flex flex-col justify-center items-center text-center p-8 border-2 border-dashed border-neutral-border rounded-2xl">
                   <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
                     <Activity size={32} />
                   </div>
@@ -96,16 +89,9 @@ export default function SymptomChecker() {
                   <p className="text-neutral-text-body mt-2">
                     Choose a section from the diagram to see recommended services.
                   </p>
-                </motion.div>
+                </div>
               ) : (
-                <motion.div
-                  key={activeTooth}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                  className="bg-white p-8 rounded-2xl shadow-lg border border-primary/20 h-full flex flex-col justify-center"
-                >
+                <div className="bg-white p-8 rounded-2xl shadow-lg border border-primary/20 h-full flex flex-col justify-center">
                   <div className="flex items-start justify-between mb-4">
                     <span className="text-sm font-bold uppercase tracking-wider text-primary">
                       {symptoms.find((s) => s.id === activeTooth)?.label}
@@ -134,7 +120,7 @@ export default function SymptomChecker() {
                   >
                     Learn More <ChevronRight size={18} />
                   </a>
-                </motion.div>
+                </div>
               )}
             </AnimatePresence>
           </div>
