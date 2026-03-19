@@ -3,7 +3,6 @@
 import React from "react";
 import { images } from "@/config/images";
 import { Linkedin, Mail } from "lucide-react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const team = [
@@ -47,14 +46,7 @@ export function TeamGrid() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {team.map((member, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group"
-            >
+            <div className="group">
               <div className="relative rounded-2xl overflow-hidden mb-6">
                 <img
                   src={images[member.image as keyof typeof images].src}
@@ -79,7 +71,7 @@ export function TeamGrid() {
               <p className="text-sm text-gray-500 leading-relaxed">
                 {member.credentials}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
