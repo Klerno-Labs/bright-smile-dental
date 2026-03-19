@@ -1,3 +1,5 @@
+"use client";
+
 import { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { Contact } from "@/components/sections/contact";
