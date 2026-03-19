@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Quote, Star } from "lucide-react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const testimonials = [
@@ -41,14 +40,7 @@ export function Testimonials() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white p-8 rounded-2xl shadow-card hover:-translate-y-2 transition-transform duration-300"
-            >
+            <div className="bg-white p-8 rounded-2xl shadow-card hover:-translate-y-2 transition-transform duration-300">
               <div className="flex text-accent mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 style={{ width: "100%", height: "100%", objectFit: "cover" }}-current" />
@@ -69,7 +61,7 @@ export function Testimonials() {
                   <p className="text-sm text-gray-400">{testimonial.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
