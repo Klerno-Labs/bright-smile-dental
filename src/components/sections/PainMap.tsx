@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Tooth, AlertCircle, X } from "lucide-react";
 
 type ToothData = {
@@ -88,11 +87,7 @@ export function PainMap() {
 
         {/* Modal / Tooltip */}
         {activeTooth && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
-          >
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
             <div className="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl relative">
               <button
                 onClick={() => setActiveTooth(null)}
@@ -121,7 +116,7 @@ export function PainMap() {
                 View Treatment Options
               </button>
             </div>
-          </motion.div>
+          </div>
         )}
       </Container>
     </section>
