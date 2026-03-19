@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { images } from "@/config/images";
-import { motion } from "framer-motion";
 
 const services = [
   {
@@ -46,29 +45,14 @@ export function Services() {
   return (
     <section className="py-24 bg-surface-alt">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Comprehensive Care</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">From preventative checkups to complex restorations, we offer a full spectrum of dental services under one roof.</p>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div 
-              key={index}
-              variants={itemVariants}
-              className="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 group flex flex-col h-full"
-            >
+            <div className="bg-white rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 group flex flex-col h-full">
               <div className="relative h-56 overflow-hidden">
                 <Image
                   src={images[service.image as keyof typeof images].src}
@@ -92,9 +76,9 @@ export function Services() {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
