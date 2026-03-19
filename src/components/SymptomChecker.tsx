@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ArrowRight, CheckCircle } from "lucide-react";
 
@@ -102,13 +101,7 @@ export function SymptomChecker() {
         <div className="p-8 flex flex-col justify-center">
           <AnimatePresence mode="wait">
             {!selectedZone ? (
-              <motion.div
-                key="idle"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="text-center h-full flex flex-col items-center justify-center"
-              >
+              <div className="text-center h-full flex flex-col items-center justify-center">
                 <div className="w-16 h-16 bg-blue-50 text-primary rounded-full flex items-center justify-center mb-4">
                   <ArrowRight className="w-8 h-8" />
                 </div>
@@ -119,16 +112,10 @@ export function SymptomChecker() {
                   Select an area on the diagram to get instant recommendations on
                   which service might be right for you.
                 </p>
-              </motion.div>
+              </div>
             ) : (
               result && (
-                <motion.div
-                  key="result"
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  className="h-full flex flex-col justify-center"
-                >
+                <div className="h-full flex flex-col justify-center">
                   <span className="inline-block px-3 py-1 bg-blue-100 text-primary text-xs font-bold rounded-full w-fit mb-4 uppercase tracking-wider">
                     AI Suggestion
                   </span>
@@ -151,7 +138,7 @@ export function SymptomChecker() {
                   >
                     Reset checker
                   </button>
-                </motion.div>
+                </div>
               )
             )}
           </AnimatePresence>
