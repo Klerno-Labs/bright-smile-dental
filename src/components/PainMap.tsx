@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -43,16 +42,9 @@ export function PainMap() {
       {/* Modal / Tooltip */}
       <AnimatePresence>
         {activeTooth && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="absolute inset-0 z-20 flex items-center justify-center bg-primary/60 backdrop-blur-sm p-6"
-            onClick={() => setActiveTooth(null)}
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-primary/60 backdrop-blur-sm p-6"> setActiveTooth(null)}
           >
-            <motion.div
-              className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 relative"
-              onClick={(e) => e.stopPropagation()}
+            <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 relative"> e.stopPropagation()}
             >
               <button
                 onClick={() => setActiveTooth(null)}
@@ -76,8 +68,8 @@ export function PainMap() {
               <a href="/services" className="flex items-center justify-center w-full bg-secondary text-white font-bold py-3 rounded-lg hover:bg-teal-700 transition-colors">
                 View Treatment Options <ChevronRight className="ml-2 w-4 h-4" />
               </a>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
       </AnimatePresence>
     </div>
