@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -12,12 +11,7 @@ export function HeroHome() {
       <Container className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
         
         {/* Left Content */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-8"
-        >
+        <div className="space-y-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E0F2F2] text-[#0E3A53] text-sm font-semibold">
             <Star className="h-4 w-4 text-[#D4AF37] style={{ width: "100%", height: "100%", objectFit: "cover" }}-[#D4AF37]" />
             <span>Top Rated Dental Practice in Houston</span>
@@ -51,15 +45,10 @@ export function HeroHome() {
               <span className="text-gray-400">(250+ Reviews)</span>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Right Content */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative hidden lg:block h-[85vh]"
-        >
+        <div className="relative hidden lg:block h-[85vh]">
           <div className="absolute inset-0 bg-gradient-to-tr from-[#0E3A53]/20 to-transparent rounded-[2rem] translate-x-4 translate-y-4" />
           <div className="relative h-full w-full rounded-[2rem] overflow-hidden shadow-2xl">
             <img
@@ -70,12 +59,7 @@ export function HeroHome() {
           </div>
           
           {/* Floating Glass Card */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="absolute bottom-10 -left-10 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl max-w-xs border border-white/50"
-          >
+          <div className="absolute bottom-10 -left-10 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl max-w-xs border border-white/50">
             <div className="flex items-center gap-3 mb-3">
                <div className="h-10 w-10 rounded-full bg-[#4CA1A3] flex items-center justify-center text-white">
                  <Star className="h-5 w-5 style={{ width: "100%", height: "100%", objectFit: "cover" }}-white" />
@@ -86,8 +70,8 @@ export function HeroHome() {
                </div>
             </div>
             <p className="text-sm text-gray-600 font-medium">Get a comprehensive exam & X-rays for just <span className="text-[#4CA1A3]">$49</span></p>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
       </Container>
     </section>
