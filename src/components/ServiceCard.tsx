@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { images } from "@/config/images";
-import { motion } from "framer-motion";
 
 interface ServiceCardProps {
   title: string;
@@ -25,13 +24,10 @@ export function ServiceCard({
   const imageData = images[imageKey];
 
   return (
-    <motion.div
-      whileHover={{ y: -4 }}
-      className={cn(
+    <div className={cn(
         "group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full",
         className
-      )}
-    >
+      )}>
       <div className="relative h-48 w-full overflow-hidden bg-gray-100">
         <img
           src={imageData.src}
@@ -56,6 +52,6 @@ export function ServiceCard({
           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 }
