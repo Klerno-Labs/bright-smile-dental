@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { images } from "@/config/images";
 import { ArrowUpRight, Sparkles, Heart, ShieldCheck } from "lucide-react";
-import { motion } from "framer-motion";
 
 const services = [
   {
@@ -48,14 +47,7 @@ export function ServiceGrid() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-xl transition-all duration-300 flex flex-col h-full overflow-hidden"
-            >
+            <div className="group bg-white rounded-2xl border border-gray-100 shadow-card hover:shadow-xl transition-all duration-300 flex flex-col h-full overflow-hidden">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={images[service.image as keyof typeof images].src}
@@ -85,7 +77,7 @@ export function ServiceGrid() {
                   </Link>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
