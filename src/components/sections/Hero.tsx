@@ -6,7 +6,6 @@ import { images } from "@/config/images";
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, Star, CheckCircle2 } from "lucide-react";
-import { motion } from "framer-motion";
 
 export function Hero() {
   return (
@@ -15,11 +14,7 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Content */}
           <div className="lg:col-span-7 space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div>
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-medical/10 text-medical text-sm font-semibold mb-6">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-medical opacity-75"></span>
@@ -36,14 +31,9 @@ export function Hero() {
               <p className="text-xl text-gray-600 max-w-2xl leading-relaxed mt-6">
                 Experience premium dental care in a calm, modern environment. From routine checkups to complete smile makeovers, we treat you like family.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" asChild>
                 <Link href="/services#book">
                   Book Appointment <ArrowRight className="ml-2 w-5 h-5" />
@@ -52,14 +42,9 @@ export function Hero() {
               <Button variant="outline" size="lg" asChild>
                 <Link href="/about">Meet Our Doctors</Link>
               </Button>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="pt-8 border-t border-gray-100"
-            >
+            <div className="pt-8 border-t border-gray-100">
               <div className="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4].map((i) => (
@@ -86,16 +71,11 @@ export function Hero() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 relative"
-          >
+          <div className="lg:col-span-5 relative">
             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
               <img
                 src={images["hero"].src}
@@ -121,7 +101,7 @@ export function Hero() {
             </div>
             {/* Background Blob */}
             <div className="absolute inset-0 bg-medical/20 rounded-3xl blur-3xl -z-10 transform translate-x-4 translate-y-4" />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
