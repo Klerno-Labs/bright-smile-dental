@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
 import { images } from "@/config/images";
 
 export function BeforeAfter() {
@@ -20,22 +19,12 @@ export function BeforeAfter() {
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Real Results, Real Smiles</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">Drag the slider to see the transformative power of our cosmetic treatments.</p>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
+        <div className="max-w-4xl mx-auto">
           <div 
             ref={containerRef}
             className="relative w-full aspect-[16/9] md:aspect-[2/1] rounded-[24px] overflow-hidden shadow-xl cursor-col-resize select-none group"
@@ -81,7 +70,7 @@ export function BeforeAfter() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
