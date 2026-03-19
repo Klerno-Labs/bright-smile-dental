@@ -7,11 +7,6 @@ import { images } from "@/config/images";
 import { Linkedin, Instagram, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
 
-export const metadata: Metadata = {
-  title: "About Us",
-  description: "Meet the team of world-class dentists at Bright Smile Dental in Houston.",
-};
-
 const team = [
   {
     name: "Dr. Elena Bright",
