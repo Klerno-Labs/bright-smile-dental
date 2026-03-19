@@ -2,7 +2,6 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { images } from "@/config/images";
-import { motion } from "framer-motion";
 
 export function Hero() {
   return (
@@ -11,12 +10,7 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
           {/* Left Content */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
+          <div className="space-y-8">
             <div className="inline-flex items-center space-x-2 bg-medical/10 text-medical px-4 py-2 rounded-full text-sm font-semibold tracking-wide">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-medical opacity-75"></span>
@@ -54,15 +48,10 @@ export function Hero() {
                 <span>Insurance Friendly</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Content */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
-          >
+          <div className="relative">
             <div className="absolute -top-10 -right-10 w-72 h-72 bg-medical/20 rounded-full blur-3xl -z-10"></div>
             <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-accent/10 rounded-full blur-3xl -z-10"></div>
             
@@ -89,7 +78,7 @@ export function Hero() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
