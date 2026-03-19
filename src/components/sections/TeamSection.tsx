@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Link } from "lucide-react";
@@ -39,14 +38,7 @@ export function TeamSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {team.map((member, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="group"
-            >
+            <div className="group">
               <div className="relative h-[350px] mb-6 rounded-t-[2rem] overflow-hidden bg-white shadow-sm">
                 <img
                   src={images[member.image as keyof typeof images].src}
@@ -62,7 +54,7 @@ export function TeamSection() {
                 <p className="text-[#4CA1A3] font-medium mb-2">{member.title}</p>
                 <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{member.bio}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </Container>
